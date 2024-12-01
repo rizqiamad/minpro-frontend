@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        lightBlue: "#0049cc",
+        blueNavy: "#152955"
       },
       screens: {
         'tablet': '960px',
