@@ -1,10 +1,14 @@
 import Link from "next/link";
 import Social from "./social";
+import NavTable from "./navTable";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col h-[100vh] bg-slate-500">
-      <div className="h-[75%] bg-blueNavy">
+    <footer className="flex flex-col h-[100vh] bg-blueNavy">
+      <div className="h-[85%] flex justify-center items-center">
+        <NavTable />
+      </div>
+      <div className="h-[15%] flex justify-center gap-10">
         <Social />
       </div>
       <div className="h-[25%] bg-lightBlue text-white text-center content-center">
