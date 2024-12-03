@@ -8,9 +8,23 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 
 export default function HamburgerMenu() {
   const [open, setOpen] = useState<boolean>(false);
+  const [hidden, setHidden] = useState<boolean>(false);
+  const menuHandler = () => {
+    if (!open) {
+      setHidden(!hidden)
+      setTimeout(() => {
+        setOpen(!open)
+      }, 300)
+    } else {
+      setOpen(!open)
+      setTimeout(() => {
+        setHidden(!hidden)
+      }, 300)
+    }
+  }
   const handleClickOutside = () => {
     if (open) {
-      setOpen(!open)
+      menuHandler()
     }
   }
   useEffect(() => {
@@ -21,8 +35,8 @@ export default function HamburgerMenu() {
   }, [open])
   return (
     <>
-      <button onClick={() => setOpen(!open)}><GiHamburgerMenu className="text-xl" /></button>
-      <div className={`absolute top-14 right-10 w-44 py-4 bg-lightBlue text-white font-semibold rounded-md flex-col gap-4 transition duration-300 ease-in-out flex ${open ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
+      <button onClick={menuHandler}><GiHamburgerMenu className="text-xl" /></button>
+      <div className={`absolute top-14 right-10 w-44 py-4 bg-lightBlue text-white font-semibold rounded-md flex-col gap-4 transition duration-300 ease-in-out flex ${hidden ? '' : 'hidden'} ${open ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'}`}>
         <Link href={'/'} className="px-4 hover:opacity-[0.8] flex items-center gap-1"><IoPersonCircleSharp /> Profile</Link>
         <Link href={'/'} className="px-4 hover:opacity-[0.8] flex items-center gap-1"><FaCompass /> Jelajahi</Link>
         <Link href={'/'} className="px-4 hover:opacity-[0.8] flex items-center gap-1"><FaTicket /> Tiket saya</Link>

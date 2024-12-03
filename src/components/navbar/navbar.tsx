@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaMagnifyingGlass, FaTicket, FaCompass } from "react-icons/fa6";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import HamburgerMenu from "./hamburgerMenu";
-// import ResponsiveInput from "./responsiveInput";
+import ResponsiveInput from "./responsiveInput";
 
 export default function Navbar() {
   return (
@@ -32,8 +32,7 @@ export default function Navbar() {
           </div> */}
         </div>
         <div className="text-white flex tablet:hidden gap-8">
-          <button><FaMagnifyingGlass className="text-xl"/></button>
-          {/* <ResponsiveInput /> */}
+          <ResponsiveInput />
           <HamburgerMenu />
         </div>
       </div>
