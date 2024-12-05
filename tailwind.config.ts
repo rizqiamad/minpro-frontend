@@ -12,10 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         lightBlue: "#0049cc",
-        blueNavy: "#152955"
+        blueNavy: "#152955",
       },
       screens: {
-        'tablet': '960px',
+        tablet: "960px",
       },
     },
   },

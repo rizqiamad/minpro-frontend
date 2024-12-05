@@ -20,7 +20,7 @@ export default function Navbar() {
       </div>
       <div>
         <div className="hidden tablet:flex text-white items-center gap-6">
-          <Link href={'/'} className="flex items-center gap-2 w-[5rem] font-bold"><FaCompass className="text-xl" /><span className="text-sm">Jelajahi</span></Link>
+          <Link href={'/events'} className="flex items-center gap-2 w-[5rem] font-bold"><FaCompass className="text-xl" /><span className="text-sm">Jelajahi</span></Link>
           <Link href={'/'} className="flex items-center gap-2 w-[6.2rem] font-bold"><FaTicket className="text-xl" /> <span className="text-sm">Tiket Saya</span></Link>
           {/* <Link href={'/'}>
             <div className="w-[30px] h-[30px] rounded-full">

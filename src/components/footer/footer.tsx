@@ -4,14 +4,14 @@ import NavTable from "./navTable";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col h-[100vh] bg-blueNavy">
-      <div className="h-[85%] flex justify-center items-center">
+    <footer className="flex flex-col tablet:h-[100vh] bg-blueNavy">
+      <div className="py-8 h-[60%] px-7 flex-inline max-tablet:mx-auto tablet:flex flex-col tablet:flex-row justify-center items-center">
         <NavTable />
       </div>
-      <div className="h-[15%] flex justify-center gap-10">
+      <div className="h-[15%] flex justify-center gap-10 flex-wrap max-tablet:py-6">
         <Social />
       </div>
-      <div className="h-[25%] bg-lightBlue text-white text-center content-center">
+      <div className="h-[25%] bg-lightBlue text-white text-center content-center max-tablet:py-8">
         <div className="text-xs">
           <Link href={'/'} className="mx-2">Tentang Kami</Link>
           •
@@ -25,7 +25,7 @@ export default function Footer() {
           •
           <Link href={'/'} className="mx-2">Hubungan Kami</Link>
         </div>
-        <div className="text-xs mt-6">
+        <div className="text-xs mt-10">
           &copy; {new Date().getFullYear()} Loket (PT Global Loket Sejahtera)
         </div>
       </div>
