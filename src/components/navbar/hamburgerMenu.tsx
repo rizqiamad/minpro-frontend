@@ -1,36 +1,13 @@
 'use client'
 
+import UseClickOutside from "@/hooks/useClickOutside";
+import UseOpen from "@/hooks/useOpen";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function HamburgerMenu() {
-  const [open, setOpen] = useState<boolean>(false);
-  const [hidden, setHidden] = useState<boolean>(false);
-  const menuHandler = () => {
-    if (!open) {
-      setHidden(!hidden)
-      setTimeout(() => {
-        setOpen(!open)
-      }, 300)
-    } else {
-      setOpen(!open)
-      setTimeout(() => {
-        setHidden(!hidden)
-      }, 300)
-    }
-  }
-  const handleClickOutside = () => {
-    if (open) {
-      menuHandler()
-    }
-  }
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside)
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }, [open])
+  const { open, hidden, menuHandler } = UseOpen()
+  UseClickOutside(open, menuHandler)
   return (
     <>
       <button onClick={menuHandler}><GiHamburgerMenu className="text-xl" /></button>

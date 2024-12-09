@@ -29,7 +29,7 @@ export default function FilterAccordion({ filterName }: { filterName: string }) 
   }
   return (
     <>
-      <button onClick={handleToogle} className="flex justify-between w-full text-xl items-center cursor-pointer my-2 px-6">
+      <button onClick={handleToogle} className="flex justify-between w-full text-xl items-center cursor-pointer my-6 px-6">
         <div className={`${isOpen ? 'text-orange-300' : 'text-black'}`}>
           {filterName}
         </div>

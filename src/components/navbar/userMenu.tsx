@@ -1,25 +1,13 @@
 'use client'
 
+import UseClickOutside from "@/hooks/useClickOutside";
+import UseOpen from "@/hooks/useOpen";
 import Link from "next/link";
-import { useState } from "react";
 import { IoPersonCircleSharp } from "react-icons/io5";
 
 export default function UserMenu() {
-  const [open, setOpen] = useState<boolean>(false)
-  const [hidden, setHidden] = useState<boolean>(false);
-  const menuHandler = () => {
-    if (!open) {
-      setHidden(!hidden)
-      setTimeout(() => {
-        setOpen(!open)
-      }, 300)
-    } else {
-      setOpen(!open)
-      setTimeout(() => {
-        setHidden(!hidden)
-      }, 300)
-    }
-  }
+  const { open, hidden, menuHandler } = UseOpen()
+  UseClickOutside(open, menuHandler);
   return (
     <div>
       <button onClick={menuHandler} className="w-[35px] h-[35px] rounded-full cursor-pointer">
