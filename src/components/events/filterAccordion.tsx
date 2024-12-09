@@ -1,16 +1,35 @@
 'use client'
 
-import { useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { category, location, time } from "./filterList";
+import { useContext } from "react";
+import { FilterContext, IValue } from "./filter";
 
 export default function FilterAccordion({ filterName }: { filterName: string }) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const context = useContext<IValue | null>(FilterContext)
+
+  if (!context) {
+    throw new Error('There is no context')
+  }
+
+  const { openAccordion, setOpenAccordion } = context
   let data: string[] = []
-  filterName == 'Location' ? data = location : filterName == 'Category' ? data = category : data = time
+  if (filterName === "Location") {
+    data = location;
+  } else if (filterName === "Category") {
+    data = category;
+  } else {
+    data = time;
+  }
+
+  const isOpen = openAccordion === filterName
+
+  const handleToogle = (): void => {
+    setOpenAccordion(isOpen ? null : filterName)
+  }
   return (
     <>
-      <button onClick={() => setIsOpen(!isOpen)} className="flex justify-between w-full text-xl items-center cursor-pointer my-2 px-6">
+      <button onClick={handleToogle} className="flex justify-between w-full text-xl items-center cursor-pointer my-2 px-6">
         <div className={`${isOpen ? 'text-orange-300' : 'text-black'}`}>
           {filterName}
         </div>
