@@ -40,7 +40,7 @@ export default function FilterAccordion({ filterName }: { filterName: string }) 
       <div className={`${isOpen ? 'flex' : 'hidden'} flex-col px-10`}>
         {data.map((item, idx) => {
           return (
-            <button key={idx} className="text-start py-2 px-4 rounded-md hover:shadow-md">
+            <button key={idx} className="text-start py-2 px-4 rounded-md hover:shadow-md hover:border">
               {item}
             </button>
           )

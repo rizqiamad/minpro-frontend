@@ -14,7 +14,7 @@ export default function Navbar() {
           <Image src='https://assets.loket.com/images/logo-loket-white.png' alt="Loket" className="w-[125px] tablet:w-[150px]" width={150} height={150} />
         </Link>
         <div className="hidden w-[100%] tablet:flex items-center h-8 overflow-hidden rounded-md">
-          <input type="text" name="search" id="search" className="w-[90%] h-full bg-[#12244d] px-4 text-white outline-none focus:bg-white focus:text-black transition ease-linear" placeholder="Cari event seru disini" />
+          <input type="search" name="search" id="search" className="w-[90%] h-full bg-[#12244d] px-4 text-white outline-none focus:bg-white focus:text-black transition ease-linear" placeholder="Cari event seru disini" />
           <button type="submit" className="text-white bg-lightBlue w-[10%] h-full"><FaMagnifyingGlass className="mx-auto" /></button>
         </div>
       </div>
