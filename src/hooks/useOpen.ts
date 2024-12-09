@@ -19,5 +19,5 @@ export default function UseOpen() {
     }
   };
 
-  return { open, setOpen, hidden, setHidden, menuHandler };
+  return { open, hidden, menuHandler };
 }

@@ -6,7 +6,7 @@ import ResponsiveFilter from "@/components/events/responsiveFilter";
 export default function EventsPage() {
   return (
     <main className="flex flex-col md:flex-row">
-      <div className="hidden md:block">
+      <div className="hidden md:block border-slate-300 border-r">
         <Filter />
       </div>
       <ResponsiveFilter />
