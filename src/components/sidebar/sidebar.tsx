@@ -84,14 +84,14 @@ export default function Sidebar() {
         {organiserMode && (
           <div className={side.organiserMode}>
             <div className={side.sideContainer}>
-              <Link href={"/organiser/dashboard"}>
+              <Link href={"/organizer/dashboard"}>
                 <RiHome4Fill className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
                   Dashboard
                 </p>
               </Link>
 
-              <Link href={"/organiser/event"}>
+              <Link href={"/organizer/events"}>
                 <FaFileAlt className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
                   Event Saya
@@ -106,7 +106,7 @@ export default function Sidebar() {
               >
                 Akun
               </h1>
-              <Link href={"/organiser/bio"}>
+              <Link href={"/organizer/bio"}>
                 <FaUserTie className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
                   Informasi Dasar
@@ -118,7 +118,7 @@ export default function Sidebar() {
                   Pengaturan
                 </p>
               </Link>
-              <Link href={"/organiser/legal"}>
+              <Link href={"/organizer/legal"}>
                 <GrDocumentVerified className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
                   Informasi Legal
