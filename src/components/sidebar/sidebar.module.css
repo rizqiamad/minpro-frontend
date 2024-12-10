@@ -1,0 +1,58 @@
+/* USER-ITEM */
+.sidebar{
+    @apply sticky top-0 w-[250px] 
+    flex flex-col 
+    min-w-[50px] min-h-screen overflow-hidden
+    border-r p-4 
+    transition-all duration-150
+
+    bg-blue-900 text-stone-300
+}
+
+.menus{
+    @apply grow
+    /* bg-blue-500 */
+}
+
+.sideContainer{
+    @apply flex flex-col
+    mb-4
+}
+
+.sideContainer a{
+    @apply flex items-center
+    py-2 transition-all
+    hover:pl-1
+}
+
+.icons{
+    @apply text-[20px]
+}
+
+.sidebarBtn{
+    @apply flex items-center
+    cursor-pointer
+}
+
+/* .userMode{
+    @apply bg-teal-600
+} */
+
+/* .organiserMode{
+    @apply bg-zinc-700
+} */
+
+/* NON-TAILWIND CLASS */
+
+.open{
+    width: 250px;
+}
+
+.closed{
+    width: 60px;
+}
+
+.hidden{
+    display: none;
+    margin: 0;
+}
