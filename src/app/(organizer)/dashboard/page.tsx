@@ -24,7 +24,7 @@ export default function Dashboard() {
             </div>
             <button className={sideContent.missionBtn}>Verifikasi</button>
           </div>
-          {/* misi */}
+          {/* misi start */}
           <div className={sideContent.missions}>
             <div className={sideContent.missionInner}>
               <FaCircleUser className={sideContent.missionIcon} />
@@ -32,7 +32,7 @@ export default function Dashboard() {
             </div>
             <button className={sideContent.missionBtn}>Verifikasi</button>
           </div>
-          {/* misi */}
+          {/* misi end*/}
           <div className={sideContent.missions}>
             <div className={sideContent.missionInner}>
               <MdEditDocument className={sideContent.missionIcon} />
@@ -61,7 +61,9 @@ export default function Dashboard() {
 
         <div className={sideContent.recordContent}>
           <div className={sideContent.recordContentTop}>
-            <RiDraftFill className={`${sideContent.recordIcon} text-teal-300`} />
+            <RiDraftFill
+              className={`${sideContent.recordIcon} text-teal-300`}
+            />
             <h1 className={sideContent.recordTitle}>Draft Event</h1>
             <button className={sideContent.recordDetailBtn}>Detail</button>
           </div>
@@ -74,7 +76,9 @@ export default function Dashboard() {
 
         <div className={sideContent.recordContent}>
           <div className={sideContent.recordContentTop}>
-            <IoWalletOutline className={`${sideContent.recordIcon} text-amber-700`} />
+            <IoWalletOutline
+              className={`${sideContent.recordIcon} text-amber-700`}
+            />
             <h1 className={sideContent.recordTitle}>Total Transaksi</h1>
             <button className={sideContent.recordDetailBtn}>Detail</button>
           </div>
@@ -100,7 +104,9 @@ export default function Dashboard() {
 
         <div className={sideContent.recordContent}>
           <div className={sideContent.recordContentTop}>
-            <GiMoneyStack className={`${sideContent.recordIcon} text-lime-700`} />
+            <GiMoneyStack
+              className={`${sideContent.recordIcon} text-lime-700`}
+            />
             <h1 className={sideContent.recordTitle}>Total Penjualan</h1>
             <button className={sideContent.recordDetailBtn}>Detail</button>
           </div>
