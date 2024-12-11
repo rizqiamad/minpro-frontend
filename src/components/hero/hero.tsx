@@ -30,7 +30,7 @@ export default function Hero() {
         {heroData.map((item, idx) => {
           return (
             <SwiperSlide key={idx} >
-              <div className='relative w-full aspect-[6/1.5] min-h-[10rem]'>
+              <div className='relative w-full aspect-[6/1.2] min-h-[10rem]'>
                 <Image src={item.url} alt={item.alt} fill />
               </div>
             </SwiperSlide>
