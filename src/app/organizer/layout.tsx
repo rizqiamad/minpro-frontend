@@ -3,9 +3,9 @@ import { ReactNode } from "react";
 
 export default function OrganizerLayout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="flex items-start justify-between">
       {<Sidebar />}
-      {children}
+      <main className="w-full h-full">{children}</main>
     </div>
   )
 }
