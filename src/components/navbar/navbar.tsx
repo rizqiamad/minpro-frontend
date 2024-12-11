@@ -8,7 +8,7 @@ import UserMenu from "./userMenu";
 
 export default function Navbar() {
   return (
-    <nav className="bg-blueNavy h-20 flex justify-between gap-10 px-10 items-center relative">
+    <nav className="bg-blueNavy h-20 flex justify-between gap-10 px-10 items-center relative shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.4)]">
       <div className="flex gap-14 tablet:w-[70%]">
         <Link href={'/'}>
           <Image src='https://assets.loket.com/images/logo-loket-white.png' alt="Loket" className="w-[125px] tablet:w-[150px]" width={150} height={150} />

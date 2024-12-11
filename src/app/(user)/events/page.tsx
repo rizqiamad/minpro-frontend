@@ -10,7 +10,7 @@ export default function EventsPage() {
         <Filter />
       </div>
       <ResponsiveFilter />
-      <div className="md:w-[78%] flex flex-col min-h-[40rem]">
+      <div className="w-full flex flex-col min-h-[40rem]">
         <div className="px-5 pt-4 text-end hidden md:block">
           <label htmlFor="sorting" className="font-medium mr-3">Urutkan :</label>
           <select id="sorting" name="sorting" className="border text-black/60 border-slate-400 py-2 px-3 rounded-md outline-none cursor-pointer">

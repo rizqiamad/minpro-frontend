@@ -9,3 +9,14 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: red;
+}
+
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+  width: 5rem;
+  background-color: red;
+}

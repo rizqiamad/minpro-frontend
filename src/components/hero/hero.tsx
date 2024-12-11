@@ -5,25 +5,33 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-import Coupon from "@/../../public/coupon.webp";
-import Points from "@/../../public/points.webp"
+import { heroData } from "./data";
 import Image from 'next/image';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 export default function Hero() {
-  const images = [Coupon, Points]
   return (
-    <div className='mx-20'>
+    <div className='mx-4 my-8 rounded-xl overflow-hidden'>
       <Swiper
-        spaceBetween={50}
-        slidesPerView={3}
+        modules={[Pagination, Navigation, Autoplay]}
+        navigation={true}
+        slidesPerView={1}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{ clickable: true }}
+        loop={true}
         className='bg-yellow-200'
       >
-        {images.map((img, idx) => {
+        {heroData.map((item, idx) => {
           return (
             <SwiperSlide key={idx} >
-              <div className='relative w-full h-64'>
-                <Image src={img} alt='hero' fill />
+              <div className='relative w-full aspect-[6/1.5] min-h-[10rem]'>
+                <Image src={item.url} alt={item.alt} fill />
               </div>
             </SwiperSlide>
           )
