@@ -4,56 +4,19 @@ import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
 // import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 // import { toast } from 'react-toastify'
-import * as Yup from 'yup'
 import SelectDate from './selectDate';
 import SelectTime from './selectTime';
 import { categories } from './data';
 import SetLocation from './setLocation';
 import RichTextEditor from './textEditor';
 import { FieldThumbnail } from './imageUploader';
-
-const eventSchema = Yup.object().shape({
-  name: Yup.string().required('Event name is required'),
-  // image: Yup.mixed().test('filesize', 'the image is too large', (value: any) => {
-  //   return value && value[0].size <= 2000000
-  // }).required('Image is required').nullable(),
-  start_date: Yup.date().required('Start Date is required'),
-  end_date: Yup.date().required('End date is required'),
-  start_time: Yup.string().required('Start Time is required'),
-  end_time: Yup.string().required('End time is required'),
-  name_place: Yup.string().required('Name of place is required'),
-  address: Yup.string().required('Address is required'),
-  city: Yup.string().required('Name of city is required'),
-  category: Yup.string()
-    .oneOf(['Festival', 'Konser', 'Pertandingan', 'Workshop', 'Konfrensi', 'Seminar', 'Pertunjukkan', 'Lainnya'])
-    .required('Category is required'),
-  type: Yup.string().oneOf(['paid', 'free']).required('Choose type of your event'),
-  description: Yup.string(),
-  terms_condition: Yup.string(),
-  coupon_seat: Yup.number().nullable()
-})
-
-export interface FormValue {
-  name: string
-  // image: File | undefined
-  start_date: Date | null
-  end_date: Date | null
-  start_time: string
-  end_time: string
-  name_place: string
-  address: string
-  city: string
-  category: string
-  type: string
-  description: string
-  terms_condition: string
-  coupon_seat: number | null
-}
+import { FormValue } from '@/types/form';
+import { eventSchema } from '@/libs/formSchemas';
 
 export default function CreateEvent() {
   const initialValue: FormValue = {
     name: '',
-    // image: undefined,
+    image: undefined,
     start_date: null,
     end_date: null,
     start_time: '',
@@ -182,7 +145,7 @@ export default function CreateEvent() {
                 <ErrorMessage name="type" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
               </div>
               <div className='flex flex-col'>
-                <label htmlFor="coupon_seat" className='my-2 text-black/50 font-[500]'>Buat Promosi</label>
+                <label htmlFor="coupon_seat" className='my-2 text-black/50 font-[500]'>Tentukan jumlah Promosi</label>
                 <Field
                   type='number'
                   name='coupon_seat'
@@ -192,7 +155,7 @@ export default function CreateEvent() {
                   className='py-1 px-2 outline-none border rounded-md'
                   min={0}
                 />
-                <div className='text-xs ml-2 text-blue-400'>Set orang yang bisa menggunakan coupon mereka (default semua bisa menggunakan coupon mereka untuk mendapatkan potongan)</div>
+                <div className='text-xs ml-2 text-blue-400'>Tentukan berapa orang yang bisa mendapatkan potongan harga menggunakan coupon mereka, jika tidak ditentukan maka setiap orang berhak menggunakan coupon mereka untuk mendapatkan promo</div>
               </div>
               <div>
                 <h1 className='my-2 text-black/50 font-[500]'>Description</h1>

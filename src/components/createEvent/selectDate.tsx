@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, FormikProps } from "formik";
-import { FormValue } from "./createEvent";
 import { SlCalender } from "react-icons/sl";
 import UseOpen from "@/hooks/useOpen";
 import { IoMdClose } from "react-icons/io";
 import { useEffect } from "react";
+import { FormValue } from "@/types/form";
 
 export default function SelectDate(Props: FormikProps<FormValue>) {
   const { handleChange, values } = Props
