@@ -1,7 +1,8 @@
+import CreateEvent from "@/components/createEvent/createEvent";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CreateEvent() {
+export default function CreateEventPage() {
   return (
     <main>
       <div className="flex justify-between items-center px-12 py-5 shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.2)]">
@@ -10,7 +11,7 @@ export default function CreateEvent() {
         </Link>
         <Link href={'/'} className="font-[600]">BANTUAN</Link>
       </div>
-      <h1>THIS IS CREATE EVENT PAGE</h1>
+      <CreateEvent />
     </main>
   )
 }
