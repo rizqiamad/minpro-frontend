@@ -30,7 +30,7 @@ const eventSchema = Yup.object().shape({
   type: Yup.string().oneOf(['paid', 'free']).required('Choose type of your event'),
   description: Yup.string(),
   terms_condition: Yup.string(),
-  // coupon_seat: Yup.number().nullable()
+  coupon_seat: Yup.number().nullable()
 })
 
 export interface FormValue {
@@ -47,7 +47,7 @@ export interface FormValue {
   type: string
   description: string
   terms_condition: string
-  // coupon_seat: number | null
+  coupon_seat: number | null
 }
 
 export default function CreateEvent() {
@@ -65,7 +65,7 @@ export default function CreateEvent() {
     type: '',
     description: '',
     terms_condition: '',
-    // coupon_seat: null,
+    coupon_seat: null,
   }
   // const router = useRouter();
   const [isLoading, SetIsLoading] = useState<boolean>(false);
@@ -180,6 +180,19 @@ export default function CreateEvent() {
                   <label htmlFor="free" className='font-semibold cursor-pointer'>Free</label>
                 </div>
                 <ErrorMessage name="type" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor="coupon_seat" className='my-2 text-black/50 font-[500]'>Buat Promosi</label>
+                <Field
+                  type='number'
+                  name='coupon_seat'
+                  id='coupon_seat'
+                  onChange={handleChange}
+                  value={values.coupon_seat}
+                  className='py-1 px-2 outline-none border rounded-md'
+                  min={0}
+                />
+                <div className='text-xs ml-2 text-blue-400'>Set orang yang bisa menggunakan coupon mereka (default semua bisa menggunakan coupon mereka untuk mendapatkan potongan)</div>
               </div>
               <div>
                 <h1 className='my-2 text-black/50 font-[500]'>Description</h1>
