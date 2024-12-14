@@ -20,7 +20,3 @@
   width: 5rem;
   background-color: red;
 }
-
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}

@@ -47,22 +47,6 @@ const RichTextEditor: React.FC<FieldRichTextProps> = ({ setFieldValue, name, val
     setFieldValue(name, e);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const toolbar = document.querySelector(".ql-toolbar");
-      if (toolbar) {
-        if (window.scrollY > toolbar.getBoundingClientRect().top) {
-          toolbar.classList.add("sticky");
-        } else {
-          toolbar.classList.remove("sticky");
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <ReactQuill
       value={values[name] as string}

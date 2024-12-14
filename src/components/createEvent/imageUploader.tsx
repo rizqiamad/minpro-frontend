@@ -24,13 +24,12 @@ export const FieldThumbnail: React.FC<FieldThumbnailProps> = ({
     if (file) {
       formik.setFieldValue(name, file);
       const imageUrl = URL.createObjectURL(file);
-      console.log(imageUrl)
       setPreviewUrl(imageUrl);
     }
   };
 
   return (
-    <div className={`flex w-full flex-col gap-2 ${className}`}>
+    <div className={`flex w-full h-full flex-col gap-2 ${className}`}>
       <input
         type="file"
         id={name}
@@ -44,14 +43,14 @@ export const FieldThumbnail: React.FC<FieldThumbnailProps> = ({
       {!previewUrl ? (
         <div
           onClick={() => imgRef.current?.click()}
-          className="flex w-full h-80 justify-center items-center border border-gray-500 border-dashed rounded-md cursor-pointer"
+          className="flex w-full h-full justify-center items-center border border-gray-500 border-dashed rounded-md cursor-pointer"
         >
           +
         </div>
       ) : (
         <div
           onClick={() => imgRef.current?.click()}
-          className="flex w-full h-80 justify-center items-center border border-gray-500 border-dashed rounded-md cursor-pointer"
+          className="overflow-hidden w-full h-full border relative border-gray-500 border-dashed rounded-md cursor-pointer"
         >
           <Image
             src={previewUrl}
@@ -60,7 +59,6 @@ export const FieldThumbnail: React.FC<FieldThumbnailProps> = ({
             height={200}
             layout="responsive"
             objectFit="cover"
-            className="rounded-lg"
           />
         </div>
       )}
