@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import { FormValue } from "@/types/form";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -36,14 +37,13 @@ const formats = [
 
 interface FieldRichTextProps {
   setFieldValue: (a: any, b: any) => void
-  name: string
+  values: FormValue
+  name: keyof FormValue
 }
 
-const RichTextEditor: React.FC<FieldRichTextProps> = ({ setFieldValue, name }) => {
-  const [value, setValue] = useState<string>("");
+const RichTextEditor: React.FC<FieldRichTextProps> = ({ setFieldValue, name, values }) => {
 
   const handleChange = (e: string) => {
-    setValue(e);
     setFieldValue(name, e);
   };
 
@@ -65,7 +65,7 @@ const RichTextEditor: React.FC<FieldRichTextProps> = ({ setFieldValue, name }) =
 
   return (
     <ReactQuill
-      value={value}
+      value={values[name] as string}
       onChange={handleChange}
       modules={modules}
       formats={formats}

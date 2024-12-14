@@ -20,10 +20,12 @@ export const FieldThumbnail: React.FC<FieldThumbnailProps> = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0];
+    console.log(file)
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setPreviewUrl(imageUrl);
       formik.setFieldValue(name, file);
+      const imageUrl = URL.createObjectURL(file);
+      console.log(imageUrl)
+      setPreviewUrl(imageUrl);
     }
   };
 
@@ -36,6 +38,7 @@ export const FieldThumbnail: React.FC<FieldThumbnailProps> = ({
         className="hidden"
         ref={imgRef}
         onChange={handleChange}
+        onSubmit={() => setPreviewUrl(null)}
         accept="image/png, image/jpeg, image/jpg, image/webp"
       />
       {!previewUrl ? (

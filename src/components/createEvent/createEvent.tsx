@@ -1,9 +1,9 @@
 'use client'
 
 import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
-// import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import SelectDate from './selectDate';
 import SelectTime from './selectTime';
 import { categories } from './data';
@@ -12,13 +12,14 @@ import RichTextEditor from './textEditor';
 import { FieldThumbnail } from './imageUploader';
 import { FormValue } from '@/types/form';
 import { eventSchema } from '@/libs/formSchemas';
+import axios from '@/helpers/axios'
 
 export default function CreateEvent() {
   const initialValue: FormValue = {
     name: '',
-    image: undefined,
-    start_date: null,
-    end_date: null,
+    image: null,
+    start_date: '',
+    end_date: '',
     start_time: '',
     end_time: '',
     name_place: '',
@@ -30,30 +31,33 @@ export default function CreateEvent() {
     terms_condition: '',
     coupon_seat: null,
   }
-  // const router = useRouter();
+  const router = useRouter();
   const [isLoading, SetIsLoading] = useState<boolean>(false);
 
-  // const handleAdd = async (user: FormValue) => {
-  //   try {
-  //     SetIsLoading(true)
-  //     const res = await fetch('http://localhost:8000/api/auth/register', {
-  //       method: 'POST',
-  //       body: JSON.stringify(user),
-  //       headers: { 'content-type': 'application/json' },
-  //     })
-  //     const result = await res.json()
+  const handleAdd = async (event: FormValue) => {
+    try {
+      SetIsLoading(true)
+      const formData = new FormData()
+      for (const key in event) {
+        let value = event[key as keyof FormValue]
+        if (key.includes('time')) value = `1970-01-01T${value}:00+07:00`
+        if (key.includes('date')) value = `${value}T00:00:00Z`
+        if (value) {
+          formData.append(key, value)
+        }
+      }
+      const { data } = await axios.post('/events', formData)
+      console.log(data)
 
-  //     if (!res.ok) throw result
-
-  //     router.push('/login')
-  //     toast.success(result.message)
-  //   } catch (err: any) {
-  //     console.log(err)
-  //     toast.error(err.message)
-  //   } finally {
-  //     SetIsLoading(false)
-  //   }
-  // }
+      // router.push(`/create-event/${result}`)
+      toast.success(data.message)
+    } catch (err: any) {
+      console.log(err)
+      toast.error(err.response)
+    } finally {
+      SetIsLoading(false)
+    }
+  }
 
   return (
     <div className='py-6 rounded-2xl shadow-2xl px-5 mx-44 my-20'>
@@ -71,7 +75,8 @@ export default function CreateEvent() {
           return (
             <Form className='flex flex-col gap-4 mt-4'>
               <div>
-                <FieldThumbnail name="thumbnail" formik={props} />
+                <FieldThumbnail name="image" formik={props} />
+                <ErrorMessage name='image'>{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
               </div>
               <div className='flex flex-col'>
                 <Field
@@ -159,11 +164,11 @@ export default function CreateEvent() {
               </div>
               <div>
                 <h1 className='my-2 text-black/50 font-[500]'>Description</h1>
-                <RichTextEditor setFieldValue={props.setFieldValue} name='description' />
+                <RichTextEditor setFieldValue={props.setFieldValue} values={values} name='description' />
               </div>
               <div>
                 <h1 className='my-2 text-black/50 font-[500]'>Terms & Condition</h1>
-                <RichTextEditor setFieldValue={props.setFieldValue} name='terms_condition' />
+                <RichTextEditor setFieldValue={props.setFieldValue} values={values} name='terms_condition' />
               </div>
               <button disabled={isLoading} type='submit' className={`${isLoading ? 'disabled:opacity-[0.5] disabled:bg-lightBlue text-white' : 'hover:bg-lightBlue hover:text-white'} py-2 rounded-lg transition ease-linear font-semibold border-2 border-lightBlue`}>
                 {isLoading ? 'Loading ...' : 'Buat Event'}

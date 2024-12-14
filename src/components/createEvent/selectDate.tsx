@@ -8,14 +8,18 @@ import { FormValue } from "@/types/form";
 export default function SelectDate(Props: FormikProps<FormValue>) {
   const { handleChange, values } = Props
   const { open, hidden, menuHandler } = UseOpen()
+  const date = new Date()
+  const minDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
+  console.log(values.start_date)
+  console.log(values.end_date)
   useEffect(() => {
-      if (open) {
-        document.body.classList.add("overflow-hidden");
-      } else {
-        document.body.classList.remove("overflow-hidden");
-      }
-    }, [open])
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [open])
   return (
     <>
       <button type="button" onClick={menuHandler} className='w-fit hover:text-blue-400 rounded-md font-[550] flex justify-center items-center gap-2'><SlCalender /> SET DATE</button>
@@ -28,6 +32,7 @@ export default function SelectDate(Props: FormikProps<FormValue>) {
             type='date'
             name='start_date'
             id='start_date'
+            min={minDate}
             onChange={handleChange}
             value={values.start_date}
             className='border-2 rounded-md px-2 py-1'
@@ -40,12 +45,14 @@ export default function SelectDate(Props: FormikProps<FormValue>) {
             type='date'
             name='end_date'
             id='end_date'
+            min={values.start_date || minDate}
             onChange={handleChange}
             value={values.end_date}
             className='border-2 rounded-md px-2 py-1'
           />
           <ErrorMessage name="end_date" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
         </div>
+        <button type="button" disabled={values.start_date == '' || values.end_date == ''} onClick={menuHandler} className={`${values.start_date == '' || values.end_date == '' ? 'disabled:cursor-not-allowed' : 'hover:bg-slate-400'} rounded-md font-[550] mt-4 py-2 bg-slate-200 transition duration-300 w-full`}>SIMPAN</button>
       </div>
     </>
   )

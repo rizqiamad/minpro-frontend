@@ -1,8 +1,8 @@
 export interface FormValue {
   name: string
-  image: File | undefined
-  start_date: Date | null
-  end_date: Date | null
+  image: File | null
+  start_date: string
+  end_date: string
   start_time: string
   end_time: string
   name_place: string
@@ -12,5 +12,5 @@ export interface FormValue {
   type: string
   description: string
   terms_condition: string
-  coupon_seat: number | null
+  coupon_seat: string | null
 }

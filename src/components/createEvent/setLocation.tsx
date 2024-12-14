@@ -1,21 +1,21 @@
 import { ErrorMessage, Field, FormikProps } from "formik";
-import { FormValue } from "./createEvent";
 import UseOpen from "@/hooks/useOpen";
 import { IoMdClose } from "react-icons/io";
 import { useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import { FormValue } from "@/types/form";
 
 export default function SetLocation(Props: FormikProps<FormValue>) {
   const { handleChange, values } = Props
   const { open, hidden, menuHandler } = UseOpen()
 
   useEffect(() => {
-      if (open) {
-        document.body.classList.add("overflow-hidden");
-      } else {
-        document.body.classList.remove("overflow-hidden");
-      }
-    }, [open])
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [open])
   return (
     <>
       <button type="button" onClick={menuHandler} className='w-fit hover:text-blue-400 rounded-md font-[550] flex justify-center items-center gap-2'><FaLocationDot /> SET LOCATION</button>
@@ -58,7 +58,8 @@ export default function SetLocation(Props: FormikProps<FormValue>) {
           />
           <ErrorMessage name="city" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
         </div>
-      </div>
+        <button type="button" disabled={values.address == '' || values.name_place == '' || values.city == ''} onClick={menuHandler} className={`${values.address == '' || values.name_place == '' || values.city == '' ? 'disabled:cursor-not-allowed' : 'hover:bg-slate-400'} rounded-md font-[550] mt-4 py-2 bg-slate-200 transition duration-300 w-full`}>SIMPAN</button>
+    </div >
     </>
   )
 }

@@ -18,7 +18,7 @@ export const eventSchema = Yup.object().shape({
   address: Yup.string().required('Address is required'),
   city: Yup.string().required('Name of city is required'),
   category: Yup.string()
-    .oneOf(['Festival', 'Konser', 'Pertandingan', 'Workshop', 'Konfrensi', 'Seminar', 'Pertunjukkan', 'Lainnya'])
+    .oneOf(['Festival', 'Konser', 'Pertandingan', 'Workshop', 'Konferensi', 'Seminar', 'Pertunjukkan', 'Lainnya'])
     .required('Category is required'),
   type: Yup.string().oneOf(['paid', 'free']).required('Choose type of your event'),
   description: Yup.string(),

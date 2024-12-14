@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, FormikProps } from "formik";
-import { FormValue } from "./createEvent";
 import UseOpen from "@/hooks/useOpen";
 import { IoMdClose } from "react-icons/io";
 import { useEffect } from "react";
 import { FaClock } from "react-icons/fa";
+import { FormValue } from "@/types/form";
 
 export default function SelectTime(Props: FormikProps<FormValue>) {
   const { handleChange, values } = Props
@@ -46,6 +46,7 @@ export default function SelectTime(Props: FormikProps<FormValue>) {
           />
           <ErrorMessage name="end_time" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
         </div>
+        <button type="button" disabled={values.start_time == '' || values.end_time == ''} onClick={menuHandler} className={`${values.start_time == '' || values.end_time == '' ? 'disabled:cursor-not-allowed' : 'hover:bg-slate-400'} rounded-md font-[550] mt-4 py-2 bg-slate-200 transition duration-300 w-full`}>SIMPAN</button>
       </div>
     </>
   )
