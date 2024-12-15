@@ -1,4 +1,4 @@
-import Card from "@/components/events/card";
+import Cards from "@/components/events/cards";
 import Filter from "@/components/events/filter";
 import EventPagination from "@/components/events/pagination";
 import ResponsiveFilter from "@/components/events/responsiveFilter";
@@ -21,14 +21,7 @@ export default function EventsPage() {
           </select>
         </div>
         <div className="w-full p-5 grid grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] auto-rows-max gap-5">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <Cards />
         </div>
         <div className="mt-auto flex gap-4 px-5 mb-4 justify-self-end">
           <EventPagination />

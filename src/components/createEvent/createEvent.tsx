@@ -48,9 +48,8 @@ export default function CreateEvent() {
         }
       }
       const { data } = await axios.post('/events', formData)
-      console.log(data)
 
-      // router.push(`/create-event/${result}`)
+      router.push(`/create-event/${data.event_id}`)
       toast.success(data.message)
     } catch (err: any) {
       console.log(err)
@@ -68,7 +67,7 @@ export default function CreateEvent() {
         onSubmit={(values, action) => {
           console.log(values)
           action.resetForm()
-          // handleAdd(values)
+          handleAdd(values)
         }}
       >
         {(props: FormikProps<FormValue>) => {

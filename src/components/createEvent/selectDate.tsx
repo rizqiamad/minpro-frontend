@@ -8,7 +8,8 @@ import { FormValue } from "@/types/form";
 export default function SelectDate(Props: FormikProps<FormValue>) {
   const { handleChange, values } = Props
   const { open, hidden, menuHandler } = UseOpen()
-  let minDate
+  const date = new Date()
+  const minDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
   useEffect(() => {
     if (open) {
@@ -17,11 +18,6 @@ export default function SelectDate(Props: FormikProps<FormValue>) {
       document.body.classList.remove("overflow-hidden");
     }
   }, [open])
-
-  useEffect(() => {
-    const date = new Date()
-    minDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-  }, [])
   return (
     <>
       <button type="button" onClick={menuHandler} className='w-fit hover:text-blue-400 rounded-md font-[550] flex justify-center items-center gap-2'><SlCalender /> SET DATE</button>
