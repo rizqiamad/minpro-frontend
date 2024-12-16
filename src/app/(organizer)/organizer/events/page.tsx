@@ -89,25 +89,22 @@ export default function event() {
         <div className="">
           <div className={sideContent.tabContainer}>
             <button
-              className={`${sideContent.eventTab} ${
-                activeTab === "active" ? "font-bold border-b-4 border-zinc-600" : ""
-              }`}
+              className={`${sideContent.eventTab} ${activeTab === "active" ? "font-bold border-b-4 border-zinc-600" : ""
+                }`}
               onClick={() => handleClick("active")}
             >
               <h1 className="p-3">Event Aktif</h1>
             </button>
             <button
-              className={`${sideContent.eventTab} ${
-                activeTab === "draft" ? "font-bold border-b-4 border-zinc-600" : ""
-              }`}
+              className={`${sideContent.eventTab} ${activeTab === "draft" ? "font-bold border-b-4 border-zinc-600" : ""
+                }`}
               onClick={() => handleClick("draft")}
             >
               <h1 className="p-3">Draft Event</h1>
             </button>
             <button
-              className={`${sideContent.eventTab} ${
-                activeTab === "previous" ? "font-bold border-b-4 border-zinc-600" : ""
-              }`}
+              className={`${sideContent.eventTab} ${activeTab === "previous" ? "font-bold border-b-4 border-zinc-600" : ""
+                }`}
               onClick={() => handleClick("previous")}
             >
               <h1 className="p-3">Event Sebelumnya</h1>

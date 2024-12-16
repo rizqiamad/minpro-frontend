@@ -17,7 +17,7 @@ export default function ResponsiveFilter() {
   }, [open])
   return (
     <>
-      <div className="flex gap-2 items-center justify-evenly pt-4 md:hidden">
+      <div className="flex gap-2 items-center justify-evenly pt-4 lg:hidden">
         <button onClick={menuHandler} className="w-[45%] shadow-md hover:shadow-sm hover:text-blue-500 border rounded-md py-2 font-medium text-black/80 cursor-pointer">Filter</button>
         <button className="w-[45%] shadow-md hover:shadow-sm hover:text-blue-500 border rounded-md py-2 font-medium text-black/80 cursor-pointer">Urutkan</button>
       </div>
