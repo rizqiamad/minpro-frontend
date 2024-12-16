@@ -17,7 +17,7 @@ export default function Card({ eventId, srcImgEvent, eventTitle, start_date, end
   const date = displayDate(formatDate(start_date), formatDate(end_date))
 
   return (
-    <Link target="blank" href={`events/${eventId}`} className="shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.75)] min-w-[13rem] h-[20rem] rounded-md overflow-hidden">
+    <Link target="blank" href={`events/${eventId}`} className="shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.75)] w-[13rem] h-[20rem] rounded-md overflow-hidden">
       <div className="relative w-full h-[40%]">
         <Image src={srcImgEvent} alt={eventTitle} fill />
       </div>

@@ -1,9 +1,7 @@
 import { IEvent } from "@/types/event";
 import Card from "../events/card";
-import { getEvents } from "@/libs/events";
 
-export default async function Cards() {
-  const { result }: { result: IEvent[] } = await getEvents();
+export default async function Cards({ result }: { result: IEvent[] }) {
   return (
     <div className="w-full p-5 grid grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] auto-rows-max gap-5">
       {result.map((item, idx) => {

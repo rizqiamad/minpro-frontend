@@ -31,11 +31,11 @@ export default function TabPagination({ result }: { result: IEvent }) {
         {!activeTab && (
           <>
             {result.description ? (<>
-              <h1 className="text-3xl font-semibold mb-3">Description</h1>
+              <h1 className="text-3xl font-semibold mb-3 border-b-2 py-2">Description</h1>
               <div dangerouslySetInnerHTML={{ __html: result.description }} className="text-justify" />
             </>) : null}
             {result.terms_condition ? (<>
-              <h1 className="text-3xl font-semibold mt-10 mb-3">Terms & Condition</h1>
+              <h1 className="text-3xl font-semibold mt-10 mb-3 border-b-2 py-2">Terms & Condition</h1>
               <div dangerouslySetInnerHTML={{ __html: result.terms_condition }} className="text-justify" />
             </>) : null}
           </>

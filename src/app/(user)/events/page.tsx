@@ -2,8 +2,12 @@ import Cards from "@/components/events/cards";
 import Filter from "@/components/events/filter";
 import EventPagination from "@/components/events/pagination";
 import ResponsiveFilter from "@/components/events/responsiveFilter";
+import { getEvents } from "@/libs/events";
+import { IEvent } from "@/types/event";
 
-export default function EventsPage() {
+export default async function EventsPage({ searchParams }: { searchParams: { page: string } }) {
+  const { result, total_page }: { result: IEvent[], total_page: number } = await getEvents(searchParams.page || '1');
+
   return (
     <main className="flex flex-col lg:flex-row">
       <div className="hidden lg:block border-slate-300 border-r">
@@ -21,10 +25,10 @@ export default function EventsPage() {
           </select>
         </div>
         <div className="w-full p-5 grid grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] auto-rows-max gap-5">
-          <Cards />
+          <Cards result={result} />
         </div>
         <div className="mt-auto flex gap-4 px-5 mb-4 justify-self-end">
-          <EventPagination />
+          <EventPagination total_page={total_page} />
         </div>
       </div>
     </main>
