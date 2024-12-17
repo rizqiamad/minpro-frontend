@@ -25,3 +25,16 @@ export const eventSchema = Yup.object().shape({
   terms_condition: Yup.string(),
   coupon_seat: Yup.number().nullable()
 })
+
+export const ticketEventSchema = Yup.object().shape({
+  name: Yup.string().required('Ticket name is required'),
+  seats: Yup.number()
+    .min(1, 'Ticket must be greater or equal to 1')
+    .required('There is must be a seats'),
+  price: Yup.number()
+    .min(20000, 'Minimum price is Rp20.000')
+    .required('password is required'),
+  description: Yup.string(),
+  start_date: Yup.date().required('Set the ticket sales period'),
+  end_date: Yup.date().required('Set the ticket sales period')
+})

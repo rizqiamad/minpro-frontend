@@ -9,9 +9,12 @@ import { formatTime } from "@/helpers/formatTime";
 import Link from "next/link";
 import Share from "@/components/eventDetail/share";
 import TabPagination from "@/components/eventDetail/pagination";
+import { ITicket } from "@/types/ticket";
+import { getTickets } from "@/libs/tickets";
 
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventById(params.event_id)
+  const ticketResult: ITicket[] = await getTickets(params.event_id)
   const date = displayDate(formatDate(result.start_date), formatDate(result.end_date))
   const time = `${formatTime(result.start_time)} - ${formatTime(result.end_time)}`
   const location = `${result.location.name_place}, ${result.location.address}, ${result.location.city.city}`
@@ -35,7 +38,7 @@ export default async function EventDetail({ params }: { params: { event_id: stri
         </div>
       </div>
       <div className="flex flex-col xl:flex-row gap-6 mt-10 px-10 xl:px-0">
-        <TabPagination result={result}/>
+        <TabPagination result={result} ticketResult={ticketResult} />
         <div className="sticky top-0 flex flex-col xl:w-[30%] xl:self-start">
           <div className="rounded-xl shadow-2xl flex flex-col gap-4 px-4 py-6">
             <div className="border-b pb-4">
@@ -43,7 +46,7 @@ export default async function EventDetail({ params }: { params: { event_id: stri
             </div>
             <Link href={`/events/${params.event_id}/order`} className="bg-lightBlue rounded-md text-center text-white py-2 font-semibold">Pesan Sekarang</Link>
           </div>
-          <Share slug={params.event_id}/>
+          <Share slug={params.event_id} />
         </div>
       </div>
     </main>

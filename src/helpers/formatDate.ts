@@ -7,6 +7,15 @@ export function formatDate(dateString: string) {
   });
 }
 
+export function formatDateLong(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export function displayDate(start_date: string, end_date: string) {
   
   if (start_date == end_date) return `${start_date}`;
