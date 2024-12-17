@@ -3,9 +3,9 @@ import UseOpen from "@/hooks/useOpen";
 import { IoMdClose } from "react-icons/io";
 import { useEffect } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { FormValue } from "@/types/form";
+import { FormValueEvent } from "@/types/form";
 
-export default function SetLocation(Props: FormikProps<FormValue>) {
+export default function SetLocation(Props: FormikProps<FormValueEvent>) {
   const { handleChange, values } = Props
   const { open, hidden, menuHandler } = UseOpen()
 

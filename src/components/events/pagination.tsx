@@ -1,26 +1,15 @@
 'use client'
 
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import UseLocater from "@/hooks/useLocater";
+import { useEffect, useState } from "react";
 
 export default function EventPagination({ total_page }: { total_page: number }) {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const router = useRouter()
+  const { searchParams, pathname, router, createQueryString } = UseLocater()
   const [page, setPage] = useState<number>(Number(searchParams.get('page')) || 1)
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
   useEffect(() => {
-    router.push(pathname + "?" + createQueryString("page", `${page}`));
+    const newQueryString = createQueryString("page", `${page}`)
+    router.replace(`${pathname}?${newQueryString}`);
   }, [page]);
   return (
     <>

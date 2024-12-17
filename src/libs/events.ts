@@ -1,8 +1,8 @@
 import axios from "@/helpers/axios";
 
-export const getEvents = async (page: string) => {
+export const getEvents = async (page: string = '1', sorts: string = 'asc') => {
   try {
-    const { data } = await axios.get(`/events/?page=${page}`);
+    const { data } = await axios.get(`/events/?page=${page}&sorts=${sorts}`);
     return data;
   } catch (err) {
     console.log(err);

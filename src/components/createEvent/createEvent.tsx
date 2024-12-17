@@ -10,13 +10,13 @@ import { categories } from './data';
 import SetLocation from './setLocation';
 import RichTextEditor from './textEditor';
 import { FieldThumbnail } from './imageUploader';
-import { FormValue } from '@/types/form';
+import { FormValueEvent } from '@/types/form';
 import { eventSchema } from '@/libs/formSchemas';
 import axios from '@/helpers/axios'
 import EventType from './eventType'
 
 export default function CreateEvent() {
-  const initialValue: FormValue = {
+  const initialValue: FormValueEvent = {
     name: '',
     image: null,
     start_date: '',
@@ -35,12 +35,12 @@ export default function CreateEvent() {
   const router = useRouter();
   const [isLoading, SetIsLoading] = useState<boolean>(false);
 
-  const handleAdd = async (event: FormValue) => {
+  const handleAdd = async (event: FormValueEvent) => {
     try {
       SetIsLoading(true)
       const formData = new FormData()
       for (const key in event) {
-        let value = event[key as keyof FormValue]
+        let value = event[key as keyof FormValueEvent]
         if (key.includes('time')) value = `1970-01-01T${value}:00+07:00`
         if (key.includes('date')) value = `${value}T00:00:00Z`
         if (value) {
@@ -70,7 +70,7 @@ export default function CreateEvent() {
           handleAdd(values)
         }}
       >
-        {(props: FormikProps<FormValue>) => {
+        {(props: FormikProps<FormValueEvent>) => {
           const { handleChange, values, errors, touched } = props
           return (
             <Form className='flex flex-col gap-4 mt-4'>
