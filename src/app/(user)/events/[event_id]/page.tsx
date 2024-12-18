@@ -6,11 +6,9 @@ import { FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { displayDate, formatDate } from "@/helpers/formatDate";
 import { formatTime } from "@/helpers/formatTime";
-import Link from "next/link";
-import Share from "@/components/eventDetail/share";
-import TabPagination from "@/components/eventDetail/pagination";
 import { ITicket } from "@/types/ticket";
 import { getTickets } from "@/libs/tickets";
+import AddTicket from "@/components/createTicket/addTicket";
 
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventById(params.event_id)
@@ -38,16 +36,7 @@ export default async function EventDetail({ params }: { params: { event_id: stri
         </div>
       </div>
       <div className="flex flex-col xl:flex-row gap-6 mt-10 px-10 xl:px-0">
-        <TabPagination result={result} ticketResult={ticketResult} />
-        <div className="sticky top-0 flex flex-col xl:w-[30%] xl:self-start">
-          <div className="rounded-xl shadow-2xl flex flex-col gap-4 px-4 py-6">
-            <div className="border-b pb-4">
-              <h1>DISINI ADA TIKET</h1>
-            </div>
-            <Link href={`/events/${params.event_id}/order`} className="bg-lightBlue rounded-md text-center text-white py-2 font-semibold">Pesan Sekarang</Link>
-          </div>
-          <Share slug={params.event_id} />
-        </div>
+        <AddTicket result={result} ticketResult={ticketResult} params={params}/>
       </div>
     </main>
   )

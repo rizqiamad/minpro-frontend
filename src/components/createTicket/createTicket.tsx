@@ -2,7 +2,6 @@
 
 import { FormValueTicketEvent } from '@/types/form'
 import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import TicketDescription from './textEditor'
