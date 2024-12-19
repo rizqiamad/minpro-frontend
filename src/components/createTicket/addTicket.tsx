@@ -2,11 +2,12 @@
 
 import { ITicket } from "@/types/ticket"
 import { createContext, useState } from "react"
-import TabPagination from "../eventDetail/pagination"
 import Link from "next/link"
 import Share from "../eventDetail/share"
 import { IEvent } from "@/types/event"
 import TicketOrder from "../eventDetail/ticketOrder"
+import Image from "next/image"
+import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency"
 
 interface IProps {
   result: IEvent
@@ -80,15 +81,20 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
         </div>
         <div className="sticky top-0 flex flex-col xl:w-[30%] xl:self-start">
           <div className="rounded-xl shadow-2xl flex flex-col gap-4 px-4 py-6">
-            <div className="border-b pb-4 flex flex-col gap-6">
-              {ticketCart ? (
+            <div className="flex flex-col gap-6">
+              {ticketCart && ticketCart.length > 0 ? (
                 ticketCart.map((item, idx) => {
                   return (
-                    <div className="flex flex-col">
-                      <span>{item.ticket.name}</span>
-                      <div className="flex items-center">
-                        <span>{item.qty}Tiket</span>
-                        <span>{item.qty * item.ticket.price}</span>
+                    <div className="flex border-b pb-4 rounded-md gap-4" key={idx}>
+                      <div>
+                        <Image src={`https://assets.loket.com/web/assets/img/ic-ticket-widget.svg`} alt="Icon" width={50} height={50} />
+                      </div>
+                      <div className="flex flex-col w-full gap-2">
+                        <span className="font-semibold">{item.ticket.name}</span>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-slate-500 font-semibold">{item.qty} Tiket</span>
+                          <span className="font-semibold text-blue-500">{formatRupiahTanpaDesimal(item.qty * item.ticket.price)}</span>
+                        </div>
                       </div>
                     </div>
                   )
@@ -96,6 +102,14 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
               ) : (
                 <h1>DISINI ADA TIKET</h1>
               )}
+            </div>
+            <div className="flex justify-between items-center py-2">
+              {ticketCart && ticketCart?.length > 0 ? (
+                <>
+                  <span>Total {ticketCart.reduce((a,b) => a + b.qty, 0)} tiket</span>
+                  <span className="font-semibold text-blue-500 text-xl">{formatRupiahTanpaDesimal(ticketCart.reduce((a,b) => a + (b.ticket.price * b.qty), 0))}</span>
+                </>
+              ) : null}
             </div>
             <Link href={`/events/${params.event_id}/order`} className="bg-lightBlue rounded-md text-center text-white py-2 font-semibold">Pesan Sekarang</Link>
           </div>

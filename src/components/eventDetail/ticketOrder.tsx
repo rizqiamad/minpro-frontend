@@ -39,14 +39,14 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
     const ticketCartId = ticketCart?.findIndex(item => item.ticket.id == ticket.id)
     console.log(ticketCart);
 
-    if (ticketCartId && ticketCart) {
+    if (ticketCartId! > -1 && ticketCart) {
       const newTicketCart = [...ticketCart]
       newTicketCart[ticketCartId!].qty = order - 1
       setTicketCart(newTicketCart)
     }
-    if (order === 1 && ticketCart && ticketCartId) {
+    if (order === 1 && ticketCart && ticketCartId! > -1) {
       const newTicketCart = [...ticketCart]
-      newTicketCart.splice(ticketCartId, 1)
+      newTicketCart.splice(ticketCartId as number, 1)
       setTicketCart(newTicketCart)
     }
   }

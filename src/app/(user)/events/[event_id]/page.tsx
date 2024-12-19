@@ -19,7 +19,7 @@ export default async function EventDetail({ params }: { params: { event_id: stri
   return (
     <main className="xl:px-28 xl:pt-10 flex flex-col pb-20">
       <div className="flex flex-col xl:flex-row gap-6">
-        <div className="relative xl:rounded-xl overflow-hidden min-h-[25rem] xl:w-[70%] flex-1">
+        <div className="relative xl:rounded-xl overflow-hidden aspect-[16/9] min-h-[15rem] xl:w-[70%] flex-1">
           <Image src={result.image} alt={result.name} fill />
         </div>
         <div className="rounded-xl shadow-2xl flex flex-col gap-2 xl:w-[30%]">
