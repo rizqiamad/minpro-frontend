@@ -45,7 +45,7 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
     try {
       SetIsLoading(true)
       const { data } = await axios.post('/transactions', { base_price: totalPrice, final_price: totalPrice, ticketCart })
-      router.push(`/events/${params.event_id}/order`)
+      router.push(`/order/${data.order_id}`)
       toast.success(data.message)
     } catch (err) {
       console.log(err);
