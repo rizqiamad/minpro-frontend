@@ -1,13 +1,16 @@
 'use client'
 
 import { ITicket } from "@/types/ticket"
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import Link from "next/link"
 import Share from "../eventDetail/share"
 import { IEvent } from "@/types/event"
 import TicketOrder from "../eventDetail/ticketOrder"
 import Image from "next/image"
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency"
+import axios from "@/helpers/axios"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
 
 interface IProps {
   result: IEvent
@@ -28,12 +31,34 @@ export interface TicketContextValue {
 export const TicketContext = createContext<TicketContextValue | null>(null)
 
 export default function AddTicket({ result, ticketResult, params }: IProps) {
+  const router = useRouter();
+  const [isLoading, SetIsLoading] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<boolean>(false);
+  const [totalPrice, setTotalPrice] = useState<number>(0)
   const handleClickTab = (tab: boolean) => {
     setActiveTab(tab);
   };
   const [ticketCart, setTicketCart] = useState<ITicketContext[] | null>(null)
   console.log(ticketCart);
+
+  const handleOrderTicket = async () => {
+    try {
+      SetIsLoading(true)
+      const { data } = await axios.post('/transactions', { base_price: totalPrice, final_price: totalPrice, ticketCart })
+      router.push(`/events/${params.event_id}/order`)
+      toast.success(data.message)
+    } catch (err) {
+      console.log(err);
+    } finally {
+      SetIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (ticketCart) {
+      setTotalPrice(ticketCart.reduce((a, b) => a + (b.ticket.price * b.qty), 0))
+    }
+  }, [ticketCart])
   return (
     <>
       <TicketContext.Provider value={{ ticketCart, setTicketCart }}>
@@ -103,15 +128,25 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
                 <h1>DISINI ADA TIKET</h1>
               )}
             </div>
-            <div className="flex justify-between items-center py-2">
+            <div className="flex flex-col gap-2">
               {ticketCart && ticketCart?.length > 0 ? (
                 <>
-                  <span>Total {ticketCart.reduce((a,b) => a + b.qty, 0)} tiket</span>
-                  <span className="font-semibold text-blue-500 text-xl">{formatRupiahTanpaDesimal(ticketCart.reduce((a,b) => a + (b.ticket.price * b.qty), 0))}</span>
+                  {/* <div className="flex rounded-md overflow-hidden">
+                    <input type="text" className="w-[80%] h-full py-2 px-2 uppercase outline-none border" placeholder="CLAIM COUPON ANDA"/>
+                    <button className="w-[20%] bg-lightBlue font-semibold text-white text-xs">CLAIM</button>
+                  </div>
+                  <div className="flex rounded-md overflow-hidden">
+                    <input type="text" className="w-[80%] h-full py-2 px-2 uppercase outline-none border" placeholder="CLAIM COUPON ANDA"/>
+                    <button className="w-[20%] bg-lightBlue font-semibold text-white text-xs">CLAIM</button>
+                  </div> */}
+                  <div className="flex justify-between items-center py-2">
+                    <span>Total {ticketCart.reduce((a, b) => a + b.qty, 0)} tiket</span>
+                    <span className="font-semibold text-blue-500 text-xl">{formatRupiahTanpaDesimal(totalPrice)}</span>
+                  </div>
                 </>
               ) : null}
             </div>
-            <Link href={`/events/${params.event_id}/order`} className="bg-lightBlue rounded-md text-center text-white py-2 font-semibold">Pesan Sekarang</Link>
+            <button disabled={isLoading} onClick={handleOrderTicket} className={`${isLoading && 'disabled:opacity-[0.5] disabled:cursor-not-allowed'} bg-lightBlue rounded-md text-center text-white py-2 font-semibold`}>{isLoading ? 'Loading ...' : 'Pesan Sekarang'}</button>
           </div>
           <Share slug={params.event_id} />
         </div>

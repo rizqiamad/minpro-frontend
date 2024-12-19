@@ -65,9 +65,9 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
       <div className="py-4 border-t border-black border-dashed flex items-center justify-between">
         <span className="font-semibold">{formatRupiahTanpaDesimal(ticket.price)}</span>
         <div className="flex items-center gap-2">
-          <button onClick={handleAddTicket} className="w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center">+</button>
-          <div>{order}</div>
           <button onClick={handleDecreaseTicket} disabled={order === 0} className={`disabled:cursor-pointer w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center`}>-</button>
+          <div>{order}</div>
+          <button onClick={handleAddTicket} className="w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center">+</button>
         </div>
       </div>
     </div>
