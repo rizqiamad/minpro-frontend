@@ -8,3 +8,15 @@ export async function getTransactionDetail(transaction_id: string) {
     console.log(err);
   }
 }
+
+export async function getSnapToken(final_price: number) {
+  try {
+    const { data } = await axios.post(
+      "/transactions/payment",
+      { order_id: "LKJADF-1234asdf", gross_amount: final_price }
+    );
+    return data.result;
+  } catch (err) {
+    console.log(err);
+  }
+}
