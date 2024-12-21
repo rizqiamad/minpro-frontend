@@ -13,7 +13,7 @@ export async function getSnapToken(final_price: number) {
   try {
     const { data } = await axios.post(
       "/transactions/payment",
-      { order_id: "LKJADF-1234asdf", gross_amount: final_price }
+      { order_id: "LKJADF-asdflkj", gross_amount: final_price }
     );
     return data.result;
   } catch (err) {

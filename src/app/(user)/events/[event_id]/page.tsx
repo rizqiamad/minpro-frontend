@@ -36,7 +36,7 @@ export default async function EventDetail({ params }: { params: { event_id: stri
         </div>
       </div>
       <div className="flex flex-col xl:flex-row gap-6 mt-10 px-10 xl:px-0">
-        <AddTicket result={result} ticketResult={ticketResult} params={params}/>
+        <AddTicket result={result} ticketResult={ticketResult} params={params} />
       </div>
     </main>
   )

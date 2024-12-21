@@ -4,17 +4,17 @@ import { FaMagnifyingGlass, FaTicket, FaCompass } from "react-icons/fa6";
 import HamburgerMenu from "./hamburgerMenu";
 import ResponsiveInput from "./responsiveInput";
 import UserMenu from "./userMenu";
+import InputNavbar from "./input";
 
 export default function Navbar() {
   return (
-    <nav className="bg-blueNavy h-20 flex justify-between gap-10 px-10 items-center relative shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.4)]">
+    <nav className="bg-blueNavy h-20 flex justify-between gap-10 px-10 items-center relative shadow-[0px_6px_6px_0px_rgba(0,_0,_0,_0.4)] z-30">
       <div className="flex gap-14 tablet:w-[70%]">
         <Link href={'/'}>
           <Image src='https://assets.loket.com/images/logo-loket-white.png' alt="Loket" className="w-[125px] tablet:w-[150px]" width={150} height={150} />
         </Link>
         <div className="hidden w-[100%] tablet:flex items-center h-8 overflow-hidden rounded-md">
-          <input type="search" name="search" id="search" className="w-[90%] h-full bg-[#12244d] px-4 text-white outline-none focus:bg-white focus:text-black transition ease-linear" placeholder="Cari event seru disini" />
-          <button type="submit" className="text-white bg-lightBlue w-[10%] h-full"><FaMagnifyingGlass className="mx-auto" /></button>
+          <InputNavbar />
         </div>
       </div>
       <div>

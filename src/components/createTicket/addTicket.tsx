@@ -2,7 +2,6 @@
 
 import { ITicket } from "@/types/ticket"
 import { createContext, useEffect, useState } from "react"
-import Link from "next/link"
 import Share from "../eventDetail/share"
 import { IEvent } from "@/types/event"
 import TicketOrder from "../eventDetail/ticketOrder"
