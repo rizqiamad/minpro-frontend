@@ -1,9 +1,9 @@
 export interface ITicket {
-  id: number
+  id: number;
   name: string;
   start_date: string;
-  end_date: string
-  price: number
-  seats: number
-  description: string
+  end_date: string;
+  price: number;
+  seats: number;
+  description: string;
 }

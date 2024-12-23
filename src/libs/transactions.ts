@@ -9,12 +9,12 @@ export async function getTransactionDetail(transaction_id: string) {
   }
 }
 
-export async function getSnapToken(final_price: number) {
+export async function getSnapToken(final_price: number, order_id: number) {
   try {
-    const { data } = await axios.post(
-      "/transactions/payment",
-      { order_id: "ashdfk2j3h54235", gross_amount: final_price }
-    );
+    const { data } = await axios.post("/transactions/payment", {
+      order_id,
+      gross_amount: final_price,
+    });
     return data.result;
   } catch (err) {
     console.log(err);
