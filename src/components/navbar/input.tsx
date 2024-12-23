@@ -38,22 +38,26 @@ export default function InputNavbar() {
     setIsOpen(dataEvents.length > 0)
   }, [dataEvents])
 
-  const handleRouting = (itemId: string) => {
+  const handleEventRouting = (itemId: string) => {
     setSearch('')
     router.push(`/events/${itemId}`)
+  }
+
+  const handleSearchRoute = () => {
+    router.push(`/search?keyword=${search}`)
   }
   return (
     <>
       <div className={`${isOpen ? 'fixed' : 'hidden'} inset-0 bg-black/50`}></div>
       <input onChange={handleChange} value={search} type="search" className="z-30 w-[100%] h-full bg-[#12244d] px-4 text-white outline-none focus:bg-white focus:text-black transition ease-linear" placeholder="Cari event seru disini" />
-      <button type="submit" className="z-30 text-white bg-lightBlue px-4 h-full"><FaMagnifyingGlass className="mx-auto" /></button>
+      <button onClick={handleSearchRoute} className="z-30 text-white bg-lightBlue px-4 h-full"><FaMagnifyingGlass className="mx-auto" /></button>
       <div className={`bg-white px-4 py-4 top-16 right-0 left-0 z-20 ${isOpen ? 'absolute' : 'hidden'}`}>
         <h1 className="mb-2 font-semibold text-xl">Search Results</h1>
         <div className="flex flex-col gap-4 z-10">
           {dataEvents.length > 0 ? dataEvents.map((item, idx) => {
             console.log(item);
             return (
-              <button key={idx} onClick={() => handleRouting(item.id)} className="flex gap-2 text-start">
+              <button key={idx} onClick={() => handleEventRouting(item.id)} className="flex gap-2 text-start">
                 <div className="relative min-h-[5rem] aspect-[16/9] rounded-md overflow-hidden">
                   <Image src={item.image} alt={item.name} fill />
                 </div>
