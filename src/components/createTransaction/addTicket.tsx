@@ -4,12 +4,12 @@ import { ITicket } from "@/types/ticket"
 import { createContext, useEffect, useState } from "react"
 import Share from "../eventDetail/share"
 import { IEvent } from "@/types/event"
-import TicketOrder from "../eventDetail/ticketOrder"
 import Image from "next/image"
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency"
 import axios from "@/helpers/axios"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
+import TicketOrder from "./ticketOrder"
 
 interface IProps {
   result: IEvent

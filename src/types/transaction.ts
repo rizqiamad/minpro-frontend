@@ -23,6 +23,7 @@ interface ITicketTransaction {
 }
 
 export interface ITransaction {
+  expiresAt: string;
   base_price: number;
   final_price: number;
   Ticket_Transaction: ITicketTransaction[];

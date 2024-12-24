@@ -1,4 +1,5 @@
 import PayButton from "@/components/midtrans/payBtn";
+import CountDown from "@/components/order/countDown";
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import { formatDate } from "@/helpers/formatDate";
 import { formatTime } from "@/helpers/formatTime";
@@ -57,16 +58,14 @@ export default async function OrderPage({ params }: { params: { transaction_id: 
             </tbody>
           </table>
         </div>
-        {/* <h1 className="text-2xl font-semibold">Metode Pembayaran</h1> */}
-        {/* <div id="snap-container"></div> */}
       </div>
       <div className="flex flex-col rounded-md shadow-xl py-6 px-4 tablet:w-[40%] gap-2">
+        <CountDown date={transaction.expiresAt} />
         <h1 className="text-2xl font-semibold mb-2">Detail Harga</h1>
         <div className="flex justify-between items-center"><span>Total Harga Tiket</span> <span>{formatRupiahTanpaDesimal(transaction.base_price)}</span></div>
         {/* <div><span>Biaya Tambahan</span></div>
         <div><span>Biaya Platform</span></div> */}
         <div className="flex justify-between items-center font-semibold text-xl border-t border-b py-2"><span>Total Bayar</span> <span>{formatRupiahTanpaDesimal(transaction.final_price)}</span></div>
-        {/* <button className="py-2 bg-lightBlue text-white font-semibold rounded-md">Bayar Tiket</button> */}
         <PayButton token={token} />
       </div>
     </main>

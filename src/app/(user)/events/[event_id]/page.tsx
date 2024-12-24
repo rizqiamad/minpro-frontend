@@ -8,7 +8,7 @@ import { displayDate, formatDate } from "@/helpers/formatDate";
 import { formatTime } from "@/helpers/formatTime";
 import { ITicket } from "@/types/ticket";
 import { getTickets } from "@/libs/tickets";
-import AddTicket from "@/components/createTicket/addTicket";
+import AddTicket from "@/components/createTransaction/addTicket";
 
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventById(params.event_id)

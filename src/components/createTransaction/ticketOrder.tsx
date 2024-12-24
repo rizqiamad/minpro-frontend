@@ -3,7 +3,7 @@ import { formatDateLong } from "@/helpers/formatDate"
 import { ITicket } from "@/types/ticket"
 import { useContext, useState } from "react"
 import { FaClock } from "react-icons/fa"
-import { TicketContext, TicketContextValue } from "../createTicket/addTicket"
+import { TicketContext, TicketContextValue } from "../createTransaction/addTicket"
 
 export default function TicketOrder({ ticket }: { ticket: ITicket }) {
   const [order, setOrder] = useState<number>(0)
