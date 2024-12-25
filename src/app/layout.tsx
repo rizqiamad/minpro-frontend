@@ -37,11 +37,11 @@ export default function RootLayout({
           src="https://app.sandbox.midtrans.com/snap/snap.js"
           data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
           strategy="beforeInteractive"
-          />
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+      >
         {children}
         <ToastContainer
           draggable
@@ -49,7 +49,7 @@ export default function RootLayout({
           autoClose={5000}
           theme="dark"
           position="bottom-right"
-          />
+        />
       </body>
     </html >
   );

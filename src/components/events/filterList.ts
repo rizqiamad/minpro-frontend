@@ -9,21 +9,13 @@ export const location = [
 
 export const category = [
   "All Category",
-  "Festival, Fair, Bazzar",
+  "Festival",
   "Konser",
   "Pertandingan",
-  "Exhibition, Expo, Pameran",
   "Konfrensi",
   "Workshop",
   "Pertunjukkan",
-  "Atraksi, Theme Park",
-  "Akomodasi",
-  "Seminar, Talk Show",
-  "Social Gatherin",
-  "Training, Sertifikasi, Ujian",
-  "Pensi, Event Sekolah, Kampus",
-  "Trip, Tur",
-  "Turnamen, Kompetisi",
+  "Seminar",
   "lainnya",
 ];
 

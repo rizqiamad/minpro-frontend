@@ -13,7 +13,16 @@ interface IProps {
   type: string
 }
 
-export default function Card({ eventId, srcImgEvent, eventTitle, start_date, end_date, srcImgOrganizer, organizerName, type }: IProps) {
+export default function Card({
+  eventId,
+  srcImgEvent,
+  eventTitle,
+  start_date,
+  end_date,
+  srcImgOrganizer,
+  organizerName,
+  type
+}: IProps) {
   const date = displayDate(formatDate(start_date), formatDate(end_date))
 
   return (

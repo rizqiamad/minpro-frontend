@@ -8,6 +8,9 @@ import { TicketContext, TicketContextValue } from "../createTransaction/addTicke
 export default function TicketOrder({ ticket }: { ticket: ITicket }) {
   const [order, setOrder] = useState<number>(0)
   const isSoldOut = !ticket.seats ? true : false
+  const lt = new Date(ticket.start_date) > new Date()
+  const gt = new Date(ticket.end_date) < new Date()
+  const isTheTime = lt ? true : gt ? true : false
   const [isDisabled, setIsDisabled] = useState<boolean>(false)
   const context = useContext<TicketContextValue | null>(TicketContext)
 
@@ -59,9 +62,9 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
   }
 
   return (
-    <div className={`${isSoldOut && 'opacity-50'} flex flex-col bg-sky-400/10 border border-lightBlue px-10 pt-4 gap-4 rounded-xl relative`}>
-      <div className="w-[40px] h-[40px] rounded-full bg-white absolute -right-5 bottom-9 border-l border-lightBlue"></div>
-      <div className="w-[40px] h-[40px] rounded-full bg-white absolute -left-5 bottom-9 border-r border-lightBlue"></div>
+    <div className={`${isSoldOut && 'border-slate-300 bg-slate-300/10'} ${isTheTime && 'border-slate-300 bg-slate-300/10'} flex flex-col bg-sky-400/10 border border-lightBlue px-10 pt-4 gap-4 rounded-xl relative`}>
+      <div className={`${isSoldOut && 'border-slate-300'} ${isTheTime && 'border-slate-300'} w-[40px] h-[40px] rounded-full bg-white absolute -right-5 bottom-9 border-l border-lightBlue`}></div>
+      <div className={`${isSoldOut && 'border-slate-300'} ${isTheTime && 'border-slate-300'} w-[40px] h-[40px] rounded-full bg-white absolute -left-5 bottom-9 border-r border-lightBlue`}></div>
       <span className="font-semibold text-xl">{ticket.name}</span>
       <span dangerouslySetInnerHTML={{ __html: ticket.description }} />
       {new Date() >= new Date(ticket.start_date) ? (
@@ -73,7 +76,9 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
         <span className="font-semibold">{formatRupiahTanpaDesimal(ticket.price)}</span>
         <div className="flex items-center gap-2">
           {isSoldOut ? (
-            <div className="text-xl font-semibold text-red-500">Ticket Seats are sold out</div>
+            <div className="text-xl font-semibold text-red-500">TICKET'S SEATS ARE SOLD OUT</div>
+          ) : isTheTime ? (
+            <div className="text-xl font-semibold text-red-500">{gt && 'SALE ENDED'}{lt && 'SALE NOT STARTED YET'}</div>
           ) : (
             <>
               <button onClick={handleDecreaseTicket} disabled={order === 0} className={`disabled:cursor-pointer w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center`}>-</button>
