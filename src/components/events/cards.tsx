@@ -16,6 +16,7 @@ export default async function Cards({ result }: { result: IEvent[] }) {
             srcImgOrganizer={item.organizer.avatar}
             organizerName={item.organizer.name}
             type={item.type}
+            price={item.Ticket[0].price}
           />
         )
       })}

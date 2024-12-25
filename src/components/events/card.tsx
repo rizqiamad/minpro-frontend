@@ -1,3 +1,4 @@
+import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import { displayDate, formatDate } from "@/helpers/formatDate";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,7 @@ interface IProps {
   srcImgOrganizer: string
   organizerName: string
   type: string
+  price: number
 }
 
 export default function Card({
@@ -21,7 +23,8 @@ export default function Card({
   end_date,
   srcImgOrganizer,
   organizerName,
-  type
+  type,
+  price
 }: IProps) {
   const date = displayDate(formatDate(start_date), formatDate(end_date))
 
@@ -34,7 +37,7 @@ export default function Card({
         <div className="flex flex-col gap-1">
           <h2 className="font-semibold line-clamp-2">{eventTitle}</h2>
           <div className="text-slate-500 font-[450]">{date}</div>
-          <div className="text-blue-500 font-semibold">{type === 'free' ? 'Free' : 'Price'}</div>
+          <div className="text-blue-500 font-semibold">{type === 'free' ? 'Free' : formatRupiahTanpaDesimal(price)}</div>
         </div>
         <div className="flex items-center gap-2 justify-self-end mt-auto border-t py-2">
           <Image src={srcImgOrganizer || ''} alt={organizerName} width={35} height={35} />

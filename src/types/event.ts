@@ -13,6 +13,10 @@ interface ICity {
   city: string;
 }
 
+interface IPrice {
+  price: number;
+}
+
 export interface IEvent {
   id: string;
   name: string;
@@ -26,4 +30,5 @@ export interface IEvent {
   location: ILocation;
   description: string;
   terms_condition: string;
+  Ticket: IPrice[];
 }

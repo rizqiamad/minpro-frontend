@@ -2,19 +2,25 @@
 
 import { FormValueTicketEvent } from '@/types/form'
 import { ErrorMessage, Field, Form, Formik, FormikProps } from 'formik'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import TicketDescription from './textEditor'
 import UseOpen from '@/hooks/useOpen'
 import { ticketEventSchema } from '@/libs/formSchemas'
 import { IoMdClose } from 'react-icons/io'
 import axios from '@/helpers/axios'
+import { formatRupiahTanpaDesimal } from '@/helpers/formatCurrency'
 
-export default function CreateTicket({ eventId }: { eventId: string }) {
+interface IProps {
+  eventId: string,
+  end_date: string
+}
+
+export default function CreateTicket({ eventId, end_date }: IProps) {
   const initialValue: FormValueTicketEvent = {
     name: '',
-    seats: '0',
-    price: '0',
+    seats: '',
+    price: '',
     description: '',
     start_date: '',
     end_date: ''
@@ -22,7 +28,9 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
   const [isLoading, SetIsLoading] = useState<boolean>(false);
   const { open, hidden, menuHandler } = UseOpen()
   const date = new Date()
+  const endDate = new Date(end_date)
   const minDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const maxDate = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, '0')}-${String(endDate.getDate()).padStart(2, '0')}`;
 
   useEffect(() => {
     if (open) {
@@ -31,7 +39,7 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
       document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ""; // Bersihkan efek saat komponen unmount
+      document.body.style.overflow = "";
     };
   }, [open])
 
@@ -47,6 +55,13 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
       toast.error(err.message)
     } finally {
       SetIsLoading(false)
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const allowedKeys = ["Backspace", "ArrowLeft", "ArrowRight", "Tab", "Delete"];
+    if (!/^[0-9]$/.test(e.key) && !allowedKeys.includes(e.key)) {
+      e.preventDefault();
     }
   }
 
@@ -69,7 +84,11 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
             }}
           >
             {(props: FormikProps<FormValueTicketEvent>) => {
-              const { handleChange, values } = props
+              const { handleChange, values, setFieldValue } = props
+              const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                const rawValue = e.target.value.replace(/\D/g, "");
+                setFieldValue("price", Number(rawValue));
+              }
               return (
                 <Form className='flex flex-col gap-4 mt-4'>
                   <div className='flex flex-col'>
@@ -88,10 +107,11 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
                   <div className='flex flex-col'>
                     <label htmlFor="seats" className='pb-2 font-semibold'>Ticket Amount :</label>
                     <Field
-                      type='number'
+                      type='text'
                       name='seats'
                       id='seats'
                       onChange={handleChange}
+                      onKeyDown={handleKeyDown}
                       value={values.seats}
                       placeholder='seats'
                       className='outline-none text-xl py-2 border-b-2 focus:border-b-lightBlue focus:placeholder:text-transparent'
@@ -101,11 +121,12 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
                   <div className='flex flex-col'>
                     <label htmlFor="price" className='pb-2 font-semibold'>Ticket Price :</label>
                     <Field
-                      type='number'
+                      type='text'
                       name='price'
                       id='price'
-                      onChange={handleChange}
-                      value={values.price}
+                      onChange={handlePriceChange}
+                      onKeyDown={handleKeyDown}
+                      value={formatRupiahTanpaDesimal(Number(values.price) || 0)}
                       placeholder='price'
                       className='outline-none text-xl py-2 border-b-2 focus:border-b-lightBlue focus:placeholder:text-transparent'
                     />
@@ -123,6 +144,7 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
                       name='start_date'
                       id='start_date'
                       min={minDate}
+                      max={maxDate}
                       onChange={handleChange}
                       value={values.start_date}
                       className='border-2 rounded-md px-2 py-1'
@@ -136,6 +158,7 @@ export default function CreateTicket({ eventId }: { eventId: string }) {
                       name='end_date'
                       id='end_date'
                       min={values.start_date || minDate}
+                      max={maxDate}
                       onChange={handleChange}
                       value={values.end_date}
                       className='border-2 rounded-md px-2 py-1'
