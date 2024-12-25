@@ -7,6 +7,8 @@ import { TicketContext, TicketContextValue } from "../createTransaction/addTicke
 
 export default function TicketOrder({ ticket }: { ticket: ITicket }) {
   const [order, setOrder] = useState<number>(0)
+  const isSoldOut = !ticket.seats ? true : false
+  const [isDisabled, setIsDisabled] = useState<boolean>(false)
   const context = useContext<TicketContextValue | null>(TicketContext)
 
   if (!context) {
@@ -17,6 +19,10 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
 
   const handleAddTicket = () => {
     setOrder(order + 1)
+    if (order === ticket.seats - 1) {
+      setIsDisabled(true)
+      alert('The ticket is ran out')
+    }
     const ticketCartId = ticketCart?.findIndex(item => item.ticket.id == ticket.id)
     console.log(ticketCartId);
     if (ticketCartId! > -1 && ticketCart) {
@@ -36,6 +42,7 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
 
   const handleDecreaseTicket = () => {
     setOrder(order - 1)
+    if (isDisabled) setIsDisabled(false)
     const ticketCartId = ticketCart?.findIndex(item => item.ticket.id == ticket.id)
     console.log(ticketCart);
 
@@ -52,7 +59,7 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
   }
 
   return (
-    <div className="flex flex-col bg-sky-400/10 border border-lightBlue px-10 pt-4 gap-4 rounded-xl relative">
+    <div className={`${isSoldOut && 'opacity-50'} flex flex-col bg-sky-400/10 border border-lightBlue px-10 pt-4 gap-4 rounded-xl relative`}>
       <div className="w-[40px] h-[40px] rounded-full bg-white absolute -right-5 bottom-9 border-l border-lightBlue"></div>
       <div className="w-[40px] h-[40px] rounded-full bg-white absolute -left-5 bottom-9 border-r border-lightBlue"></div>
       <span className="font-semibold text-xl">{ticket.name}</span>
@@ -65,9 +72,15 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
       <div className="py-4 border-t border-black border-dashed flex items-center justify-between">
         <span className="font-semibold">{formatRupiahTanpaDesimal(ticket.price)}</span>
         <div className="flex items-center gap-2">
-          <button onClick={handleDecreaseTicket} disabled={order === 0} className={`disabled:cursor-pointer w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center`}>-</button>
-          <div>{order}</div>
-          <button onClick={handleAddTicket} className="w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center">+</button>
+          {isSoldOut ? (
+            <div className="text-xl font-semibold text-red-500">Ticket Seats are sold out</div>
+          ) : (
+            <>
+              <button onClick={handleDecreaseTicket} disabled={order === 0} className={`disabled:cursor-pointer w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center`}>-</button>
+              <div>{order}</div>
+              <button disabled={isDisabled} onClick={handleAddTicket} className="disabled:opacity-30 w-[25px] h-[25px] rounded-full font-semibold border-2 border-lightBlue flex items-center justify-center">+</button>
+            </>
+          )}
         </div>
       </div>
     </div>
