@@ -18,7 +18,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Loket.com: Buat Event Gratis, Atur Acara & Jual Eventmu Sendiri",
+  title: {
+    template: "Loket.com: %s",
+    default: "Loket.com: Buat Event Gratis, Atur Acara & Jual Eventmu Sendiri"
+  },
   description: "Sekarang kamu bisa buat event, atur acara, jual tiket event sendiri, bikin undangan event secara online dan berkesempatan dipromosikan afiliasi Loket.com.",
   icons: {
     icon: 'https://assets.loket.com/images/favicon/favicon.ico'

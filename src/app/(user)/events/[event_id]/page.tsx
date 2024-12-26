@@ -10,6 +10,16 @@ import { ITicket } from "@/types/ticket";
 import { getTickets } from "@/libs/tickets";
 import AddTicket from "@/components/createTransaction/addTicket";
 
+// export function generateMetaData() {
+//   return {
+//     title: '',
+//     description: 'Lihat jadwal, lokasi, dan harga tiket Cara Simpel Menyusun dan Menyelenggarakan Pelatihan yang tersedia. Beli tiket atau pesan secara online hanya di Loket.com',
+//     openGraph: {
+//       image: ['']
+//     }
+//   }
+// }
+
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventById(params.event_id)
   const ticketResult: ITicket[] = await getTickets(params.event_id)
