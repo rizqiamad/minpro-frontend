@@ -3,14 +3,15 @@
 import Link from "next/link";
 import side from "@/components/sidebar/sidebar.module.css";
 import { useState } from "react";
-import { FaFileAlt, FaUserTie } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
+import { FaCompass, FaUser } from "react-icons/fa6";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { RiHome4Fill } from "react-icons/ri";
-import { GrDocumentVerified } from "react-icons/gr";
-import { IoWalletSharp } from "react-icons/io5";
+import { ImTicket } from "react-icons/im";
+// import { RiHome4Fill } from "react-icons/ri";
+// import { GrDocumentVerified } from "react-icons/gr";
+// import { IoWalletSharp } from "react-icons/io5";
+// import { FaFileAlt, FaUserTie } from "react-icons/fa";
 
-export default function Sidebar() {
+export default function SidebarUser() {
   //singkat sidebar
   const [SidebarOpen, setSidebarOpen] = useState(true)
 
@@ -76,17 +77,17 @@ export default function Sidebar() {
         
           <div className={side.organiserMode}>
             <div className={side.sideContainer}>
-              <Link href={"/organizer/dashboard"}>
-                <RiHome4Fill className={side.icons} />
+            <Link href={"/"}>
+                <FaCompass className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Dashboard
+                  Jelajah Event
                 </p>
               </Link>
 
-              <Link href={"/organizer/events"}>
-                <FaFileAlt className={side.icons} />
+              <Link href={"/member/ticket"}>
+                <ImTicket className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Event Saya
+                  Tiket Saya
                 </p>
               </Link>
             </div>
@@ -98,30 +99,13 @@ export default function Sidebar() {
               >
                 Akun
               </h1>
-              <Link href={"/organizer/bio"}>
-                <FaUserTie className={side.icons} />
+              <Link href={"/member/bio"}>
+                <FaUser className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Informasi Dasar
+                  Informasi Saya
                 </p>
               </Link>
-              <Link href={"/"}>
-                <FaGear className={side.icons} />
-                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Pengaturan
-                </p>
-              </Link>
-              <Link href={"/organizer/legal"}>
-                <GrDocumentVerified className={side.icons} />
-                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Informasi Legal
-                </p>
-              </Link>
-              <Link href={"/"}>
-                <IoWalletSharp className={side.icons} />
-                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Rekening
-                </p>
-              </Link>
+             
             </div>
           </div>
 

@@ -1,10 +1,10 @@
 /* USER-ITEM */
 .sidebar{
-    @apply sticky top-0 w-[250px] 
-    flex flex-col 
+    @apply sticky top-0 hidden flex-col 
     min-w-[50px] min-h-screen overflow-hidden
     border-r p-4 
     transition-all duration-150
+    lg:flex md:flex
 
     bg-blue-900 text-stone-300
 }
@@ -45,7 +45,7 @@
 /* NON-TAILWIND CLASS */
 
 .open{
-    width: 250px;
+    width: 350px;
 }
 
 .closed{
