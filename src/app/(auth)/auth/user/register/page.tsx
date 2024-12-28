@@ -60,7 +60,7 @@ export default function RegisterUser() {
       user.dob = `${user.dob}T00:00:00+07:00`;
       const { data } = await axios.post("/auth/user/register", user);
 
-      router.push("/user/login");
+      router.push("auth/user/login");
       toast.success(data.message);
     } catch (err: any) {
       console.log(err);
@@ -85,7 +85,7 @@ export default function RegisterUser() {
       {/* gambar start */}
       <div className="hidden mr-10 lg:block md:block">
         <Image
-          src="/img/auth.svg"
+          src="/img/auth.jpg"
           alt="Example Image"
           width={300}
           height={300}

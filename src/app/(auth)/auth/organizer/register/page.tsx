@@ -46,7 +46,7 @@ export default function RegisterOrganizer() {
       SetIsLoading(true);
       const { data } = await axios.post("auth/organizer/register", organizer);
 
-      router.push("/organizer/login");
+      router.push("auth/organizer/login");
       toast.success(data.message);
     } catch (err: any) {
       console.log(err);
@@ -61,7 +61,7 @@ export default function RegisterOrganizer() {
       {/* gambar start */}
       <div className="hidden mr-10 lg:block md:block">
         <Image
-          src="/img/auth.svg"
+          src="/img/auth.jpg"
           alt="Example Image"
           width={300}
           height={300}

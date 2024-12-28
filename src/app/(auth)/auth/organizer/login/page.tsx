@@ -48,7 +48,7 @@ export default function LoginOrganizer() {
       {/* gambar start */}
       <div className="hidden mr-10 lg:block md:block">
         <Image
-          src="/img/auth.svg"
+          src="/img/auth.jpg"
           alt="Example Image"
           width={300}
           height={300}
