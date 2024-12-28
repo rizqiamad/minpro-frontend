@@ -1,6 +1,6 @@
+import MobileNav from "@/components/member/mobileNav";
 import SidebarUser from "@/components/sidebar/sidebarUser";
 import { ReactNode } from "react";
-import MobileNav from "./mobileNav/page";
 
 export default function MemberLayout({ children }: { children: ReactNode }) {
   return (

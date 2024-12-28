@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import Image from "next/image";
 
 const RegisterSchema = Yup.object().shape({
-  data: Yup.string().required("username or email is required"),
+  data: Yup.string().required("organizer name or email is required"),
   password: Yup.string().required("password is required"),
 });
 
@@ -19,25 +19,18 @@ interface FormValue {
   password: string;
 }
 
-export default function LoginUser() {
+export default function LoginOrganizer() {
   const initialValue: FormValue = { data: "", password: "" };
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleLogin = async (user: FormValue) => {
+  const handleLogin = async (organizer: FormValue) => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post("/auth/login/user", user);
-
-      // token
+      const { data } = await axios.post("/auth/organizer/login", organizer);
       const token = data.token;
 
-      //cookies
-      // Cookies.set('auth_token', token, {expires: 7})
-
-      //cookies storage data
-      localStorage.setItem("token", token);
-      // Cookies.set('user', JSON.stringify(data.user), {expires: 2 / 1440})
+      localStorage.setItem('token', token)
 
       router.push("/");
       console.log(data);
@@ -51,27 +44,29 @@ export default function LoginUser() {
   };
 
   return (
-    <div className="flex justify-center items-center">{/* gambar start */}
-          <div className="hidden mr-10 lg:block md:block">
-            <Image
-              src="/img/auth.svg"
-              alt="Example Image"
-              width={300}
-              height={300}
-              className="mx-auto"
-            />
-            <h1 className="font-bold text-center">
-              Tidak lagi ketinggalan event dan film favoritmu
-            </h1>
-            <p className="text-sm text-center">
-              Gabung dan rasakan kemudahan bertransaksi dan mengelola event di
-              Loket.
-            </p>
-          </div>
-          {/* gambar end */}
+    <div className="flex justify-center items-center">
+      {/* gambar start */}
+      <div className="hidden mr-10 lg:block md:block">
+        <Image
+          src="/img/auth.svg"
+          alt="Example Image"
+          width={300}
+          height={300}
+          className="mx-auto"
+        />
+        <h1 className="font-bold text-center">
+          Tidak lagi ketinggalan event dan film favoritmu
+        </h1>
+        <p className="text-sm text-center">
+          Gabung dan rasakan kemudahan bertransaksi dan mengelola event di
+          Loket.
+        </p>
+      </div>
+      {/* gambar end */}
+
       <div className="min-h-[calc(100vh-4rem)] content-center">
         <div className="w-96 py-6 rounded-2xl shadow-2xl px-5 mx-auto">
-          <h1 className="text-2xl font-bold">Login User</h1>
+          <h1 className="text-2xl font-bold">Login Organizer</h1>
           <Formik
             initialValues={initialValue}
             validationSchema={RegisterSchema}
@@ -87,7 +82,7 @@ export default function LoginUser() {
                 <Form className="flex flex-col gap-4 mt-4 text-[13px]">
                   <div className="flex flex-col">
                     <label htmlFor="data" className="pb-2 font-semibold">
-                      Username or Email :
+                      Organizer Name or Email :
                     </label>
                     <Field
                       type="text"
@@ -95,7 +90,7 @@ export default function LoginUser() {
                       id="data"
                       onChange={handleChange}
                       value={values.data}
-                      placeholder="Username or Email"
+                      placeholder="Organizer Name or Email"
                       className="outline-none px-2 py-1 rounded-md border border-slate-400 focus:bg-blue-100"
                     />
                     {touched.data && errors.data ? (
@@ -127,11 +122,10 @@ export default function LoginUser() {
                   <button
                     disabled={isLoading}
                     type="submit"
-                    className={`${
-                      isLoading
+                    className={`${isLoading
                         ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
                         : "hover:bg-blue-700 hover:text-white"
-                    } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
+                      } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
                   >
                     {isLoading ? "Loading ..." : "Login"}
                   </button>

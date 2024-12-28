@@ -44,9 +44,9 @@ export default function RegisterOrganizer() {
   const handleAdd = async (organizer: FormValue) => {
     try {
       SetIsLoading(true);
-      const { data } = await axios.post("auth/register/organizer", organizer);
+      const { data } = await axios.post("auth/organizer/register", organizer);
 
-      router.push("/login/organizer");
+      router.push("/organizer/login");
       toast.success(data.message);
     } catch (err: any) {
       console.log(err);

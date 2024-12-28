@@ -77,7 +77,7 @@ export default function SidebarUser() {
         
           <div className={side.organiserMode}>
             <div className={side.sideContainer}>
-            <Link href={"/"}>
+            <Link href={"/events"}>
                 <FaCompass className={side.icons} />
                 <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
                   Jelajah Event

@@ -1,6 +1,6 @@
+import MobileNav from "@/components/organizer/mobileNav";
 import Sidebar from "@/components/sidebar/sidebar";
 import { ReactNode } from "react";
-import MobileNav from "./mobileNav/page";
 
 export default function OrganizerLayout({ children }: { children: ReactNode }) {
   return (
