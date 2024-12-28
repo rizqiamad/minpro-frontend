@@ -47,7 +47,9 @@ export default function CreateEvent() {
           formData.append(key, value)
         }
       }
-      const { data } = await axios.post('/events', formData)
+      const { data } = await axios.post('/events', formData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
 
       router.push(`/create-event/${data.event_id}`)
       toast.success(data.message)

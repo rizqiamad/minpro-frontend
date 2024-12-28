@@ -25,7 +25,7 @@ const RegisterSchema = Yup.object().shape({
     .max(new Date(), "Date of birth cannot be in the future"),
   no_handphone: Yup.string().required("Phone Number is required"),
   jenis_kelamin: Yup.string()
-    .oneOf(["l", "l"], "Invalid gender selection")
+    .oneOf(["l", "p"], "Invalid gender selection")
     .required("Gender is required"),
 });
 

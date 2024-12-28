@@ -16,8 +16,8 @@ export default function VerifyPage() {
         `${process.env.NEXT_PUBLIC_BASE_URL_BE}/auth/verify/organizer/${params.token}`);
       console.log(params.token);
       
+      router.push("/auth/organizer/login");
       toast.success(data.message);
-      router.push("/");
     } catch (err: any) {
       console.log(err);
       toast.error('Verification failed', err.message);

@@ -10,17 +10,14 @@ export default function VerifyPage() {
   console.log(params);
 
   const router = useRouter();
-  const [referralCode, setReferralCode] = useState<string | null>(null)
   const onVerify = async () => {
     try {
       const { data } = await axios.patch(
         `${process.env.NEXT_PUBLIC_BASE_URL_BE}/auth/user/verify/${params.token}`);
       console.log(params.token);
-
-      setReferralCode(data.ref_code)
       
+      router.push("/auth/user/login");
       toast.success(data.message);
-      router.push("/");
     } catch (err: any) {
       console.log(err);
       toast.error('Verification failed', err.message);

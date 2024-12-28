@@ -43,7 +43,10 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
   const handleOrderTicket = async () => {
     try {
       SetIsLoading(true)
-      const { data } = await axios.post('/transactions', { base_price: totalPrice, final_price: totalPrice, ticketCart })
+      const bodyParamaters = { base_price: totalPrice, final_price: totalPrice, ticketCart }
+      const { data } = await axios.post('/transactions', bodyParamaters, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
       router.push(`/order/${data.order_id}`)
       toast.success(data.message)
     } catch (err) {
