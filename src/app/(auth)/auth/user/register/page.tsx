@@ -25,7 +25,7 @@ const RegisterSchema = Yup.object().shape({
     .max(new Date(), "Date of birth cannot be in the future"),
   no_handphone: Yup.string().required("Phone Number is required"),
   jenis_kelamin: Yup.string()
-    .oneOf(["L", "P"], "Invalid gender selection")
+    .oneOf(["l", "l"], "Invalid gender selection")
     .required("Gender is required"),
 });
 
@@ -60,7 +60,7 @@ export default function RegisterUser() {
       user.dob = `${user.dob}T00:00:00+07:00`;
       const { data } = await axios.post("/auth/user/register", user);
 
-      router.push("auth/user/login");
+      router.push("/auth/user/login");
       toast.success(data.message);
     } catch (err: any) {
       console.log(err);
@@ -271,9 +271,9 @@ export default function RegisterUser() {
                           value={values.jenis_kelamin}
                           className="outline-none px-2 py-2 rounded-md  border border-slate-400"
                         >
-                          <option value="">Select Gender</option>
-                          <option value="L">Laki-Laki</option>
-                          <option value="P">Perempuan</option>
+                          <option value="" disabled>Select Gender</option>
+                          <option value="l">Laki-Laki</option>
+                          <option value="p">Perempuan</option>
                         </Field>
                         {touched.jenis_kelamin && errors.jenis_kelamin ? (
                           <div className="text-red-500 text-xs">
