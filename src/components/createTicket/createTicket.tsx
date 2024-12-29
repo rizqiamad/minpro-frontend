@@ -13,14 +13,15 @@ import { formatRupiahTanpaDesimal } from '@/helpers/formatCurrency'
 
 interface IProps {
   eventId: string,
-  end_date: string
+  end_date: string,
+  type: 'free' | 'paid'
 }
 
-export default function CreateTicket({ eventId, end_date }: IProps) {
+export default function CreateTicket({ eventId, end_date, type }: IProps) {
   const initialValue: FormValueTicketEvent = {
     name: '',
     seats: '',
-    price: '',
+    price: 0,
     description: '',
     start_date: '',
     end_date: ''
@@ -74,7 +75,7 @@ export default function CreateTicket({ eventId, end_date }: IProps) {
           <h1 className="text-4xl font-bold animate-bounce">CREATE YOUR EVENT TICKET</h1>
           <Formik
             initialValues={initialValue}
-            validationSchema={ticketEventSchema}
+            validationSchema={ticketEventSchema(type)}
             onSubmit={(values, action) => {
               console.log(values)
               values.start_date = `${values.start_date}T00:00:00Z`
@@ -128,8 +129,10 @@ export default function CreateTicket({ eventId, end_date }: IProps) {
                       onKeyDown={handleKeyDown}
                       value={formatRupiahTanpaDesimal(Number(values.price) || 0)}
                       placeholder='price'
-                      className='outline-none text-xl py-2 border-b-2 focus:border-b-lightBlue focus:placeholder:text-transparent'
+                      className='disabled:cursor-not-allowed outline-none text-xl py-2 border-b-2 focus:border-b-lightBlue focus:placeholder:text-transparent'
+                      disabled={type === 'free'}
                     />
+                    {type === 'free' && (<span className='text-xs text-blue-500'>Because of the free event, you don't have to fulfill this field</span>)}
                     <ErrorMessage name='price'>{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
                   </div>
                   <div className='flex flex-col'>

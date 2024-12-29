@@ -13,7 +13,7 @@ export default function VerifyPage() {
   const onVerify = async () => {
     try {
       const { data } = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BASE_URL_BE}/auth/verify/organizer/${params.token}`);
+        `${process.env.NEXT_PUBLIC_BASE_URL_BE}/auth/organizer/verify/${params.token}`);
       console.log(params.token);
       
       router.push("/auth/organizer/login");

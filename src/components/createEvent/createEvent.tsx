@@ -30,7 +30,7 @@ export default function CreateEvent() {
     type: '',
     description: '',
     terms_condition: '',
-    coupon_seat: null,
+    coupon_seat: '',
   }
   const router = useRouter();
   const [isLoading, SetIsLoading] = useState<boolean>(false);
@@ -147,7 +147,11 @@ export default function CreateEvent() {
                     className='py-1 px-2 outline-none border rounded-md w-fit'
                     min={0}
                   />
-                  <div className='text-xs ml-2 text-blue-400'>Tentukan berapa orang yang bisa mendapatkan potongan harga menggunakan coupon mereka, jika tidak ditentukan maka setiap orang berhak menggunakan coupon mereka untuk mendapatkan promo</div>
+                  {errors.coupon_seat ? (
+                    <ErrorMessage name="coupon_seat" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
+                  ) : (
+                    <div className='text-xs ml-2 text-blue-400'>Tentukan berapa orang yang bisa mendapatkan potongan harga menggunakan coupon mereka untuk <span className='font-semibold'>event berbayar</span>, jika tidak ditentukan maka setiap orang berhak menggunakan coupon mereka untuk mendapatkan promo</div>
+                  )}
                 </div>
                 <div className='px-2'>
                   <h1 className='my-2 text-black/50 font-[500]'>Description</h1>

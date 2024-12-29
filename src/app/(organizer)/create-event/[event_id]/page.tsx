@@ -10,10 +10,11 @@ import { FaClock, FaPencilAlt, FaTrash } from "react-icons/fa";
 export default async function TicketPage({ params }: { params: { event_id: string } }) {
   const result: ITicket[] = await getTickets(params.event_id);
   const getEndDate: { result: { end_date: string } } = await getEventById(params.event_id, 1)
+  const getType: { result: { type: 'free' | 'paid' } } = await getEventById(params.event_id, 0, 1)
   return (
     <main>
       <div className='rounded-2xl sm:mx-10 p-10 tablet:mx-52 shadow-2xl md:my-20'>
-        <CreateTicket eventId={params.event_id} end_date={getEndDate.result.end_date} />
+        <CreateTicket eventId={params.event_id} end_date={getEndDate.result.end_date} type={getType.result.type} />
         <div className="mt-10 border-t border-black pt-4">
           <h1 className="text-2xl mb-6 font-[500]">TICKET ANDA AKAN MUNCUL DISINI</h1>
           <div className="flex flex-col gap-6">

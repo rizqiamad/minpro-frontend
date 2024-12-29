@@ -12,13 +12,13 @@ export interface FormValueEvent {
   type: string;
   description: string;
   terms_condition: string;
-  coupon_seat: string | null;
+  coupon_seat: string;
 }
 
 export interface FormValueTicketEvent {
   name: string
   seats: string
-  price: string
+  price: number
   description: string
   start_date: string
   end_date: string
