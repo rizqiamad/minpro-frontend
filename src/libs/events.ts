@@ -18,9 +18,9 @@ export const getEventById = async (id: string, end_date: number = 0, type: numbe
   }
 };
 
-export const getEventsOrganizer = async () => {
+export const getEventsOrganizer = async (type: string) => {
   try {
-    const { data } = await axios.get("/events/organizer", {
+    const { data } = await axios.get(`/events/organizer?type=${type}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     return data.result;

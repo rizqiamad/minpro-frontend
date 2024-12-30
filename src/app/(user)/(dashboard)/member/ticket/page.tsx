@@ -19,7 +19,7 @@ export default function event() {
         <div className={sideContent.tabContainer}>
           <button
             className={`${sideContent.eventTab} ${!activeTab
-              ? "font-bold border-b-4 border-zinc-600"
+              ? "font-bold border-b-4 border-lightBlue"
               : ""
               }`}
             onClick={() => handleClick(!activeTab)}
@@ -28,7 +28,7 @@ export default function event() {
           </button>
           <button
             className={`${sideContent.eventTab} ${activeTab
-              ? "font-bold border-b-4 border-zinc-600"
+              ? "font-bold border-b-4 border-lightBlue"
               : ""
               }`}
             onClick={() => handleClick(!activeTab)}

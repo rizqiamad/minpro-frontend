@@ -1,16 +1,17 @@
 import CreateTicket from "@/components/createTicket/createTicket";
+import LinkCheck from "@/components/createTicket/linkCheck";
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import { formatDateLong } from "@/helpers/formatDate";
 import { getEventById } from "@/libs/events";
 import { getTickets } from "@/libs/tickets";
 import { ITicket } from "@/types/ticket";
-import Link from "next/link";
 import { FaClock, FaPencilAlt, FaTrash } from "react-icons/fa";
 
 export default async function TicketPage({ params }: { params: { event_id: string } }) {
   const result: ITicket[] = await getTickets(params.event_id);
   const getEndDate: { result: { end_date: string } } = await getEventById(params.event_id, 1)
   const getType: { result: { type: 'free' | 'paid' } } = await getEventById(params.event_id, 0, 1)
+
   return (
     <main>
       <div className='rounded-2xl sm:mx-10 p-10 tablet:mx-52 shadow-2xl md:my-20'>
@@ -43,7 +44,7 @@ export default async function TicketPage({ params }: { params: { event_id: strin
           </div>
         </div>
         <div className="mt-10 border-t border-black pt-4">
-          <Link className="py-2 px-3 bg-lightBlue text-white rounded-md" href={'/organizer/events'}>KEMBALI KE DASHBOARD</Link>
+          <LinkCheck result={result} />
         </div>
       </div>
     </main>

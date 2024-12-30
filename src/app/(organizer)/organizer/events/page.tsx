@@ -1,6 +1,5 @@
 import sideContent from "@/components/sidebar/content/content.module.css";
 import OrganizerEvents from "@/components/organizer/organizerEvents";
-import Link from "next/link";
 
 export default async function event() {
   return (

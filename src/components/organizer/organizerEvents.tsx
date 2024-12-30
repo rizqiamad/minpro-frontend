@@ -10,19 +10,31 @@ import EventCard from "./eventCard";
 export default function OrganizerEvents() {
   type Tab = "active" | "draft" | "previous";
   const [activeTab, setActiveTab] = useState<Tab>("active");
-  const [events, setEvents] = useState<IEvent[]>([])
+  const [eventsActive, setEventsActive] = useState<IEvent[]>([])
+  const [eventsDraft, setEventsDraft] = useState<IEvent[]>([])
+  const [eventsUnactive, setEventsUnactive] = useState<IEvent[]>([])
 
   const handleClick = (tab: Tab) => {
     setActiveTab(tab);
   };
 
-  const getDataEventsOrganizer = async () => {
-    const data = await getEventsOrganizer()
-    setEvents(data)
+  const getActiveEvent = async () => {
+    const dataActive = await getEventsOrganizer('active')
+    setEventsActive(dataActive)
+  }
+  const getDraftEvent = async () => {
+    const dataDraft = await getEventsOrganizer('draft')
+    setEventsDraft(dataDraft)
+  }
+  const getUnactiveEvent = async () => {
+    const dataUnactive = await getEventsOrganizer('unactive')
+    setEventsUnactive(dataUnactive)
   }
 
   useEffect(() => {
-    getDataEventsOrganizer()
+    getActiveEvent()
+    getDraftEvent()
+    getUnactiveEvent()
   }, [])
 
   return (
@@ -51,7 +63,7 @@ export default function OrganizerEvents() {
         </button>
       </div>
       {activeTab === "active" && (
-        !events.length ? (
+        !eventsActive.length ? (
           <div className={sideContent.eventContent}>
             <div className="text-center">
               <h1 className="font-semibold text-xl mb-4">Anda Belum memiliki Event apapun</h1>
@@ -60,7 +72,7 @@ export default function OrganizerEvents() {
           </div>
         ) : (
           <div className="w-full py-5 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {events.map((item, idx) => {
+            {eventsActive.map((item, idx) => {
               return (
                 <EventCard key={idx} event={item} />
               )
@@ -69,18 +81,38 @@ export default function OrganizerEvents() {
         )
       )}
       {activeTab === "draft" && (
-        <div className={sideContent.eventContent}>
-          <div className="text-center">
-            <h1>Ini draft event</h1>
+        !eventsDraft.length ? (
+          <div className={sideContent.eventContent}>
+            <div className="text-center">
+              <h1 className="font-semibold text-xl mb-4">Tidak ada draft</h1>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-full py-5 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {eventsDraft.map((item, idx) => {
+              return (
+                <EventCard key={idx} event={item} />
+              )
+            })}
+          </div>
+        )
       )}
       {activeTab === "previous" && (
-        <div className={sideContent.eventContent}>
-          <div className="text-center">
-            <h1>Ini event sebelumnya</h1>
+        !eventsUnactive.length ? (
+          <div className={sideContent.eventContent}>
+            <div className="text-center">
+              <h1 className="font-semibold text-xl mb-4">Ini adalah even-even lampau</h1>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-full py-5 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {eventsUnactive.map((item, idx) => {
+              return (
+                <EventCard key={idx} event={item} />
+              )
+            })}
+          </div>
+        )
       )}
     </div>
   )
