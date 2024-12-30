@@ -37,7 +37,7 @@ export default function LoginUser() {
       toast.success(data.message);
     } catch (err: any) {
       console.log(err);
-      toast.error(err.message);
+      toast.error(err.response.data.message);
     } finally {
       setIsLoading(false);
     }
