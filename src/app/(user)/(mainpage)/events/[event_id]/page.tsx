@@ -1,4 +1,4 @@
-import { getEventById } from "@/libs/events"
+import { getEventDetail } from "@/libs/events"
 import { IEvent } from "@/types/event"
 import Image from "next/image"
 import { SlCalender } from "react-icons/sl";
@@ -21,7 +21,7 @@ import AddTicket from "@/components/createTransaction/addTicket";
 // }
 
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
-  const { result }: { result: IEvent } = await getEventById(params.event_id)
+  const { result }: { result: IEvent } = await getEventDetail(params.event_id)
   const ticketResult: ITicket[] = await getTickets(params.event_id)
   const date = displayDate(formatDate(result.start_date), formatDate(result.end_date))
   const time = `${formatTime(result.start_time)} - ${formatTime(result.end_time)}`

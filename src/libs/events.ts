@@ -9,7 +9,7 @@ export const getEvents = async (page: string = "1", sorts: string = "asc") => {
   }
 };
 
-export const getEventById = async (
+export const getEventDetail = async (
   id: string,
   end_date: number = 0,
   type: number = 0
@@ -24,9 +24,18 @@ export const getEventById = async (
   }
 };
 
+export const getEventId = async (event_id: string) => {
+  try {
+    const { data } = await axios.get(`/events/review/${event_id}`);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getEventsOrganizer = async (type: string) => {
   try {
-    const { data } = await axios.get(`/events/organizer?type=${type}`, {
+    const { data } = await axios.get(`/organizers/events?type=${type}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     return data.result;
