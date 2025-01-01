@@ -6,8 +6,7 @@ import Link from "next/link";
 export default function ReviewCard({ event }: { event: IEvent }) {
   const date = displayDate(formatDate(event.start_date), formatDate(event.end_date))
   return (
-    <Link
-      href={`/create-event/${event.id}`}
+    <div
       className="shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.75)] w-full h-auto rounded-md overflow-hidden flex flex-col"
     >
       <div className="relative w-full aspect-[4/3]">
@@ -18,6 +17,6 @@ export default function ReviewCard({ event }: { event: IEvent }) {
         <div className="text-slate-500 font-[450]">{date}</div>
         <Link href={`/review/${event.id}`} className="border border-lightBlue font-semibold hover:bg-lightBlue hover:text-white rounded-md py-2 text-center transition duration-200 my-1">Review Event</Link>
       </div>
-    </Link>
+    </div>
   )
 }
