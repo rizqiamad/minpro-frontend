@@ -2,15 +2,15 @@ import CreateTicket from "@/components/createTicket/createTicket";
 import LinkCheck from "@/components/createTicket/linkCheck";
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import { formatDateLong } from "@/helpers/formatDate";
-import { getEventById } from "@/libs/events";
+import { getEventDetail } from "@/libs/events";
 import { getTickets } from "@/libs/tickets";
 import { ITicket } from "@/types/ticket";
 import { FaClock, FaPencilAlt, FaTrash } from "react-icons/fa";
 
 export default async function TicketPage({ params }: { params: { event_id: string } }) {
   const result: ITicket[] = await getTickets(params.event_id);
-  const getEndDate: { result: { end_date: string } } = await getEventById(params.event_id, 1)
-  const getType: { result: { type: 'free' | 'paid' } } = await getEventById(params.event_id, 0, 1)
+  const getEndDate: { result: { end_date: string } } = await getEventDetail(params.event_id, 1)
+  const getType: { result: { type: 'free' | 'paid' } } = await getEventDetail(params.event_id, 0, 1)
 
   return (
     <main>

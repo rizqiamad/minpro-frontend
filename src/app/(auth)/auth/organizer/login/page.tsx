@@ -116,15 +116,15 @@ export default function LoginOrganizer() {
                       </div>
                     ) : null}
                   </div>
-                  <Link href={"/register"} className="text-sm text-blue-500">
+                  <Link href={"/auth/organizer/register"} className="text-sm text-blue-500">
                     Register
                   </Link>
                   <button
                     disabled={isLoading}
                     type="submit"
                     className={`${isLoading
-                        ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
-                        : "hover:bg-blue-700 hover:text-white"
+                      ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
+                      : "hover:bg-blue-700 hover:text-white"
                       } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
                   >
                     {isLoading ? "Loading ..." : "Login"}

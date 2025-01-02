@@ -1,4 +1,5 @@
 interface IOrganizer {
+  id: number;
   name: string;
   avatar: string;
 }

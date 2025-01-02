@@ -2,13 +2,14 @@ import { getEventDetail } from "@/libs/events"
 import { IEvent } from "@/types/event"
 import Image from "next/image"
 import { SlCalender } from "react-icons/sl";
-import { FaClock } from "react-icons/fa";
+import { FaClock, FaStar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { displayDate, formatDate } from "@/helpers/formatDate";
 import { formatTime } from "@/helpers/formatTime";
 import { ITicket } from "@/types/ticket";
 import { getTickets } from "@/libs/tickets";
 import AddTicket from "@/components/createTransaction/addTicket";
+import { getAvgRating } from "@/libs/reviews";
 
 // export function generateMetaData() {
 //   return {
@@ -23,6 +24,7 @@ import AddTicket from "@/components/createTransaction/addTicket";
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventDetail(params.event_id)
   const ticketResult: ITicket[] = await getTickets(params.event_id)
+  const avgRating = await getAvgRating(result.organizer.id)
   const date = displayDate(formatDate(result.start_date), formatDate(result.end_date))
   const time = `${formatTime(result.start_time)} - ${formatTime(result.end_time)}`
   const location = `${result.location.name_place}, ${result.location.address}, ${result.location.city.city}`
@@ -39,9 +41,18 @@ export default async function EventDetail({ params }: { params: { event_id: stri
             <div className="flex items-center gap-2"><span className="text-lightBlue"><FaClock /></span><span>{time}</span></div>
             <div className="flex items-center gap-2"><span className="text-lightBlue"><FaLocationDot /></span><span>{location}</span></div>
           </div>
-          <div className="flex items-center gap-2 justify-self-end mt-auto border-t py-4 px-6">
-            <Image src={result.organizer.avatar || ''} alt={result.organizer.name} width={35} height={35} />
-            <span className="text-xl font-[490] text-slate-500">{result.organizer.name}</span>
+          <div className="flex items-center gap-4 justify-self-end mt-auto border-t py-4 px-6">
+            <div>
+              <Image src={result.organizer.avatar || ''} alt={result.organizer.name} width={35} height={35} />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-[490] text-slate-500">Diselenggarakan</span>
+              <span className="font-[490] text-slate-500">{result.organizer.name}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaStar className={`text-3xl text-yellow-300`} />
+              <span className="font-semibold">{avgRating || 'N/A'}</span>
+            </div>
           </div>
         </div>
       </div>

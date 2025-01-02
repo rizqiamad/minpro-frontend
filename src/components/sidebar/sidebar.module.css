@@ -1,37 +1,37 @@
 /* USER-ITEM */
-.sidebar{
-    @apply sticky top-0 hidden flex-col 
-    min-w-[50px] min-h-screen overflow-hidden
+.sidebar {
+  @apply sticky top-0 hidden flex-col 
+    min-h-screen overflow-hidden
     border-r p-4 
     transition-all duration-150
     lg:flex md:flex
 
-    bg-blue-900 text-stone-300
+    bg-blue-900 text-stone-300;
 }
 
-.menus{
-    @apply grow
-    /* bg-blue-500 */
+.menus {
+  @apply grow
+    /* bg-blue-500 */;
 }
 
-.sideContainer{
-    @apply flex flex-col
-    mb-4
+.sideContainer {
+  @apply flex flex-col
+    mb-4;
 }
 
-.sideContainer a{
-    @apply flex items-center
+.sideContainer a {
+  @apply flex items-center
     py-2 transition-all
-    hover:pl-1
+    hover:pl-1;
 }
 
-.icons{
-    @apply text-[20px]
+.icons {
+  @apply text-[20px];
 }
 
-.sidebarBtn{
-    @apply flex items-center
-    cursor-pointer
+.sidebarBtn {
+  @apply flex items-center
+    cursor-pointer;
 }
 
 /* .userMode{
@@ -44,15 +44,15 @@
 
 /* NON-TAILWIND CLASS */
 
-.open{
-    width: 350px;
+.open {
+  min-width: 250px;
 }
 
-.closed{
-    width: 60px;
+.closed {
+  width: 60px;
 }
 
-.hidden{
-    display: none;
-    margin: 0;
+.hidden {
+  display: none;
+  margin: 0;
 }

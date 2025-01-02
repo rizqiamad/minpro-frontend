@@ -2,7 +2,7 @@
 
 import axios from "@/helpers/axios";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function VerifyPage() {
@@ -15,7 +15,7 @@ export default function VerifyPage() {
       const { data } = await axios.patch(
         `${process.env.NEXT_PUBLIC_BASE_URL_BE}/auth/user/verify/${params.token}`);
       console.log(params.token);
-      
+
       router.push("/auth/user/login");
       toast.success(data.message);
     } catch (err: any) {

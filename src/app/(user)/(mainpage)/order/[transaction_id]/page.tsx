@@ -12,7 +12,6 @@ import { SlCalender } from "react-icons/sl";
 
 export default async function OrderPage({ params }: { params: { transaction_id: string } }) {
   const transaction: ITransaction = await getTransactionDetail(params.transaction_id)
-  const token: string = await getSnapToken(transaction.final_price, +params.transaction_id)
   console.log(transaction);
   return (
     <main className="flex gap-16 tablet:flex-row flex-col sm:px-10 tablet:px-20 py-4">
@@ -66,7 +65,7 @@ export default async function OrderPage({ params }: { params: { transaction_id: 
         {/* <div><span>Biaya Tambahan</span></div>
         <div><span>Biaya Platform</span></div> */}
         <div className="flex justify-between items-center font-semibold text-xl border-t border-b py-2"><span>Total Bayar</span> <span>{formatRupiahTanpaDesimal(transaction.final_price)}</span></div>
-        <PayButton token={token} />
+        <PayButton base_price={transaction.base_price} final_price={transaction.final_price} transaction_id={params.transaction_id} />
       </div>
     </main>
   )

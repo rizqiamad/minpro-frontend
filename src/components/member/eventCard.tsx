@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function EventCard({ event }: { event: IEvent }) {
   const date = displayDate(formatDate(event.start_date), formatDate(event.end_date))
-  console.log(event);
   return (
     <Link
       href={`/create-event/${event.id}`}

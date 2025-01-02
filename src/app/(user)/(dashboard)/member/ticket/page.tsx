@@ -5,8 +5,8 @@ import { IoTicket } from "react-icons/io5";
 import sideContent from "@/components/sidebar/content/content.module.css";
 import { IEvent } from "@/types/event";
 import { getEventsUser } from "@/libs/events";
-import EventCard from "@/components/organizer/eventCard";
 import ReviewCard from "@/components/member/reviewCard";
+import EventCard from "@/components/member/eventCard";
 
 export default function event() {
   type Tab = 'active' | 'unactive'
@@ -88,7 +88,7 @@ export default function event() {
                 <IoTicket className="text-[6rem] mb-2 text-zinc-500" />
                 <h1>
                   Kamu belum memiliki tiket, silakan membeli tiket terlebih
-                  dahulu, ini Event Active.
+                  dahulu, ini Event yang sudah tidak Active.
                 </h1>
               </div>
             </div>
