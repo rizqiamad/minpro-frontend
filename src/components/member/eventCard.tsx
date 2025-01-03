@@ -6,8 +6,8 @@ import { IEvent } from "@/types/event";
 import { ITicket } from "@/types/ticket";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaClock, FaPencilAlt, FaTrash } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import UserTickets from "./userTickets";
 
 export default function EventCard({ event }: { event: IEvent }) {
   const { open, hidden, menuHandler } = UseOpen()
@@ -53,15 +53,7 @@ export default function EventCard({ event }: { event: IEvent }) {
         </div>
         {dataTickets.length > 0 && dataTickets.map((item, idx) => {
           return (
-            <div key={idx} className="flex flex-col desc-content bg-sky-400/10 border border-lightBlue px-10 pt-4 gap-4 rounded-xl relative">
-              <div className="w-[40px] h-[40px] rounded-full bg-white absolute -right-5 bottom-9 border-l border-lightBlue"></div>
-              <div className="w-[40px] h-[40px] rounded-full bg-white absolute -left-5 bottom-9 border-r border-lightBlue"></div>
-              <span className="font-semibold text-xl">{item.name}</span>
-              <span dangerouslySetInnerHTML={{ __html: item.description }} />
-              <div className="py-4 border-t border-black border-dashed">
-                <span className="font-semibold">{formatRupiahTanpaDesimal(item.price)}</span>
-              </div>
-            </div>
+            <UserTickets key={idx} item={item} />
           )
         })}
       </div>

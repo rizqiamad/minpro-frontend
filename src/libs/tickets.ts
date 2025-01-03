@@ -19,3 +19,14 @@ export const getTicketsUser = async (event_id: string) => {
     console.log(err);
   }
 };
+
+export const getAmountTicketsUser = async (ticket_id: string) => {
+  try {
+    const { data } = await axios.get(`/users/amount/tickets/${ticket_id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return data.result;
+  } catch (err) {
+    console.log(err);
+  }
+};
