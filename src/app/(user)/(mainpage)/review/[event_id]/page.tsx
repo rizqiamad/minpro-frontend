@@ -33,22 +33,18 @@ export default async function ReviewPage({ params }: { params: { event_id: strin
             </div>
           </div>
         </div>
-        <div className="my-6">
+        <div className="my-6 px-4">
           <h1 className="font-semibold text-4xl">Comment Section</h1>
-          {dataReviews.result.length && dataReviews.result.map((item, idx) => {
+          {dataReviews.result.length > 0 ? dataReviews.result.map((item, idx) => {
             return (
-              <div key={idx} className="flex flex-col my-2">
+              <div key={idx} className="flex flex-col my-2 border-b py-4 gap-2">
                 <div className="flex items-center gap-4">
                   <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
                     <Image src={item.user.avatar} alt={item.user.full_name} fill />
                   </div>
                   <div className="flex flex-col">
-                    <span>
-                      {item.user.full_name}
-                    </span>
-                    <span>
-                      {formatDate(item.createdAt)}
-                    </span>
+                    <span className="font-semibold">{item.user.full_name}</span>
+                    <span className="text-xs font-semibold text-black/50">{formatDate(item.createdAt)}</span>
                   </div>
                   <div className="flex">
                     <StarDisplay rate={item.rating} />
@@ -57,7 +53,9 @@ export default async function ReviewPage({ params }: { params: { event_id: strin
                 <div dangerouslySetInnerHTML={{ __html: item.comment }} className="mt-2 indent-4" />
               </div>
             )
-          })}
+          }) : (
+            <div>BELUM ADA REVIEW</div>
+          )}
         </div>
         <div className="shadow-xl rounded-md my-4 p-4">
           <h1 className="font-semibold text-2xl mb-4 text-center">Rate and drop your comment here</h1>

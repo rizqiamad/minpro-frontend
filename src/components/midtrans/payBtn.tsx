@@ -4,7 +4,7 @@ import axios from "@/helpers/axios";
 import UseOpen from "@/hooks/useOpen";
 import { getSnapToken } from "@/libs/transactions";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TiTick } from "react-icons/ti";
 import { toast } from "react-toastify";
 
@@ -49,6 +49,17 @@ export default function PayButton({ base_price, final_price, transaction_id }: I
       toast.error(err)
     }
   }
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open])
   return (
     <>
       <button disabled={isLoading} onClick={handleClick} className={`${isLoading && 'disabled:opacity-[0.5] disabled:bg-lightBlue/50 text-white'} py-2 bg-lightBlue text-white font-semibold rounded-md`}>

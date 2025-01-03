@@ -3,7 +3,7 @@ import CountDown from "@/components/order/countDown";
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import { formatDate } from "@/helpers/formatDate";
 import { formatTime } from "@/helpers/formatTime";
-import { getSnapToken, getTransactionDetail } from "@/libs/transactions";
+import { getTransactionDetail } from "@/libs/transactions";
 import { ITransaction } from "@/types/transaction";
 import Image from "next/image";
 import { FaClock } from "react-icons/fa";

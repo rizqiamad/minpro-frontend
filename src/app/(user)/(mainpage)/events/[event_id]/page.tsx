@@ -24,7 +24,7 @@ import { getAvgRating } from "@/libs/reviews";
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventDetail(params.event_id)
   const ticketResult: ITicket[] = await getTickets(params.event_id)
-  const avgRating = await getAvgRating(result.organizer.id)
+  const avgRating:number = await getAvgRating(result.organizer.id)
   const date = displayDate(formatDate(result.start_date), formatDate(result.end_date))
   const time = `${formatTime(result.start_time)} - ${formatTime(result.end_time)}`
   const location = `${result.location.name_place}, ${result.location.address}, ${result.location.city.city}`
@@ -51,7 +51,7 @@ export default async function EventDetail({ params }: { params: { event_id: stri
             </div>
             <div className="flex items-center gap-2">
               <FaStar className={`text-3xl text-yellow-300`} />
-              <span className="font-semibold">{avgRating || 'N/A'}</span>
+              <span className="font-semibold">{avgRating.toFixed(1) || 'N/A'}</span>
             </div>
           </div>
         </div>
