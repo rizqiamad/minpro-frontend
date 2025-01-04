@@ -32,7 +32,7 @@ export default function LoginOrganizer() {
 
       localStorage.setItem('token', token)
 
-      router.push("/");
+      router.push("/organizer/dashboard");
       console.log(data);
       toast.success(data.message);
     } catch (err: any) {

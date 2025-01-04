@@ -4,8 +4,9 @@ import { FaSearch } from "react-icons/fa";
 import { FaFileCircleCheck, FaCircleUser } from "react-icons/fa6";
 import { MdEditDocument } from "react-icons/md";
 import sideContent from "@/components/sidebar/content/content.module.css";
+import organizerGuard from "@/hoc/organizerProtect";
 
-export default function event() {
+ function event() {
   //tipe tab
   type Tab = "active" | "draft" | "previous";
 
@@ -121,3 +122,5 @@ export default function event() {
     </section>
   );
 }
+
+export default organizerGuard(event)

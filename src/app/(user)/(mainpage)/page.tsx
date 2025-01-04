@@ -1,8 +1,11 @@
+'use client'
+
 import Card from "@/components/events/card";
 import OrganizerCard from "@/components/events/organizerCard";
 import Hero from "@/components/hero/hero";
+import userGuard from "@/hoc/userProtect";
 
-export default function HomePage() {
+function HomePage() {
   return (
     <main>
       <Hero />
@@ -25,3 +28,5 @@ export default function HomePage() {
     </main>
   )
 }
+
+export default userGuard(HomePage)

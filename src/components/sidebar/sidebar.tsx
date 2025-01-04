@@ -4,11 +4,8 @@ import Link from "next/link";
 import side from "@/components/sidebar/sidebar.module.css";
 import { useState } from "react";
 import { FaFileAlt, FaUserTie } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RiHome4Fill } from "react-icons/ri";
-import { GrDocumentVerified } from "react-icons/gr";
-import { IoWalletSharp } from "react-icons/io5";
 
 export default function Sidebar() {
   //singkat sidebar
@@ -104,24 +101,7 @@ export default function Sidebar() {
                   Informasi Dasar
                 </p>
               </Link>
-              <Link href={"/"}>
-                <FaGear className={side.icons} />
-                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Pengaturan
-                </p>
-              </Link>
-              <Link href={"/organizer/legal"}>
-                <GrDocumentVerified className={side.icons} />
-                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Informasi Legal
-                </p>
-              </Link>
-              <Link href={"/"}>
-                <IoWalletSharp className={side.icons} />
-                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
-                  Rekening
-                </p>
-              </Link>
+              
             </div>
           </div>
 
