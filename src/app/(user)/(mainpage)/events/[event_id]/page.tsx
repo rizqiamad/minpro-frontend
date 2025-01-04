@@ -10,21 +10,23 @@ import { ITicket } from "@/types/ticket";
 import { getTickets } from "@/libs/tickets";
 import AddTicket from "@/components/createTransaction/addTicket";
 import { getAvgRating } from "@/libs/reviews";
+import { getEventMetadata } from "@/libs/metadata";
 
-// export function generateMetaData() {
-//   return {
-//     title: '',
-//     description: 'Lihat jadwal, lokasi, dan harga tiket Cara Simpel Menyusun dan Menyelenggarakan Pelatihan yang tersedia. Beli tiket atau pesan secara online hanya di Loket.com',
-//     openGraph: {
-//       image: ['']
-//     }
-//   }
-// }
+export async function generateMetadata({ params }: { params: { event_id: string } }) {
+  const data: IEvent = await getEventMetadata(params.event_id)
+  return {
+    title: data.name,
+    description: 'Lihat jadwal, lokasi, dan harga tiket Cara Simpel Menyusun dan Menyelenggarakan Pelatihan yang tersedia. Beli tiket atau pesan secara online hanya di Loket.com',
+    openGraph: {
+      image: [data.image]
+    }
+  }
+}
 
 export default async function EventDetail({ params }: { params: { event_id: string } }) {
   const { result }: { result: IEvent } = await getEventDetail(params.event_id)
   const ticketResult: ITicket[] = await getTickets(params.event_id)
-  const avgRating:number = await getAvgRating(result.organizer.id)
+  const avgRating: number = await getAvgRating(result.organizer.id)
   const date = displayDate(formatDate(result.start_date), formatDate(result.end_date))
   const time = `${formatTime(result.start_time)} - ${formatTime(result.end_time)}`
   const location = `${result.location.name_place}, ${result.location.address}, ${result.location.city.city}`
@@ -41,17 +43,17 @@ export default async function EventDetail({ params }: { params: { event_id: stri
             <div className="flex items-center gap-2"><span className="text-lightBlue"><FaClock /></span><span>{time}</span></div>
             <div className="flex items-center gap-2"><span className="text-lightBlue"><FaLocationDot /></span><span>{location}</span></div>
           </div>
-          <div className="flex items-center gap-4 justify-self-end mt-auto border-t py-4 px-6">
+          <div className="flex items-center gap-4 mt-auto border-t py-4 px-6">
             <div>
               <Image src={result.organizer.avatar || ''} alt={result.organizer.name} width={35} height={35} />
             </div>
             <div className="flex flex-col">
               <span className="font-[490] text-slate-500">Diselenggarakan</span>
-              <span className="font-[490] text-slate-500">{result.organizer.name}</span>
+              <span className="font-semibold text-slate-500">{result.organizer.name}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 ml-auto">
               <FaStar className={`text-3xl text-yellow-300`} />
-              <span className="font-semibold">{avgRating.toFixed(1) || 'N/A'}</span>
+              <span className="font-semibold">{avgRating ? avgRating.toFixed(1) : 'N/A'}</span>
             </div>
           </div>
         </div>

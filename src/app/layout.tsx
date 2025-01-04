@@ -19,7 +19,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: "Loket.com: %s",
+    template: "Beli Tiket %s",
     default: "Loket.com: Buat Event Gratis, Atur Acara & Jual Eventmu Sendiri"
   },
   description: "Sekarang kamu bisa buat event, atur acara, jual tiket event sendiri, bikin undangan event secara online dan berkesempatan dipromosikan afiliasi Loket.com.",

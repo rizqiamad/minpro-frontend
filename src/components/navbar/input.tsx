@@ -66,14 +66,13 @@ export default function InputNavbar() {
         <h1 className="mb-2 font-semibold text-xl text-black">Search Results</h1>
         <div className="flex flex-col gap-4 z-10 w-full">
           {dataEvents.length > 0 ? dataEvents.map((item, idx) => {
-            console.log(item);
             return (
               <button key={idx} onClick={() => handleEventRouting(item.id)} className="flex gap-2 text-start">
                 <div className="relative min-h-[5rem] aspect-[16/9] rounded-md overflow-hidden">
                   <Image src={item.image} alt={item.name} fill />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-semibold text-black">{item.name}</span>
+                  <span className="font-semibold text-black line-clamp-2">{item.name}</span>
                   <span className="font-semibold text-slate-400 text-sm">{formatDateLong(item.start_date)}</span>
                 </div>
               </button>

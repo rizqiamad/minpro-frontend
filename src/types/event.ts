@@ -26,7 +26,7 @@ export interface IEvent {
   end_date: string;
   start_time: string;
   end_time: string;
-  type: string;
+  type: string;   
   organizer: IOrganizer;
   location: ILocation;
   description: string;
