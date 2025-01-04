@@ -1,20 +1,20 @@
-import Planet1 from "@/../../public/planet1.jpg";
-import Planet2 from "@/../../public/planet2.jpg";
+import { getOrganizers } from "@/libs/organizers";
+import { IOrganizer } from "@/types/organizer";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function OrganizerCard() {
-  const images = [Planet1, Planet2]
+export default async function OrganizerCard() {
+  const dataOrganizers: IOrganizer[] = await getOrganizers()
   return (
     <>
       {
-        images.map((img, idx) => {
+        dataOrganizers.map((item, idx) => {
           return (
             <Link href={'/'} key={idx} className="flex flex-col items-center gap-2" >
               <div className="relative w-20 h-20 rounded-full overflow-hidden">
-                <Image src={img} alt="planet" fill />
+                <Image src={item.avatar} alt="planet" fill />
               </div>
-              <h1>Nama Organizer</h1>
+              <h1>{item.name}</h1>
             </Link>
           )
         })

@@ -1,5 +1,4 @@
-import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
-import { displayDate, formatDate, formatDateLong } from "@/helpers/formatDate";
+import { displayDate, formatDate } from "@/helpers/formatDate";
 import UseOpen from "@/hooks/useOpen";
 import { getTicketsUser } from "@/libs/tickets";
 import { IEvent } from "@/types/event";

@@ -41,7 +41,10 @@ export default function Card({
         </div>
         <div className="flex items-center gap-2 justify-self-end mt-auto border-t py-2">
           <Image src={srcImgOrganizer || ''} alt={organizerName} width={35} height={35} />
-          <span className="text-xl font-[490] text-slate-500">{organizerName}</span>
+          <div className="text-xs flex flex-col line-clamp-1">
+            <span>Diselenggarakan oleh : </span>
+            <span className="font-semibold text-slate-500">{organizerName}</span>
+          </div>
         </div>
       </div>
     </Link>

@@ -54,3 +54,12 @@ export const getEventsUser = async (type: "active" | "unactive") => {
     console.log(err);
   }
 };
+
+export const getEventsDisplay = async () => {
+  try {
+    const { data } = await axios.get("/events/display");
+    return data.result;
+  } catch (err) {
+    console.log(err);
+  }
+};
