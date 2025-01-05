@@ -1,12 +1,19 @@
 'use client'
 
-import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-import { category, location, time } from "./filterList";
-import { useContext } from "react";
+import { IoMdArrowDropdown, IoMdArrowDropup, IoMdClose } from "react-icons/io";
+import { category, location } from "./filterList";
+import { useContext, useState } from "react";
 import { FilterContext, IValue } from "./filter";
 
-export default function FilterAccordion({ filterName }: { filterName: string }) {
+interface IProps {
+  filterName: string
+  setCat?: (key: string) => void
+  setCity?: (key: string) => void
+}
+
+export default function FilterAccordion({ filterName, setCat, setCity }: IProps) {
   const context = useContext<IValue | null>(FilterContext)
+  const [choice, setChoice] = useState<string>('')
 
   if (!context) {
     throw new Error('There is no context')
@@ -18,8 +25,6 @@ export default function FilterAccordion({ filterName }: { filterName: string }) 
     data = location;
   } else if (filterName === "Category") {
     data = category;
-  } else {
-    data = time;
   }
 
   const isOpen = openAccordion === filterName
@@ -27,20 +32,47 @@ export default function FilterAccordion({ filterName }: { filterName: string }) 
   const handleToogle = (): void => {
     setOpenAccordion(isOpen ? null : filterName)
   }
+
+  const handleFilter = (value: string) => {
+    if (setCat) setCat(value)
+    if (setCity) setCity(value)
+    handleToogle()
+    setChoice(value)
+  }
+
+  const delFilter = () => {
+    if (setCat) setCat('')
+    if (setCity) setCity('')
+    setChoice('')
+  }
   return (
     <>
-      <button onClick={handleToogle} className="flex justify-between w-full text-xl items-center cursor-pointer my-6 px-6">
-        <div className={`${isOpen ? 'text-orange-300' : 'text-black'}`}>
-          {filterName}
+      {choice ? (
+        <div className="w-full py-6 px-6 shadow-lg flex justify-between text-xl">
+          <span className="font-semibold text-black/50">{choice}</span>
+          <button className="hover:text-red-500" onClick={delFilter}><IoMdClose /></button>
         </div>
-        <div>
-          {isOpen ? (<IoMdArrowDropup />) : (<IoMdArrowDropdown />)}
-        </div>
-      </button>
+      ) : (
+        <button
+          onClick={handleToogle}
+          className="flex justify-between w-full text-xl items-center cursor-pointer my-6 px-6"
+        >
+          <div className={`${isOpen ? 'text-orange-300' : 'text-black'}`}>
+            {filterName}
+          </div>
+          <div>
+            {isOpen ? (<IoMdArrowDropup />) : (<IoMdArrowDropdown />)}
+          </div>
+        </button>
+      )}
       <div className={`${isOpen ? 'flex' : 'hidden'} flex-col px-10`}>
         {data.map((item, idx) => {
           return (
-            <button key={idx} className="text-start py-2 px-4 rounded-md hover:shadow-md hover:border">
+            <button
+              onClick={() => handleFilter(item)}
+              key={idx}
+              className="text-start py-2 px-4 rounded-md hover:shadow-md hover:border"
+            >
               {item}
             </button>
           )

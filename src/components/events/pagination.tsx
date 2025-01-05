@@ -6,8 +6,15 @@ import { useEffect, useState } from "react";
 export default function EventPagination({ total_page }: { total_page: number }) {
   const { searchParams, pathname, router, createQueryString } = UseLocater()
   const [page, setPage] = useState<number>(Number(searchParams.get('page')) || 1)
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      router.replace(`${pathname}?page=1&sorts=asc`);
+      return;
+    }
+
     const newQueryString = createQueryString("page", `${page}`)
     router.replace(`${pathname}?${newQueryString}`);
   }, [page]);

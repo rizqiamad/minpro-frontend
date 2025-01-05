@@ -1,8 +1,8 @@
 import axios from "@/helpers/axios";
 
-export const getEvents = async (page: string = "1", sorts: string = "asc") => {
+export const getEvents = async (query: URLSearchParams) => {
   try {
-    const { data } = await axios.get(`/events/?page=${page}&sorts=${sorts}`);
+    const { data } = await axios.get(`/events/?${query.toString()}`);
     return data;
   } catch (err) {
     console.log(err);

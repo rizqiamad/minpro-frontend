@@ -1,14 +1,12 @@
 export const location = [
-  "All Location",
   "Bali",
   "Bandung",
-  "DKI Jakarta",
+  "Jakarta",
   "Yogyakarta",
-  "surabaya",
+  "Surabaya",
 ];
 
 export const category = [
-  "All Category",
   "Festival",
   "Konser",
   "Pertandingan",
@@ -16,15 +14,5 @@ export const category = [
   "Workshop",
   "Pertunjukkan",
   "Seminar",
-  "lainnya",
-];
-
-export const time = [
-  "Hari Ini",
-  "Besok",
-  "Akhir Pekan",
-  "Minggu Ini",
-  "Minggu Depan",
-  "Bulan Ini",
-  "Bulan Depan",
+  "Lainnya",
 ];

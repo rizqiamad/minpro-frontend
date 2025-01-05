@@ -6,14 +6,10 @@ import Sorting from "@/components/events/sorting";
 import { getEvents } from "@/libs/events";
 import { IEvent } from "@/types/event";
 
-interface ISearchParams {
-  page: string
-  sorts: string
-}
-
-export default async function EventsPage({ searchParams }: { searchParams: ISearchParams }) {
-  const { page, sorts } = searchParams
-  const { result, total_page }: { result: IEvent[], total_page: number } = await getEvents(page, sorts);
+export default async function EventsPage({ searchParams }: { searchParams: Record<string, string> }) {
+  console.log(searchParams);
+  const params = new URLSearchParams(searchParams as Record<string, string>);
+  const { result, total_page }: { result: IEvent[], total_page: number } = await getEvents(params);
 
   return (
     <main className="flex flex-col lg:flex-row">

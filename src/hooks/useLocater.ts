@@ -16,5 +16,5 @@ export default function UseLocater() {
     [searchParams]
   );
 
-  return {searchParams, pathname, router, createQueryString};
+  return { searchParams, pathname, router, createQueryString };
 }

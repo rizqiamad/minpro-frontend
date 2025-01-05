@@ -6,8 +6,14 @@ import { useEffect, useState } from "react";
 export default function Sorting() {
   const { searchParams, pathname, router, createQueryString } = UseLocater()
   const [sorts, setSorts] = useState<string>(searchParams.get('sorts') || 'asc')
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      return;
+    }
+
     const newQueryString = createQueryString("sorts", `${sorts}`)
     router.replace(`${pathname}?${newQueryString}`);
   }, [sorts]);

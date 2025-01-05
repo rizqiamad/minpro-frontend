@@ -4,7 +4,7 @@ import Card from "../events/card";
 export default async function Cards({ result }: { result: IEvent[] }) {
   return (
     <div className="w-full p-5 grid grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] auto-rows-max gap-5">
-      {result.map((item, idx) => {
+      {result.length > 0 ? result.map((item, idx) => {
         return (
           <Card
             key={idx}
@@ -19,7 +19,11 @@ export default async function Cards({ result }: { result: IEvent[] }) {
             price={item.Ticket[0].price}
           />
         )
-      })}
+      }) : (
+        <div>
+          Events not found
+        </div>
+      )}
     </div>
   )
 }

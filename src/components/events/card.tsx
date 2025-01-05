@@ -37,7 +37,7 @@ export default function Card({
         <div className="flex flex-col gap-1">
           <h2 className="font-semibold line-clamp-2">{eventTitle}</h2>
           <div className="text-slate-500 font-[450]">{date}</div>
-          <div className="text-blue-500 font-semibold">{type === 'free' ? 'Free' : formatRupiahTanpaDesimal(price)}</div>
+          <div className="font-semibold">{type === 'free' ? (<span className="text-blue-500">Free</span>) : (<span className="text-green-400">{formatRupiahTanpaDesimal(price)}</span>)}</div>
         </div>
         <div className="flex items-center gap-2 justify-self-end mt-auto border-t py-2">
           <Image src={srcImgOrganizer || ''} alt={organizerName} width={35} height={35} />
