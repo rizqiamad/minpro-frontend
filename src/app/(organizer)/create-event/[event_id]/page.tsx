@@ -1,3 +1,4 @@
+import ComingSoon from "@/components/createTicket/comingSoon";
 import CreateTicket from "@/components/createTicket/createTicket";
 import LinkCheck from "@/components/createTicket/linkCheck";
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
@@ -5,7 +6,7 @@ import { formatDateLong } from "@/helpers/formatDate";
 import { getEventDetail } from "@/libs/events";
 import { getTickets } from "@/libs/tickets";
 import { ITicket } from "@/types/ticket";
-import { FaClock, FaPencilAlt, FaTrash } from "react-icons/fa";
+import { FaClock } from "react-icons/fa";
 
 export default async function TicketPage({ params }: { params: { event_id: string } }) {
   const result: ITicket[] = await getTickets(params.event_id);
@@ -33,10 +34,7 @@ export default async function TicketPage({ params }: { params: { event_id: strin
                   )}
                   <div className="py-4 border-t border-black border-dashed flex items-center justify-between">
                     <span className="font-semibold">{formatRupiahTanpaDesimal(item.price)}</span>
-                    <div className="flex items-center gap-4">
-                      <button><FaPencilAlt className="text-lightBlue" /></button>
-                      <button><FaTrash className="text-red-500" /></button>
-                    </div>
+                    <ComingSoon />
                   </div>
                 </div>
               )

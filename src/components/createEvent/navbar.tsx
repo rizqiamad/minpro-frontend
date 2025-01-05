@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ComingSoonNavbar from "./comingSoonNavbar";
 
 export default function CreatEventNavbar() {
   return (
@@ -7,7 +8,7 @@ export default function CreatEventNavbar() {
       <Link href={'/organizer/dashboard'}>
         <Image src='https://assets.loket.com/images/logo-loket-blue.png' alt="" width={125} height={125} />
       </Link>
-      <Link href={'/'} className="font-[600]">BANTUAN</Link>
+      <ComingSoonNavbar />
     </div>
   )
 }
