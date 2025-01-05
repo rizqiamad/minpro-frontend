@@ -23,7 +23,7 @@ export default function PayButton({ base_price, final_price, transaction_id }: I
     if (base_price) {
       try {
         SetIsLoading(true)
-        const token = await getSnapToken(final_price, Number(transaction_id))
+        const token = await getSnapToken(base_price, final_price, Number(transaction_id))
         window.snap.pay(token)
       } catch (err) {
         console.log(err);

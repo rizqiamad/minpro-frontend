@@ -12,7 +12,6 @@ import { SlCalender } from "react-icons/sl";
 
 export default async function OrderPage({ params }: { params: { transaction_id: string } }) {
   const transaction: ITransaction = await getTransactionDetail(params.transaction_id)
-  console.log(transaction);
   return (
     <main className="flex gap-16 tablet:flex-row flex-col sm:px-10 tablet:px-20 py-4">
       <div className="tablet:w-[60%]">
@@ -61,10 +60,21 @@ export default async function OrderPage({ params }: { params: { transaction_id: 
       <div className="flex flex-col rounded-md shadow-xl py-6 px-4 tablet:w-[40%] gap-2">
         <CountDown date={transaction.expiresAt} />
         <h1 className="text-2xl font-semibold mb-2">Detail Harga</h1>
-        <div className="flex justify-between items-center"><span>Total Harga Tiket</span> <span>{formatRupiahTanpaDesimal(transaction.base_price)}</span></div>
-        {/* <div><span>Biaya Tambahan</span></div>
-        <div><span>Biaya Platform</span></div> */}
-        <div className="flex justify-between items-center font-semibold text-xl border-t border-b py-2"><span>Total Bayar</span> <span>{formatRupiahTanpaDesimal(transaction.final_price)}</span></div>
+        <div className="flex justify-between items-center">
+          <span>Total Harga Tiket</span>
+          <span>{formatRupiahTanpaDesimal(transaction.base_price)}</span>
+        </div>
+        {transaction.coupon && (
+          <div className="flex justify-between items-center">
+            <span>Coupon</span>
+            <span className="font-semibold text-red-500">- {formatRupiahTanpaDesimal(transaction.base_price / 10)}</span>
+          </div>
+        )}
+        {/* <div><span>Biaya Platform</span></div> */}
+        <div className="flex justify-between items-center font-semibold text-xl border-t border-b py-2">
+          <span>Total Bayar</span>
+          <span>{formatRupiahTanpaDesimal(transaction.final_price)}</span>
+        </div>
         <PayButton base_price={transaction.base_price} final_price={transaction.final_price} transaction_id={params.transaction_id} />
       </div>
     </main>

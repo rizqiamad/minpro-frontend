@@ -9,12 +9,17 @@ export async function getTransactionDetail(transaction_id: string) {
   }
 }
 
-export async function getSnapToken(final_price: number, order_id: number) {
+export async function getSnapToken(
+  base_price: number,
+  final_price: number,
+  order_id: number
+) {
   try {
     const { data } = await axios.post(
       "/transactions/payment",
       {
         order_id,
+        base_price,
         gross_amount: final_price,
       },
       {
@@ -23,6 +28,17 @@ export async function getSnapToken(final_price: number, order_id: number) {
         },
       }
     );
+    return data.result;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getCoupon() {
+  try {
+    const { data } = await axios.get("/users/coupon", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
     return data.result;
   } catch (err) {
     console.log(err);
