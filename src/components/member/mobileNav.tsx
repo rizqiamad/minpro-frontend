@@ -6,9 +6,7 @@ import dashNavbar from "@/components/sidebar/content/dashNavbar.module.css";
 import side from "@/components/sidebar/sidebar.module.css";
 import { FaFileAlt, FaUserCircle } from "react-icons/fa";
 import { RiHome4Fill } from "react-icons/ri";
-import { FaGear, FaUserTie } from "react-icons/fa6";
-import { GrDocumentVerified } from "react-icons/gr";
-import { IoWalletSharp } from "react-icons/io5";
+import { FaUserTie } from "react-icons/fa6";
 
 export default function MobileNav() {
   const [navOpen, setNavOpen] = useState(false);
@@ -19,7 +17,6 @@ export default function MobileNav() {
 
   return (
     <div className={dashNavbar.dashboardNavbar}>
-      <h1 className={dashNavbar.titleNavbar}>Title</h1>
       <div className="">
         <FaUserCircle className={dashNavbar.navBtn} onClick={toggleMenu} />
         {navOpen && (
@@ -36,18 +33,7 @@ export default function MobileNav() {
               <FaUserTie className={side.icons} />
               <p className="ml-2">Informasi Dasar</p>
             </Link>
-            <Link href={"/"}>
-              <FaGear className={side.icons} />
-              <p className="ml-2">Pengaturan</p>
-            </Link>
-            <Link href={"/organizer/legal"}>
-              <GrDocumentVerified className={side.icons} />
-              <p className="ml-2">Informasi Legal</p>
-            </Link>
-            <Link href={"/"}>
-              <IoWalletSharp className={side.icons} />
-              <p className="ml-2">Rekening</p>
-            </Link>
+            
           </div>
         )}
       </div>

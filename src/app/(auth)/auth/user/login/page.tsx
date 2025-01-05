@@ -8,6 +8,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import Image from "next/image";
+import authProtect from "@/hoc/userAuthProtect";
 
 const RegisterSchema = Yup.object().shape({
   data: Yup.string().required("username or email is required"),
@@ -19,7 +20,7 @@ interface FormValue {
   password: string;
 }
 
-export default function LoginUser() {
+function LoginUser() {
   const initialValue: FormValue = { data: "", password: "" };
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,6 +36,7 @@ export default function LoginUser() {
       router.push("/");
       console.log(data);
       toast.success(data.message);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err);
       toast.error(err.response.data.message);
@@ -44,7 +46,8 @@ export default function LoginUser() {
   };
 
   return (
-    <div className="flex justify-center items-center">{/* gambar start */}
+    <div className="flex justify-center items-center">
+      {/* gambar start */}
       <div className="hidden mr-10 lg:block md:block">
         <Image
           src="/img/auth.jpg"
@@ -120,10 +123,18 @@ export default function LoginUser() {
                   <button
                     disabled={isLoading}
                     type="submit"
+<<<<<<< HEAD
                     className={`${isLoading
                       ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
                       : "hover:bg-blue-700 hover:text-white"
                       } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
+=======
+                    className={`${
+                      isLoading
+                        ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
+                        : "hover:bg-blue-700 hover:text-white"
+                    } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
+>>>>>>> dashboard
                   >
                     {isLoading ? "Loading ..." : "Login"}
                   </button>
@@ -136,3 +147,5 @@ export default function LoginUser() {
     </div>
   );
 }
+
+export default authProtect(LoginUser);

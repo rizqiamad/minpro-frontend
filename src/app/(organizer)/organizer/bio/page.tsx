@@ -1,8 +1,10 @@
+'use client'
 import { GoPlusCircle } from "react-icons/go";
 import { HiUpload } from "react-icons/hi";
 import sideContent from "@/components/sidebar/content/content.module.css";
+import organizerGuard from "@/hoc/organizerProtect";
 
-export default function Bio() {
+ function Bio() {
   return (
     <section className={sideContent.bioSection}>
       <h1 className={sideContent.mainTitle}>Profil Kamu</h1>
@@ -59,3 +61,5 @@ export default function Bio() {
     </section>
   );
 }
+
+export default organizerGuard(Bio)

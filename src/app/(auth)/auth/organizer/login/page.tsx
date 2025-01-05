@@ -35,6 +35,7 @@ export default function LoginOrganizer() {
       router.push("/organizer/dashboard");
       console.log(data);
       toast.success(data.message);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err);
       toast.error(err.response.data.message);

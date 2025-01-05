@@ -7,6 +7,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import * as Yup from "yup";
+import authProtect from "@/hoc/userAuthProtect";
+import { toastErr } from "@/helpers/toast";
 
 const RegisterSchema = Yup.object().shape({
   organizer_name: Yup.string().required("Organizer Name is required"),
@@ -29,8 +31,7 @@ interface FormValue {
   confirmPassword: string;
   no_handphone: string;
 }
-
-export default function RegisterOrganizer() {
+ function RegisterOrganizer() {
   const initialValue: FormValue = {
     organizer_name: "",
     email: "",
@@ -48,9 +49,13 @@ export default function RegisterOrganizer() {
 
       router.push("/auth/organizer/login");
       toast.success(data.message);
-    } catch (err: any) {
+    } catch (err) {
       console.log(err);
+<<<<<<< HEAD
       toast.error(err.response.data.message);
+=======
+      toastErr(err)
+>>>>>>> dashboard
     } finally {
       SetIsLoading(false);
     }
@@ -213,3 +218,5 @@ export default function RegisterOrganizer() {
     </div>
   );
 }
+
+export default authProtect(RegisterOrganizer)

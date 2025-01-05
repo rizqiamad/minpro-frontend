@@ -1,11 +1,19 @@
+'use client'
+
 import Card from "@/components/events/card";
 import OrganizerCard from "@/components/events/organizerCard";
 import Hero from "@/components/hero/hero";
+<<<<<<< HEAD
 import { getEventsDisplay } from "@/libs/events";
 import { IEvent } from "@/types/event";
 
 export default async function HomePage() {
   const dataEventsDisplay: IEvent[] = await getEventsDisplay()
+=======
+import userGuard from "@/hoc/userProtect";
+
+function HomePage() {
+>>>>>>> dashboard
   return (
     <main className="max-w-[70rem] mx-auto">
       <Hero />
@@ -39,3 +47,5 @@ export default async function HomePage() {
     </main>
   )
 }
+
+export default userGuard(HomePage)

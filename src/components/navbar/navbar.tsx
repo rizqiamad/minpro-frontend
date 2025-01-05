@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaMagnifyingGlass, FaTicket, FaCompass } from "react-icons/fa6";
+import { FaTicket, FaCompass } from "react-icons/fa6";
 import HamburgerMenu from "./hamburgerMenu";
 import ResponsiveInput from "./responsiveInput";
 import UserMenu from "./userMenu";

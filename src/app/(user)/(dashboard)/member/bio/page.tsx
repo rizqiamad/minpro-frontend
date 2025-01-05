@@ -1,6 +1,8 @@
+'use client'
 import sideContent from "@/components/sidebar/content/content.module.css";
+import userGuard from "@/hoc/userProtect";
 
-export default function MemberBio() {
+ function MemberBio() {
   return (
     <section className={sideContent.bioSection}>
       <div className="px-[2.25rem] py-[1.25rem] border-b-2">
@@ -83,3 +85,5 @@ export default function MemberBio() {
     </section>
   );
 }
+
+export default userGuard(MemberBio)

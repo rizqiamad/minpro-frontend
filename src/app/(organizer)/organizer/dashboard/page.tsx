@@ -1,22 +1,61 @@
-import { FaCircleUser, FaFileCircleCheck, FaTent } from "react-icons/fa6";
-import { MdEditDocument } from "react-icons/md";
+'use client'
+import { FaTent } from "react-icons/fa6";
 import sideContent from "@/components/sidebar/content/content.module.css";
 import { RiDraftFill } from "react-icons/ri";
 import { IoWalletOutline } from "react-icons/io5";
 import { GiMoneyStack, GiTicket } from "react-icons/gi";
 import { FaUsers } from "react-icons/fa";
+import { statistic } from "@/libs/dashoboard";
+import { graphStats } from "@/libs/totalTransaction";
+import { useEffect, useState } from "react";
+import organizerGuard from "@/hoc/organizerProtect";
+import GraphEvent from "@/components/graph/graphEvent";
+import GraphTransaction from "@/components/graph/graphTransaction";
 
-export default function Dashboard() {
+function Dashboard() {
+  
+
+  const [eventTotal, setEventTotal] = useState(0);
+  const [totalTrans, setTotalTrans] = useState(0)
+
+  useEffect(() => {
+    const fetchStatistics = async () => {
+      try {
+        const total = await statistic();
+        setEventTotal(total);
+      } catch (error) {
+        console.error("Error fetching statistics:", error);
+        setEventTotal(0); // Default value in case of an error
+      }
+    };
+
+    fetchStatistics();
+  }, []);
+
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      try {
+        const totalTransGraph = await graphStats();
+        setTotalTrans(totalTransGraph);
+      } catch (error) {
+        console.error("Error fetching statistics:", error);
+        setTotalTrans(0); // Default value in case of an error
+      }
+    };
+
+    fetchTransaction();
+  }, []);
+
+
   return (
     <section className={sideContent.dashboardSection}>
-      <h1 className={sideContent.mainTitle}>Home</h1>
+      
 
-      {/* container misi */}
-      <div className={sideContent.missionContainer}>
+      {/* <div className={sideContent.missionContainer}>
         <h1>Ayo selesaikan misi</h1>
-        {/* isi content */}
+        
         <div className={sideContent.missionContent}>
-          {/* misi */}
+          
           <div className={sideContent.missions}>
             <div className={sideContent.missionInner}>
               <FaFileCircleCheck className={sideContent.missionIcon} />
@@ -24,7 +63,7 @@ export default function Dashboard() {
             </div>
             <button className={sideContent.missionBtn}>Verifikasi</button>
           </div>
-          {/* misi start */}
+          
           <div className={sideContent.missions}>
             <div className={sideContent.missionInner}>
               <FaCircleUser className={sideContent.missionIcon} />
@@ -32,7 +71,7 @@ export default function Dashboard() {
             </div>
             <button className={sideContent.missionBtn}>Verifikasi</button>
           </div>
-          {/* misi end*/}
+          
           <div className={sideContent.missions}>
             <div className={sideContent.missionInner}>
               <MdEditDocument className={sideContent.missionIcon} />
@@ -41,7 +80,7 @@ export default function Dashboard() {
             <button className={sideContent.missionBtn}>Verifikasi</button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* container record */}
       <div className={sideContent.recordContainer}>
@@ -54,7 +93,7 @@ export default function Dashboard() {
           </div>
 
           <div className={sideContent.recordTotal}>
-            <span className={sideContent.recordTotalNum}>0</span>
+            <span className={sideContent.recordTotalNum}>{eventTotal}</span>
             <h1 className={sideContent.recordTotalPlaceholder}>Event</h1>
           </div>
         </div>
@@ -84,7 +123,7 @@ export default function Dashboard() {
           </div>
 
           <div className={sideContent.recordTotal}>
-            <span className={sideContent.recordTotalNum}>0</span>
+            <span className={sideContent.recordTotalNum}>{totalTrans}</span>
             <h1 className={sideContent.recordTotalPlaceholder}></h1>
           </div>
         </div>
@@ -129,8 +168,12 @@ export default function Dashboard() {
             <h1 className={sideContent.recordTotalPlaceholder}>Orang</h1>
           </div>
         </div>
-        {/* isi content start*/}
+        {/* isi content end*/}
+        <GraphEvent />
+        <GraphTransaction />
       </div>
     </section>
   );
 }
+
+export default organizerGuard(Dashboard)

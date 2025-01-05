@@ -7,6 +7,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import * as Yup from "yup";
+import authProtect from "@/hoc/userAuthProtect";
+import { toastErr } from "@/helpers/toast";
 
 const RegisterSchema = Yup.object().shape({
   full_name: Yup.string().required("username is required"),
@@ -40,7 +42,7 @@ interface FormValue {
   jenis_kelamin: string;
 }
 
-export default function RegisterUser() {
+ function RegisterUser() {
   const initialValue: FormValue = {
     full_name: "",
     email: "",
@@ -62,18 +64,10 @@ export default function RegisterUser() {
 
       router.push("/auth/user/login");
       toast.success(data.message);
-    } catch (err: any) {
+    
+    } catch (err) {
       console.log(err);
-      if (
-        err.response &&
-        err.response.data.error === "Invalid or expired referral code"
-      ) {
-        toast.error(
-          "Invalid referral code provided. Please check and try again."
-        ); // Display specific error for referral code
-      } else {
-        toast.error(err.message || "Something went wrong!"); // Display general error message
-      }
+      toastErr(err)
     } finally {
       SetIsLoading(false);
     }
@@ -307,3 +301,5 @@ export default function RegisterUser() {
     </div>
   );
 }
+
+export default authProtect(RegisterUser)

@@ -1,6 +1,11 @@
 /* USER-ITEM */
+<<<<<<< HEAD
 .sidebar {
   @apply sticky top-0 hidden flex-col 
+=======
+.sidebar{
+    @apply sticky top-0 hidden flex-col 
+>>>>>>> dashboard
     min-h-screen overflow-hidden
     border-r p-4 
     transition-all duration-150
@@ -44,8 +49,13 @@
 
 /* NON-TAILWIND CLASS */
 
+<<<<<<< HEAD
 .open {
   min-width: 250px;
+=======
+.open{
+    width: 450px;
+>>>>>>> dashboard
 }
 
 .closed {

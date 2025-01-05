@@ -4,11 +4,12 @@ import Link from "next/link";
 import side from "@/components/sidebar/sidebar.module.css";
 import { useState } from "react";
 import { FaFileAlt, FaUserTie } from "react-icons/fa";
+<<<<<<< HEAD
 import { FaGear, FaPencil } from "react-icons/fa6";
+=======
+>>>>>>> dashboard
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RiHome4Fill } from "react-icons/ri";
-import { GrDocumentVerified } from "react-icons/gr";
-import { IoWalletSharp } from "react-icons/io5";
 
 export default function Sidebar() {
   //singkat sidebar
@@ -31,6 +32,7 @@ export default function Sidebar() {
       <div className={side.menus}>
         {/* khusus organiser start */}
 
+<<<<<<< HEAD
         <div className={side.organiserMode}>
           <div className={side.sideContainer}>
             <Link href={"/organizer/dashboard"}>
@@ -53,6 +55,31 @@ export default function Sidebar() {
                 Event Saya
               </p>
             </Link>
+=======
+              <Link href={"/organizer/events"}>
+                <FaFileAlt className={side.icons} />
+                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
+                  Event Saya
+                </p>
+              </Link>
+            </div>
+            <div className={side.sideContainer}>
+              <h1
+                className={`ml-2 ${
+                  !SidebarOpen ? side.hidden : ""
+                } font-semibold`}
+              >
+                Akun
+              </h1>
+              <Link href={"/organizer/bio"}>
+                <FaUserTie className={side.icons} />
+                <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
+                  Informasi Dasar
+                </p>
+              </Link>
+              
+            </div>
+>>>>>>> dashboard
           </div>
           <div className={side.sideContainer}>
             <h1
