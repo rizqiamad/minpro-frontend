@@ -24,23 +24,20 @@ export default function UserMenu() {
           onClick={menuHandler}
           className="w-[40px] h-[40px] rounded-full cursor-pointer"
         >
-          <div className="flex justify-center items-center my-5">
-            <div className="w-10 h-10 relative">
-              <Image
-                className="rounded-full object-cover"
-                src={user?.avatar || "/default-avatar.png"}
-                alt={user?.full_name || "user"}
-                fill
-                priority
-              />
-            </div>
+          <div className="w-10 h-10 relative">
+            <Image
+              className="rounded-full object-cover"
+              src={user?.avatar || "/default-avatar.png"}
+              alt={user?.full_name || "user"}
+              fill
+              priority
+            />
           </div>
         </button>
       )}
       <div
-        className={`rounded-md py-2 px-3 absolute w-64 font-semibold z-10 bg-white text-black right-10 top-[3.4rem] flex flex-col gap-2 transition duration-300 ${
-          open ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
-        } ${hidden ? "" : "hidden"}`}
+        className={`rounded-md py-2 px-3 absolute w-64 font-semibold z-10 bg-white text-black right-10 top-[3.4rem] flex flex-col gap-2 transition duration-300 ${open ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
+          } ${hidden ? "" : "hidden"}`}
       >
         {user && (
           <div className="mb-2">

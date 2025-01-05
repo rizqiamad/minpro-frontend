@@ -9,6 +9,7 @@ import axios from "@/helpers/axios";
 import { toast } from "react-toastify";
 import { reviewSchema } from "@/libs/formSchemas";
 import StarRating from "./starRating";
+import { toastErrAxios } from "@/helpers/toast";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -27,9 +28,8 @@ export default function FormReview({ event_id }: { event_id: string }) {
       })
 
       toast.success(data.message)
-    } catch (err: any) {
-      console.log(err)
-      toast.error(err.response.data.message)
+    } catch (err: unknown) {
+      toastErrAxios(err)
     } finally {
       SetIsLoading(false)
     }

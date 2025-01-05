@@ -1,4 +1,5 @@
 import axios from "@/helpers/axios";
+import { toastErrAxios } from "@/helpers/toast";
 
 export const getEvents = async (query: URLSearchParams) => {
   try {
@@ -39,8 +40,8 @@ export const getEventsOrganizer = async (type: string) => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     return data.result;
-  } catch (err: any) {
-    console.log(err.response.data.message);
+  } catch (err: unknown) {
+    toastErrAxios(err)
   }
 };
 

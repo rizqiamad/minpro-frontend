@@ -12,7 +12,7 @@ const organizerGuard = (WrappedComponent: React.ComponentType) => {
     useEffect(() => {
       const storedToken = localStorage.getItem("token");
       setToken(storedToken);
-      if(!storedToken) router.push("/auth")
+      if (!storedToken) router.push("/auth")
     }, []);
 
     useEffect(() => {

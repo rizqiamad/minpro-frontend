@@ -1,3 +1,5 @@
+'use client'
+
 export default function ComingSoonNavbar() {
   const handleComingSoon = () => {
     alert('COMING SOON, SABAR MASEEE')

@@ -1,12 +1,12 @@
 "use client";
 
 import axios from "@/helpers/axios";
-import { iOrganizer } from "@/types/organizer";
+import { IOrganizer } from "@/types/organizer";
 import { useEffect, useState } from "react";
 
 const useSessionOrganizer = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [organizer, setOrganizer] = useState<iOrganizer | null>(null);
+  const [organizer, setOrganizer] = useState<IOrganizer | null>(null);
 
   const checkOrganizerSession = async () => {
     try {

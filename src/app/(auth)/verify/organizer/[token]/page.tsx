@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "@/helpers/axios";
+import { toastErrAxios } from "@/helpers/toast";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -14,13 +15,10 @@ export default function VerifyPage() {
     try {
       const { data } = await axios.patch(
         `${process.env.NEXT_PUBLIC_BASE_URL_BE}/auth/organizer/verify/${params.token}`);
-      console.log(params.token);
-      
       router.push("/auth/organizer/login");
       toast.success(data.message);
-    } catch (err: any) {
-      console.log(err);
-      toast.error('Verification failed', err.message);
+    } catch (err: unknown) {
+      toastErrAxios(err)
     }
   };
 
@@ -30,11 +28,6 @@ export default function VerifyPage() {
 
   return (
     <div>
-      {/* {
-        <button className="p-2 bg-blue-700 text-zinc-100" onClick={onVerify}>
-          Verifikasi
-        </button>
-      } */}
       Verified
     </div>
   );

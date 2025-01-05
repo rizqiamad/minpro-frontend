@@ -14,6 +14,7 @@ import { FormValueEvent } from '@/types/form';
 import { eventSchema } from '@/libs/formSchemas';
 import axios from '@/helpers/axios'
 import EventType from './eventType'
+import { toastErrAxios } from '@/helpers/toast'
 
 export default function CreateEvent() {
   const initialValue: FormValueEvent = {
@@ -53,9 +54,8 @@ export default function CreateEvent() {
 
       router.push(`/create-event/${data.event_id}`)
       toast.success(data.message)
-    } catch (err: any) {
-      console.log(err)
-      toast.error(err.response)
+    } catch (err: unknown) {
+      toastErrAxios(err)
     } finally {
       SetIsLoading(false)
     }

@@ -8,7 +8,7 @@ export default function StarDisplay({ rate }: { rate: number }) {
       {Array.from({ length: 5 }).map((_, idx) => {
         const pointRate = idx + 1;
         return (
-          <FaStar className={`text-3xl ${pointRate <= rate ? 'text-yellow-300' : 'text-slate-400'}`} />
+          <FaStar key={idx} className={`text-3xl ${pointRate <= rate ? 'text-yellow-300' : 'text-slate-400'}`} />
         )
       })}
     </>

@@ -123,18 +123,10 @@ function LoginUser() {
                   <button
                     disabled={isLoading}
                     type="submit"
-<<<<<<< HEAD
                     className={`${isLoading
                       ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
                       : "hover:bg-blue-700 hover:text-white"
                       } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
-=======
-                    className={`${
-                      isLoading
-                        ? "disabled:opacity-[0.5] disabled:bg-blue-700 text-white"
-                        : "hover:bg-blue-700 hover:text-white"
-                    } py-2 rounded-lg transition ease-linear font-semibold border-2 border-blue-700`}
->>>>>>> dashboard
                   >
                     {isLoading ? "Loading ..." : "Login"}
                   </button>

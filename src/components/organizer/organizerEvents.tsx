@@ -6,6 +6,7 @@ import Link from "next/link";
 import { IEvent } from "@/types/event";
 import { getEventsOrganizer } from "@/libs/events";
 import EventCard from "./eventCard";
+import CardUnactive from "./cardUnactive";
 
 export default function OrganizerEvents() {
   type Tab = "active" | "draft" | "previous";
@@ -108,7 +109,7 @@ export default function OrganizerEvents() {
           <div className="w-full py-5 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {eventsUnactive.map((item, idx) => {
               return (
-                <EventCard key={idx} event={item} />
+                <CardUnactive key={idx} event={item} />
               )
             })}
           </div>

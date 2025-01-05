@@ -22,7 +22,7 @@ const formats = [
 ];
 
 interface FieldRichTextProps {
-  setFieldValue: (a: any, b: any) => void
+  setFieldValue: (a: string, b: string) => void
   values: FormValueTicketEvent
 }
 

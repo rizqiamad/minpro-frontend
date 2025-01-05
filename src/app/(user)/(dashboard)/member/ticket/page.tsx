@@ -8,7 +8,7 @@ import { getEventsUser } from "@/libs/events";
 import ReviewCard from "@/components/member/reviewCard";
 import EventCard from "@/components/member/eventCard";
 
-export default function event() {
+export default function TicketUserPage() {
   type Tab = 'active' | 'unactive'
   const [activeTab, setActiveTab] = useState<Tab>('active');
   const [eventsActive, setEventsActive] = useState<IEvent[]>([]);

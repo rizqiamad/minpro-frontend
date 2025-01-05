@@ -1,6 +1,7 @@
 'use client'
 
 import axios from "@/helpers/axios";
+import { toastErrAxios } from "@/helpers/toast";
 import UseOpen from "@/hooks/useOpen";
 import { getSnapToken } from "@/libs/transactions";
 import { useRouter } from "next/navigation";
@@ -26,8 +27,8 @@ export default function PayButton({ base_price, final_price, transaction_id }: I
         SetIsLoading(true)
         const token = await getSnapToken(base_price, final_price, Number(transaction_id))
         window.snap.pay(token)
-      } catch (err: any) {
-        console.log(err.response.data.message);
+      } catch (err: unknown) {
+        toastErrAxios(err)
       } finally {
         SetIsLoading(false)
       }
@@ -45,9 +46,8 @@ export default function PayButton({ base_price, final_price, transaction_id }: I
       const { data } = await axios.post('/transactions/midtrans-webhook', resBody)
       router.push('/')
       toast.success(data.message)
-    } catch (err: any) {
-      console.log(err);
-      toast.error(err)
+    } catch (err: unknown) {
+      toastErrAxios(err)
     }
   }
 

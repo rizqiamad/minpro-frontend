@@ -1,14 +1,12 @@
 "use client";
 
 import axios from "@/helpers/axios";
-import { iUser } from "@/types/user";
-import { iOrganizer } from "@/types/organizer";
+import { IUser } from "@/types/user";
 import { useEffect, useState } from "react";
 
 const useSession = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [user, setUser] = useState<iUser | null>(null);
-  const [organizer, setOrganizer] = useState<iOrganizer | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   const checkSession = async () => {
     try {
@@ -17,30 +15,19 @@ const useSession = () => {
       if (!token) throw new Error("No token found");
 
       // Fetch user session
-      const { data: userData } = await axios.get("/users/profile", {
+      const { data } = await axios.get("/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (userData?.result) {
-        setUser(userData.result);
+      if (data) {
+        setUser(data.result);
         setIsAuth(true);
         return;
-      }
-
-      // If no user, fetch organizer session
-      const { data: organizerData } = await axios.get("/organizers/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (organizerData?.result) {
-        setOrganizer(organizerData.result);
-        setIsAuth(true);
       }
     } catch (err) {
       console.error("Session check failed:", err);
       setIsAuth(false);
       setUser(null);
-      setOrganizer(null);
     }
   };
 
@@ -48,7 +35,7 @@ const useSession = () => {
     checkSession();
   }, []);
 
-  return { user, organizer, isAuth };
+  return { user, isAuth };
 };
 
 export default useSession;

@@ -5,9 +5,8 @@ export async function statistic() {
     const { data } = await axios.get("/graph/graphevent", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
-    console.log(data);
 
-    return data.eventTotal;
+    return data.result;
   } catch (err) {
     console.log(err);
   }

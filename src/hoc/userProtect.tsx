@@ -12,7 +12,7 @@ const userGuard = (WrappedComponent: React.ComponentType) => {
     useEffect(() => {
       const storedToken = localStorage.getItem("token");
       setToken(storedToken);
-      if(!storedToken) router.push("/auth")
+      if (!storedToken) router.push("/auth")
     }, []);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const userGuard = (WrappedComponent: React.ComponentType) => {
       } else {
         const decodedUser = jwtDecode(token) as { role: "organizer" | "user" };
         console.log(decodedUser);
-        
+
         if (decodedUser.role !== "user") {
           router.push("/auth/user/login");
         }

@@ -47,7 +47,7 @@ export default function EventCard({ event }: { event: IEvent }) {
       <div className={`fixed ${hidden ? '' : 'hidden'} overflow-y-scroll z-10 inset-0 bg-[rgba(0,0,0,0.5)]`}></div>
       <div className={`${open ? 'scale-100' : 'scale-0'} h-[80vh] overflow-y-scroll rounded-md w-full sm:w-[75%] xl:w-[50%] py-5 px-6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition duration-300 bg-white z-20 ${hidden ? '' : 'hidden'}`}>
         <div className="flex justify-center pb-4 border-b">
-          <h1 className="font-semibold text-2xl line-clamp-2">Tiket yang sudah anda beli untuk event "{event.name}"</h1>
+          <h1 className="font-semibold text-2xl line-clamp-2">Tiket yang sudah anda beli untuk event &quote;{event.name}&quote;</h1>
           <button onClick={menuHandler} className="w-fit p-4 text-[1.5rem] hover:text-red-500"><IoMdClose /></button>
         </div>
         <div className="flex flex-col gap-4 pt-4">

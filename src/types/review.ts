@@ -1,7 +1,4 @@
-interface IUser {
-  avatar: string;
-  full_name: string;
-}
+import { IUser } from "./user";
 
 export interface IReview {
   rating: number;

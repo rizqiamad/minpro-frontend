@@ -3,24 +3,27 @@
 import Card from "@/components/events/card";
 import OrganizerCard from "@/components/events/organizerCard";
 import Hero from "@/components/hero/hero";
-<<<<<<< HEAD
+import userGuard from "@/hoc/userProtect";
 import { getEventsDisplay } from "@/libs/events";
 import { IEvent } from "@/types/event";
-
-export default async function HomePage() {
-  const dataEventsDisplay: IEvent[] = await getEventsDisplay()
-=======
-import userGuard from "@/hoc/userProtect";
+import { useEffect, useState } from "react";
 
 function HomePage() {
->>>>>>> dashboard
+  const [eventDisplay, setEventDisplay] = useState<IEvent[]>([])
+  useEffect(() => {
+    const getData = async () => {
+      const dataEventsDisplay: IEvent[] = await getEventsDisplay()
+      setEventDisplay(dataEventsDisplay)
+    }
+    getData()
+  }, [])
   return (
     <main className="max-w-[70rem] mx-auto">
       <Hero />
       <div className="my-4">
         <h1 className="sm:text-2xl text-xl font-medium mx-4">Event Kami</h1>
         <div className="flex gap-4 overflow-x-scroll py-4 px-4 scrollbar-hide">
-          {dataEventsDisplay.map((item, idx) => {
+          {eventDisplay.map((item, idx) => {
             return (
               <Card
                 key={idx}

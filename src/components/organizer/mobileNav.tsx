@@ -8,11 +8,11 @@ import { FaFileAlt, FaUserCircle } from "react-icons/fa";
 import { RiHome4Fill } from "react-icons/ri";
 import { FaUserTie } from "react-icons/fa6";
 import { logOut } from "@/libs/action";
-import useSession from "@/hooks/useSession";
+import useSessionOrganizer from "@/hooks/useSessionOrganiser";
 
 export default function MobileNav() {
   const [navOpen, setNavOpen] = useState(false);
-  const { organizer, isAuth } = useSession(); // Fetching organizer session data
+  const { organizer, isAuth } = useSessionOrganizer(); // Fetching organizer session data
 
   const toggleMenu = () => {
     setNavOpen((prevState) => !prevState);

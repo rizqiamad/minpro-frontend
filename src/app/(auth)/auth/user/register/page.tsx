@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import * as Yup from "yup";
 import authProtect from "@/hoc/userAuthProtect";
-import { toastErr } from "@/helpers/toast";
+import { toastErrAxios } from "@/helpers/toast";
 
 const RegisterSchema = Yup.object().shape({
   full_name: Yup.string().required("username is required"),
@@ -66,8 +66,7 @@ interface FormValue {
       toast.success(data.message);
     
     } catch (err) {
-      console.log(err);
-      toastErr(err)
+      toastErrAxios(err)
     } finally {
       SetIsLoading(false);
     }

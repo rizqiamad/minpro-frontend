@@ -1,4 +1,3 @@
-import { url } from "inspector"
 import Link from "next/link"
 
 function Instagram() {

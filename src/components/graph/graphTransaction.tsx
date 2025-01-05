@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -19,14 +18,6 @@ import {
 } from "@/components/ui/chart";
 import { useEffect, useState } from "react";
 import axios from "@/helpers/axios";
-// const chartData = [
-//   { month: "January", desktop: 186 },
-//   { month: "February", desktop: 305 },
-//   { month: "March", desktop: 237 },
-//   { month: "April", desktop: 73 },
-//   { month: "May", desktop: 209 },
-//   { month: "June", desktop: 214 },
-// ]
 
 const chartConfig = {
   desktop: {
@@ -35,13 +26,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface iTransaction {
+interface ITransaction {
   final_price: number;
   createdAt: string;
 }
 
 export default function GraphTransaction() {
-  const [chartData, setChartData] = useState<iTransaction[]>([]);
+  const [chartData, setChartData] = useState<ITransaction[]>([]);
   console.log("chartdata", chartData);
 
   const getChartData = async () => {

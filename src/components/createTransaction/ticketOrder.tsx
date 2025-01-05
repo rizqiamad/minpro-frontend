@@ -27,15 +27,14 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
       alert('The ticket is ran out')
     }
     const ticketCartId = ticketCart?.findIndex(item => item.ticket.id == ticket.id)
-    console.log(ticketCartId);
     if (ticketCartId! > -1 && ticketCart) {
       const newTicketCart = [...ticketCart]
       newTicketCart[ticketCartId!].qty = order + 1
       console.log(newTicketCart);
 
       setTicketCart(newTicketCart)
-    } else {
-      if (ticketCart?.length! > 0) {
+    } else if (ticketCart) {
+      if (ticketCart.length > 0) {
         setTicketCart([...ticketCart!, { ticket, qty: 1 }])
       } else {
         setTicketCart([{ ticket, qty: 1 }])
@@ -76,7 +75,7 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
         <span className="font-semibold">{formatRupiahTanpaDesimal(ticket.price)}</span>
         <div className="flex items-center gap-2">
           {isSoldOut ? (
-            <div className="text-xl font-semibold text-red-500">TICKET'S SEATS ARE SOLD OUT</div>
+            <div className="text-xl font-semibold text-red-500">TICKETS ARE SOLD OUT</div>
           ) : isTheTime ? (
             <div className="text-xl font-semibold text-red-500">{gt && 'SALE ENDED'}{lt && 'SALE NOT STARTED YET'}</div>
           ) : (

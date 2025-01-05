@@ -1,12 +1,15 @@
 import { toast } from "react-toastify";
+import axios from 'axios';
 
-export const toastErr = (err: unknown) => {
-  if (typeof err === "object" && err !== null && "message" in err) {
-    const apiError = err as { message: string };
-    console.log(apiError);
-    toast.error(apiError.message);
+interface VerifyResponse {
+  message: string;
+}
+
+export const toastErrAxios = (err: unknown) => {
+  if (axios.isAxiosError(err) && err.response?.data) {
+    const errorData = err.response.data as VerifyResponse;
+    toast.error(errorData.message);
   } else {
-    console.error("Unexpected error:", err);
-    toast.error("An unexpected error occured.");
+    toast.error('An unexpected error occurred');
   }
-};
+}

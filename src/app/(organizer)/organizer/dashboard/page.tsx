@@ -13,8 +13,6 @@ import GraphEvent from "@/components/graph/graphEvent";
 import GraphTransaction from "@/components/graph/graphTransaction";
 
 function Dashboard() {
-  
-
   const [eventTotal, setEventTotal] = useState(0);
   const [totalTrans, setTotalTrans] = useState(0)
 
@@ -50,38 +48,6 @@ function Dashboard() {
   return (
     <section className={sideContent.dashboardSection}>
       
-
-      {/* <div className={sideContent.missionContainer}>
-        <h1>Ayo selesaikan misi</h1>
-        
-        <div className={sideContent.missionContent}>
-          
-          <div className={sideContent.missions}>
-            <div className={sideContent.missionInner}>
-              <FaFileCircleCheck className={sideContent.missionIcon} />
-              Verifikasi no. Ponselmu
-            </div>
-            <button className={sideContent.missionBtn}>Verifikasi</button>
-          </div>
-          
-          <div className={sideContent.missions}>
-            <div className={sideContent.missionInner}>
-              <FaCircleUser className={sideContent.missionIcon} />
-              Lengkapi detail informasi dasar
-            </div>
-            <button className={sideContent.missionBtn}>Verifikasi</button>
-          </div>
-          
-          <div className={sideContent.missions}>
-            <div className={sideContent.missionInner}>
-              <MdEditDocument className={sideContent.missionIcon} />
-              Lengkapi detail informasi legal
-            </div>
-            <button className={sideContent.missionBtn}>Verifikasi</button>
-          </div>
-        </div>
-      </div> */}
-
       {/* container record */}
       <div className={sideContent.recordContainer}>
         {/* isi content start*/}

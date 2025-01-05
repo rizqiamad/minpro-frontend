@@ -1,5 +1,5 @@
-export interface iOrganizer{
+export interface IOrganizer{
     name: string
     email: string
-    avatar: string | null
+    avatar: string
 }

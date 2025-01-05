@@ -10,6 +10,7 @@ import { ticketEventSchema } from '@/libs/formSchemas'
 import { IoMdClose } from 'react-icons/io'
 import axios from '@/helpers/axios'
 import { formatRupiahTanpaDesimal } from '@/helpers/formatCurrency'
+import { toastErrAxios } from '@/helpers/toast'
 
 interface IProps {
   eventId: string,
@@ -51,9 +52,8 @@ export default function CreateTicket({ eventId, end_date, type }: IProps) {
 
       location.reload()
       toast.success(data.message)
-    } catch (err: any) {
-      console.log(err)
-      toast.error(err.message)
+    } catch (err: unknown) {
+      toastErrAxios(err)
     } finally {
       SetIsLoading(false)
     }
@@ -132,7 +132,7 @@ export default function CreateTicket({ eventId, end_date, type }: IProps) {
                       className='disabled:cursor-not-allowed outline-none text-xl py-2 border-b-2 focus:border-b-lightBlue focus:placeholder:text-transparent'
                       disabled={type === 'free'}
                     />
-                    {type === 'free' && (<span className='text-xs text-blue-500'>Because of the free event, you don't have to fulfill this field</span>)}
+                    {type === 'free' && (<span className='text-xs text-blue-500'>Because of the free event, you do not have to fulfill this field</span>)}
                     <ErrorMessage name='price'>{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
                   </div>
                   <div className='flex flex-col'>

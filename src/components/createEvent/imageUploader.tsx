@@ -3,10 +3,11 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { FormikProps } from "formik";
+import { FormValueEvent } from "@/types/form";
 
 interface FieldThumbnailProps {
   name: string;
-  formik: FormikProps<any>;
+  formik: FormikProps<FormValueEvent>;
   className?: string;
 }
 

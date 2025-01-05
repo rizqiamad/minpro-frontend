@@ -10,7 +10,7 @@ export const category = [
   "Festival",
   "Konser",
   "Pertandingan",
-  "Konfrensi",
+  "Konferensi",
   "Workshop",
   "Pertunjukkan",
   "Seminar",

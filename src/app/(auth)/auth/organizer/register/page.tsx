@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Image from "next/image";
 import * as Yup from "yup";
 import authProtect from "@/hoc/userAuthProtect";
-import { toastErr } from "@/helpers/toast";
+import { toastErrAxios } from "@/helpers/toast";
 
 const RegisterSchema = Yup.object().shape({
   organizer_name: Yup.string().required("Organizer Name is required"),
@@ -50,12 +50,7 @@ interface FormValue {
       router.push("/auth/organizer/login");
       toast.success(data.message);
     } catch (err) {
-      console.log(err);
-<<<<<<< HEAD
-      toast.error(err.response.data.message);
-=======
-      toastErr(err)
->>>>>>> dashboard
+      toastErrAxios(err)
     } finally {
       SetIsLoading(false);
     }
