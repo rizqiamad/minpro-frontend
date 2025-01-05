@@ -6,6 +6,7 @@ interface VerifyResponse {
 }
 
 export const toastErrAxios = (err: unknown) => {
+  console.log(err);
   if (axios.isAxiosError(err) && err.response?.data) {
     const errorData = err.response.data as VerifyResponse;
     toast.error(errorData.message);

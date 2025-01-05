@@ -22,7 +22,6 @@ const userGuard = (WrappedComponent: React.ComponentType) => {
         router.push("/auth");
       } else {
         const decodedUser = jwtDecode(token) as { role: "organizer" | "user" };
-        console.log(decodedUser);
 
         if (decodedUser.role !== "user") {
           router.push("/auth/user/login");

@@ -33,8 +33,8 @@ export default function TicketOrder({ ticket }: { ticket: ITicket }) {
       console.log(newTicketCart);
 
       setTicketCart(newTicketCart)
-    } else if (ticketCart) {
-      if (ticketCart.length > 0) {
+    } else {
+      if (ticketCart && ticketCart.length > 0) {
         setTicketCart([...ticketCart!, { ticket, qty: 1 }])
       } else {
         setTicketCart([{ ticket, qty: 1 }])

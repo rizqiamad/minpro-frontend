@@ -1,5 +1,6 @@
 "use client"
 
+import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
@@ -11,14 +12,23 @@ const authProtect = (WrappedComponent: React.ComponentType) => {
     useEffect(() => {
       const storedToken = localStorage.getItem("token");
       setToken(storedToken);
-
       if (storedToken) {
-        router.push("/");
+        const decodedUser = jwtDecode(storedToken) as { role: "organizer" | "user" };
+        if (decodedUser.role !== 'user') {
+          router.push("/organizer/dashboard")
+        } else {
+          router.push("/");
+        }
       }
     }, [router]);
 
     if (token) {
-      router.push("/");
+      const decodedUser = jwtDecode(token) as { role: "organizer" | "user" };
+      if (decodedUser.role !== 'user') {
+        router.push("/organizer/dashboard")
+      } else {
+        router.push("/");
+      }
       return null;
     }
 

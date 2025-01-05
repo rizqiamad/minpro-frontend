@@ -8,6 +8,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import Image from "next/image";
+import { toastErrAxios } from "@/helpers/toast";
 
 const RegisterSchema = Yup.object().shape({
   data: Yup.string().required("organizer name or email is required"),
@@ -29,16 +30,11 @@ export default function LoginOrganizer() {
       setIsLoading(true);
       const { data } = await axios.post("/auth/organizer/login", organizer);
       const token = data.token;
-
       localStorage.setItem('token', token)
-
       router.push("/organizer/dashboard");
-      console.log(data);
       toast.success(data.message);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      console.log(err);
-      toast.error(err.response.data.message);
+    } catch (err: unknown) {
+      toastErrAxios(err)
     } finally {
       setIsLoading(false);
     }
