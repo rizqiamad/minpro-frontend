@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 interface IProps {
   base_price: number
   final_price: number
+  point: number
   transaction_id: string
 }
 

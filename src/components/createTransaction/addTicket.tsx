@@ -10,7 +10,7 @@ import axios from "@/helpers/axios"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import TicketOrder from "./ticketOrder"
-import { getCoupon } from "@/libs/transactions"
+import { getCoupon, getPoints } from "@/libs/transactions"
 
 interface IProps {
   result: IEvent
@@ -37,17 +37,25 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
   const [totalPrice, setTotalPrice] = useState<number>(0)
   let final_price = totalPrice
   const [coupon, setCoupon] = useState<boolean>(false)
+  const [points, setPoints] = useState<number>(0)
+  let point = 0
   const [isReedemedCoupon, setIsReedemedCoupon] = useState<boolean>(false)
+  const [isReedemedPoints, setIsReedemedPoints] = useState<boolean>(false)
   const handleClickTab = (tab: boolean) => {
     setActiveTab(tab);
   };
   const [ticketCart, setTicketCart] = useState<ITicketContext[] | null>(null)
+  console.log('coupon points', coupon, points)
 
   const handleOrderTicket = async () => {
     try {
       SetIsLoading(true)
+      if (isReedemedPoints) {
+        final_price -= points
+        point = points
+      }
       if (isReedemedCoupon) final_price -= final_price / 10
-      const resBody = { base_price: totalPrice, coupon: isReedemedCoupon, final_price, ticketCart }
+      const resBody = { base_price: totalPrice, coupon: isReedemedCoupon, point, final_price, ticketCart }
       const { data } = await axios.post('/transactions', resBody, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
@@ -68,8 +76,10 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getCoupon()
-      setCoupon(data)
+      const dataCoupon = await getCoupon()
+      const dataPoints = await getPoints()
+      setCoupon(dataCoupon)
+      setPoints(dataPoints)
     }
     getData()
   }, [])
@@ -77,6 +87,10 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
   const handleReedemCoupon = () => {
     setIsReedemedCoupon(true)
     setCoupon(false)
+  }
+
+  const handleReedemPoints = () => {
+    setIsReedemedPoints(true)
   }
   return (
     <>
@@ -150,21 +164,39 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
             <div className="flex flex-col gap-2">
               {ticketCart && ticketCart?.length > 0 ? (
                 <>
-                  <div>
-                    <button onClick={handleReedemCoupon} disabled={!coupon} className="px-2 py-1 disabled:cursor-not-allowed disabled:opacity-50 bg-lightBlue font-semibold text-white text-xs">CLAIM COUPON</button>
-                  </div>
-                  {/* <div className="flex rounded-md overflow-hidden">
-                    <input type="text" className="w-[80%] h-full py-2 px-2 uppercase outline-none border" placeholder="CLAIM COUPON ANDA" />
-                    <button className="w-[20%] bg-lightBlue font-semibold text-white text-xs">CLAIM</button>
-                  </div> */}
+                  {coupon || points ? (
+                    <div className="flex gap-2 justify-between">
+                      <button onClick={handleReedemCoupon} disabled={!coupon} className="rounded-md px-2 py-1 disabled:cursor-not-allowed disabled:opacity-50 bg-lightBlue font-semibold text-white text-xs">CLAIM COUPON</button>
+                      <button onClick={handleReedemPoints} disabled={isReedemedPoints || points <= 0} className={`flex gap-1 px-2 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 border-lightBlue font-semibold text-lightBlue text-xs`}>
+                        <span>CLAIM POINTS</span>
+                        <span>{!isReedemedPoints ? (points >= 1000 ? `${points / 1000}K` : points) : 0}</span>
+                      </button>
+                    </div>
+                  ) : null}
                   <div className="flex flex-col">
                     <div className="flex justify-between items-center py-2">
                       <span>Total {ticketCart.reduce((a, b) => a + b.qty, 0)} tiket</span>
                       <span className="font-semibold text-blue-500 text-xl">{formatRupiahTanpaDesimal(totalPrice)}</span>
                     </div>
-                    <div className="py-2 flex justify-end">
-                      {isReedemedCoupon ? (<span className="font-semibold text-red-500 text-xl">- {formatRupiahTanpaDesimal(totalPrice / 10)}</span>) : null}
-                    </div>
+                    {isReedemedPoints ? (
+                      <div className="py-2 flex justify-end">
+                        <span className="font-semibold text-red-500 text-xl">
+                          - {formatRupiahTanpaDesimal(points)}
+                        </span>
+                      </div>
+                    ) : null}
+                    {isReedemedCoupon ? (
+                      <div className="py-2 flex justify-end">
+                        <span className="font-semibold text-red-500 text-xl">
+                          -
+                          {isReedemedPoints ? (
+                            formatRupiahTanpaDesimal((totalPrice - points) / 10)
+                          ) : (
+                            formatRupiahTanpaDesimal(totalPrice / 10)
+                          )}
+                        </span>
+                      </div>
+                    ) : null}
                   </div>
                 </>
               ) : null}

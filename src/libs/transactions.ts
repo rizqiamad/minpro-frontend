@@ -44,3 +44,14 @@ export async function getCoupon() {
     console.log(err);
   }
 }
+
+export async function getPoints() {
+  try {
+    const { data } = await axios.get("/users/points", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    return data.result || 0;
+  } catch (err) {
+    console.log(err);
+  }
+}

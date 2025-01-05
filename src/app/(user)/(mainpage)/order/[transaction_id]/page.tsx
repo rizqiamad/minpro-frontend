@@ -64,10 +64,16 @@ export default async function OrderPage({ params }: { params: { transaction_id: 
           <span>Total Harga Tiket</span>
           <span>{formatRupiahTanpaDesimal(transaction.base_price)}</span>
         </div>
+        {transaction.point && (
+          <div className="flex justify-between items-center">
+            <span>Points</span>
+            <span className="font-semibold text-red-500">- {formatRupiahTanpaDesimal(transaction.point)}</span>
+          </div>
+        )}
         {transaction.coupon && (
           <div className="flex justify-between items-center">
             <span>Coupon</span>
-            <span className="font-semibold text-red-500">- {formatRupiahTanpaDesimal(transaction.base_price / 10)}</span>
+            <span className="font-semibold text-red-500">- {formatRupiahTanpaDesimal((transaction.base_price - transaction.point) / 10)}</span>
           </div>
         )}
         {/* <div><span>Biaya Platform</span></div> */}
@@ -75,7 +81,7 @@ export default async function OrderPage({ params }: { params: { transaction_id: 
           <span>Total Bayar</span>
           <span>{formatRupiahTanpaDesimal(transaction.final_price)}</span>
         </div>
-        <PayButton base_price={transaction.base_price} final_price={transaction.final_price} transaction_id={params.transaction_id} />
+        <PayButton point={transaction.point} base_price={transaction.base_price} final_price={transaction.final_price} transaction_id={params.transaction_id} />
       </div>
     </main>
   )
