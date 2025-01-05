@@ -1,50 +1,50 @@
 /* USER-ITEM */
-.sidebar {
+.sidebar{
   @apply sticky top-0 hidden flex-col 
-    min-h-screen overflow-hidden
-    border-r p-4 
-    transition-all duration-150
-    lg:flex md:flex
+  min-h-screen overflow-hidden
+  border-r p-4 
+  transition-all duration-150
+  lg:flex md:flex
 
-    bg-blue-900 text-stone-300;
+  bg-blue-900 text-stone-300
 }
 
-.menus {
+.menus{
   @apply grow
-    /* bg-blue-500 */;
 }
 
-.sideContainer {
+.sideContainer{
   @apply flex flex-col
-    mb-4;
+  mb-4
 }
 
-.sideContainer a {
+.sideContainer a{
   @apply flex items-center
-    py-2 transition-all
-    hover:pl-1;
+  py-2 transition-all
+  hover:pl-1
 }
 
-.icons {
-  @apply text-[20px];
+.icons{
+  @apply text-[20px]
 }
 
-.sidebarBtn {
+.sidebarBtn{
   @apply flex items-center
-    cursor-pointer;
+  cursor-pointer
 }
 
 /* NON-TAILWIND CLASS */
 
 .open{
-    width: 350px;
+  width: 350px;
 }
 
-.closed {
+.closed{
   width: 60px;
 }
 
-.hidden {
+.hidden{
   display: none;
   margin: 0;
 }
+
