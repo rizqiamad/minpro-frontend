@@ -5,15 +5,18 @@ import { RiDraftFill } from "react-icons/ri";
 import { IoWalletOutline } from "react-icons/io5";
 import { GiMoneyStack, GiTicket } from "react-icons/gi";
 import { FaUsers } from "react-icons/fa";
-import { GraphEvent } from "@/components/graph/graphEvent";
 import { statistic } from "@/libs/dashoboard";
+import { graphStats } from "@/libs/totalTransaction";
 import { useEffect, useState } from "react";
 import organizerGuard from "@/hoc/organizerProtect";
+import GraphEvent from "@/components/graph/graphEvent";
+import GraphTransaction from "@/components/graph/graphTransaction";
 
 function Dashboard() {
   
 
   const [eventTotal, setEventTotal] = useState(0);
+  const [totalTrans, setTotalTrans] = useState(0)
 
   useEffect(() => {
     const fetchStatistics = async () => {
@@ -29,10 +32,24 @@ function Dashboard() {
     fetchStatistics();
   }, []);
 
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      try {
+        const totalTransGraph = await graphStats();
+        setTotalTrans(totalTransGraph);
+      } catch (error) {
+        console.error("Error fetching statistics:", error);
+        setTotalTrans(0); // Default value in case of an error
+      }
+    };
+
+    fetchTransaction();
+  }, []);
+
 
   return (
     <section className={sideContent.dashboardSection}>
-      <h1 className={sideContent.mainTitle}>Home</h1>
+      
 
       {/* <div className={sideContent.missionContainer}>
         <h1>Ayo selesaikan misi</h1>
@@ -106,7 +123,7 @@ function Dashboard() {
           </div>
 
           <div className={sideContent.recordTotal}>
-            <span className={sideContent.recordTotalNum}>0</span>
+            <span className={sideContent.recordTotalNum}>{totalTrans}</span>
             <h1 className={sideContent.recordTotalPlaceholder}></h1>
           </div>
         </div>
@@ -153,6 +170,7 @@ function Dashboard() {
         </div>
         {/* isi content end*/}
         <GraphEvent />
+        <GraphTransaction />
       </div>
     </section>
   );

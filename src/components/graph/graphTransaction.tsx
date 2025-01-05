@@ -1,5 +1,6 @@
 "use client";
 
+
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -18,7 +19,6 @@ import {
 } from "@/components/ui/chart";
 import { useEffect, useState } from "react";
 import axios from "@/helpers/axios";
-
 // const chartData = [
 //   { month: "January", desktop: 186 },
 //   { month: "February", desktop: 305 },
@@ -29,26 +29,26 @@ import axios from "@/helpers/axios";
 // ]
 
 const chartConfig = {
-  active_event: {
-    label: "Active Event",
+  desktop: {
+    label: "final_price",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
-interface iEvent {
-  month: string;
-  active_event: number;
+interface iTransaction {
+  final_price: number;
+  createdAt: string;
 }
 
-export default function GraphEvent() {
-  const [chartData, setChartData] = useState<iEvent[] | null>(null);
-  console.log(chartData);
+export default function GraphTransaction() {
+  const [chartData, setChartData] = useState<iTransaction[]>([]);
+  console.log("chartdata", chartData);
 
   const getChartData = async () => {
-    const { data } = await axios.get("/graph/eventaktif", {
+    const { data } = await axios.get("/graph/graphtransaction", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
-    console.log(data);
+    console.log("data", data);
     setChartData(data.result);
   };
 
@@ -59,10 +59,8 @@ export default function GraphEvent() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Event Aktif</CardTitle>
-        <CardDescription>
-          Event Yang Sedang Aktif
-        </CardDescription>
+        <CardTitle>Grafik Transaksi</CardTitle>
+        <CardDescription>Transaksi</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -76,28 +74,27 @@ export default function GraphEvent() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="createdAt"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              //   tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dot" hideLabel />}
             />
             <Area
-              dataKey="active_event"
+              dataKey="final_price"
               type="linear"
-              fill="var(--color-active_event)"
+              fill="var(--color-final_price)"
               fillOpacity={0.4}
-              stroke="var(--color-active_event)"
+              stroke="var(--color-final_price)"
             />
           </AreaChart>
         </ChartContainer>
       </CardContent>
       <CardFooter>
-       
       </CardFooter>
     </Card>
   );
