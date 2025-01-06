@@ -4,7 +4,7 @@ import { HiUpload } from "react-icons/hi";
 import sideContent from "@/components/sidebar/content/content.module.css";
 import organizerGuard from "@/hoc/organizerProtect";
 
- function Bio() {
+function Bio() {
   return (
     <section className={sideContent.bioSection}>
       <h1 className={sideContent.mainTitle}>Profil Kamu</h1>
@@ -40,9 +40,9 @@ import organizerGuard from "@/hoc/organizerProtect";
                     Tautan Singkat Profil
                   </label>
                   <div className="flex items-center border mt-3 border-zinc-400">
-                  <input type="text" className={sideContent.txtInput} />
-                  <button className="px-3 border border-zinc-500 p-2">Tambah</button>
-                </div>
+                    <input type="text" className={sideContent.txtInput} />
+                    <button className="px-3 border border-zinc-500 p-2">Tambah</button>
+                  </div>
                 </form>
               </div>
               <form className={sideContent.formResponsive}>

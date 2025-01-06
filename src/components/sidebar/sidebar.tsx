@@ -3,7 +3,7 @@
 import Link from "next/link";
 import side from "@/components/sidebar/sidebar.module.css";
 import { useState } from "react";
-import { FaFileAlt } from "react-icons/fa";
+import { FaFileAlt, FaUser } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RiHome4Fill } from "react-icons/ri";
@@ -20,7 +20,7 @@ export default function Sidebar() {
     <nav className={`${side.sidebar} ${SidebarOpen ? side.open : side.closed}`}>
       {/* logo */}
       <div className="flex justify-center mb-4">
-        <Link href={"/"} className="text-2xl font-bold">
+        <Link href={"/organizer/dashboard"} className="text-2xl font-bold">
           {SidebarOpen ? "Loket.com" : "L"}
         </Link>
       </div>
@@ -51,6 +51,21 @@ export default function Sidebar() {
                 Event Saya
               </p>
             </Link>
+          </div>
+          <div className={side.sideContainer}>
+            <h1
+              className={`ml-2 ${!SidebarOpen ? side.hidden : ""
+                } font-semibold`}
+            >
+              Akun
+            </h1>
+            <Link href={"/organizer/bio"}>
+              <FaUser className={side.icons} />
+              <p className={`ml-2 ${!SidebarOpen ? side.hidden : ""}`}>
+                Informasi Saya
+              </p>
+            </Link>
+
           </div>
         </div>
 

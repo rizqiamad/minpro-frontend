@@ -6,7 +6,7 @@ import dashNavbar from "@/components/sidebar/content/dashNavbar.module.css";
 import side from "@/components/sidebar/sidebar.module.css";
 import { FaFileAlt, FaUserCircle } from "react-icons/fa";
 import { RiHome4Fill } from "react-icons/ri";
-import { FaUserTie } from "react-icons/fa6";
+import { FaPencil, FaUserTie } from "react-icons/fa6";
 import { logOut } from "@/libs/action";
 import useSessionOrganizer from "@/hooks/useSessionOrganiser";
 
@@ -42,7 +42,11 @@ export default function MobileNav() {
             </Link>
             <Link href={"/organizer/events"}>
               <FaFileAlt className={side.icons} />
-              <p className="ml-2">Event Saya WAW</p>
+              <p className="ml-2">Event Saya</p>
+            </Link>
+            <Link href={"/create-event"}>
+              <FaPencil className={side.icons} />
+              <p className="ml-2">Buat Event</p>
             </Link>
             <Link href={"/organizer/bio"}>
               <FaUserTie className={side.icons} />

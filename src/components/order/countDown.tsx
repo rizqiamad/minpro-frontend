@@ -8,7 +8,6 @@ export default function CountDown({ date }: { date: string }) {
   );
 
   useEffect(() => {
-    // Recalculate time left when `date` changes
     setTimeLeft(new Date(date).getTime() - new Date().getTime());
   }, [date]);
 
@@ -23,7 +22,7 @@ export default function CountDown({ date }: { date: string }) {
       });
     }, 1000);
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
