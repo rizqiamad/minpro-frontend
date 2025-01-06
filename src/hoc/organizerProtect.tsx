@@ -12,7 +12,7 @@ const organizerGuard = (WrappedComponent: React.ComponentType) => {
     useEffect(() => {
       const storedToken = localStorage.getItem("token");
       setToken(storedToken);
-      if (!storedToken) router.push("/auth")
+      if(!storedToken) router.push("/auth")
     }, []);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const organizerGuard = (WrappedComponent: React.ComponentType) => {
       } else {
         const decodedUser = jwtDecode(token) as { role: "organizer" | "user" };
         if (decodedUser.role !== "organizer") {
-          router.push("/organizer/login");
+          router.push("/auth/organizer/login");
         }
       }
     }, [router, token]);
