@@ -3,7 +3,6 @@
 import sideContent from "@/components/sidebar/content/content.module.css";
 import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import userGuard from "@/hoc/userProtect";
-import useSession from "@/hooks/useSession";
 import { getCoupon, getPoints } from "@/libs/transactions";
 import { useEffect, useState } from "react";
 
