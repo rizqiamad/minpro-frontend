@@ -8,7 +8,6 @@ import { getCoupon, getPoints } from "@/libs/transactions";
 import { useEffect, useState } from "react";
 
 function MemberBio() {
-  const { user } = useSession()
   const [coupon, setCoupon] = useState<boolean>(false)
   const [points, setPoints] = useState<number>(0)
 
