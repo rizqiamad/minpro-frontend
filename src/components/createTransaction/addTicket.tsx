@@ -164,10 +164,10 @@ export default function AddTicket({ result, ticketResult, params }: IProps) {
             <div className="flex flex-col gap-2">
               {ticketCart && ticketCart?.length > 0 ? (
                 <>
-                  {coupon || points || totalPrice > 100000 ? (
+                  {coupon || points ? (
                     <div className="flex gap-2 justify-between">
                       <button onClick={handleReedemCoupon} disabled={!coupon} className="rounded-md px-2 py-1 disabled:cursor-not-allowed disabled:opacity-50 bg-lightBlue font-semibold text-white text-xs">CLAIM COUPON</button>
-                      <button onClick={handleReedemPoints} disabled={isReedemedPoints || points <= 0} className={`flex gap-1 px-2 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 border-lightBlue font-semibold text-lightBlue text-xs`}>
+                      <button onClick={handleReedemPoints} disabled={isReedemedPoints || points <= 0 || totalPrice - points < 30000} className={`flex gap-1 px-2 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 border-lightBlue font-semibold text-lightBlue text-xs`}>
                         <span>CLAIM POINTS</span>
                         <span>{!isReedemedPoints ? (points >= 1000 ? `${points / 1000}K` : points) : 0}</span>
                       </button>

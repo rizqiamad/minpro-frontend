@@ -64,7 +64,7 @@ export default async function OrderPage({ params }: { params: { transaction_id: 
           <span>Total Harga Tiket</span>
           <span>{formatRupiahTanpaDesimal(transaction.base_price)}</span>
         </div>
-        {transaction.point && (
+        {transaction.point > 0 && (
           <div className="flex justify-between items-center">
             <span>Points</span>
             <span className="font-semibold text-red-500">- {formatRupiahTanpaDesimal(transaction.point)}</span>
