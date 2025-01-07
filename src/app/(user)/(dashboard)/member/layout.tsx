@@ -4,10 +4,12 @@ import { ReactNode } from "react";
 
 export default function MemberLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="items-start justify-between lg:flex md:flex">
+    <div className="md:flex">
       <SidebarUser />
-      <MobileNav />
-      <main className="w-full h-full relative">{children}</main>
+      <div className="md:w-full">
+        <MobileNav />
+        <main className="w-full relative">{children}</main>
+      </div>
     </div>
   );
 }

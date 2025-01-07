@@ -7,7 +7,6 @@ import { getEvents } from "@/libs/events";
 import { IEvent } from "@/types/event";
 
 export default async function EventsPage({ searchParams }: { searchParams: Record<string, string> }) {
-  console.log(searchParams);
   const params = new URLSearchParams(searchParams as Record<string, string>);
   const { result, total_page }: { result: IEvent[], total_page: number } = await getEvents(params);
 

@@ -1,20 +1,30 @@
 'use client'
-import sideContent from "@/components/sidebar/content/content.module.css";
-import userGuard from "@/hoc/userProtect";
 
- function MemberBio() {
+import sideContent from "@/components/sidebar/content/content.module.css";
+import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
+import userGuard from "@/hoc/userProtect";
+import useSession from "@/hooks/useSession";
+import { getCoupon, getPoints } from "@/libs/transactions";
+import { useEffect, useState } from "react";
+
+function MemberBio() {
+  const { user } = useSession()
+  const [coupon, setCoupon] = useState<boolean>(false)
+  const [points, setPoints] = useState<number>(0)
+
+  useEffect(() => {
+    const getData = async () => {
+      const getDataCoupon = await getCoupon()
+      const getDataPoints = await getPoints()
+      setCoupon(getDataCoupon)
+      setPoints(getDataPoints)
+    }
+    getData()
+  }, [])
   return (
     <section className={sideContent.bioSection}>
-      <div className="px-[2.25rem] py-[1.25rem] border-b-2">
-        <h1 className="text-[1.5rem] font-semibold">Profil Kamu</h1>
-      </div>
-      {/* container informasi dasar */}
       <div className={sideContent.memberBioContainer}>
         <div className={sideContent.memberBioContainerInner}>
-          <h1 className="border-b-2 py-2 text-[1.25rem] font-semibold">
-            Informasi Dasar
-          </h1>
-          {/* form informasi dasar */}
           <div className={sideContent.memberBioFormContainer}>
             <form className={sideContent.memberBioForm}>
               <div className={sideContent.memberFormContent}>
@@ -25,6 +35,12 @@ import userGuard from "@/hoc/userProtect";
                 </p>
               </div>
               <div className={sideContent.memberFormContent}>
+                <p className="text-xl font-semibold text-black">You Have <span>{formatRupiahTanpaDesimal(points)}</span> Points</p>
+                <span className="text-xs font-light ml-2 text-blue-500">*You can use this points to get discount for your transaction</span>
+                <p className="text-xl font-semibold text-black">{coupon ? 'You have one Coupon' : 'You do not have coupon'}</p>
+                <span className="text-xs font-light ml-2 text-blue-500">*You can use this coupon to get 10% discount for your transaction</span>
+              </div>
+              <div className={sideContent.memberFormContent}>
                 <h2 className="font-semibold mb-3">E-mail</h2>
                 <input
                   type="text"
@@ -33,45 +49,24 @@ import userGuard from "@/hoc/userProtect";
                 />
               </div>
               <div className={sideContent.memberFormContent}>
-                <h2 className="font-semibold mb-3">Nama Depan</h2>
+                <h2 className="font-semibold mb-3">Full Name</h2>
                 <input
                   type="text"
-                  placeholder="Nama Depan"
+                  placeholder="Full Name"
                   className={sideContent.txtInput}
                 />
               </div>
               <div className={sideContent.memberFormContent}>
-                <h2 className="font-semibold mb-3">Nama Belakang</h2>
+                <h2 className="font-semibold mb-3">Password</h2>
                 <input
-                  type="text"
-                  placeholder="Nama Belakang"
+                  type="password"
+                  placeholder="Password"
                   className={sideContent.txtInput}
                 />
               </div>
               <div className={sideContent.memberFormContent}>
                 <h2 className="font-semibold mb-3">Tanggal Lahir</h2>
                 <input type="date" className={sideContent.txtInput} />
-              </div>
-              <div className={sideContent.memberFormContent}>
-                <h2 className="font-semibold mb-3">Jenis Kelamin</h2>
-                <div className="flex">
-                  <input
-                    type="radio"
-                    name="Laki"
-                    value="Laki"
-                    className="mr-1"
-                  />
-                  <label htmlFor="gender" className="mr-5">
-                    Laki-Laki
-                  </label>
-                  <input
-                    type="radio"
-                    name="Perempuan"
-                    value="Perempuan"
-                    className="mr-1"
-                  />
-                  <label htmlFor="gender">Perempuan</label>
-                </div>
               </div>
               <div className={sideContent.saveChanges}>
                 <button className={sideContent.saveChangesBtn}>

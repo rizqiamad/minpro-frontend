@@ -84,10 +84,17 @@ interface FormValue {
           height={300}
           className="mx-auto"
         />
-        <h1 className="font-bold text-center">Tidak lagi ketinggalan event dan film favoritmu</h1>
-        <p className="text-sm text-center">Gabung dan rasakan kemudahan bertransaksi dan mengelola event di Loket.</p>
+        <h1 className="font-bold text-center text-xl mb-4">
+          Tidak lagi ketinggalan event dan film favoritmu
+        </h1>
+        <p className="text-center">
+          Gabung dan rasakan kemudahan bertransaksi dan mengelola event di
+          Loket.
+        </p>
       </div>
       {/* gambar end */}
+
+      <Image className="absolute top-4" src={'https://assets.loket.com/web/assets/img/logo-loket-blue.svg'} alt="logo-loket-blue" width={125} height={75} />
 
       {/* form start */}
       <div className="min-h-[calc(100vh-4rem)] content-center">

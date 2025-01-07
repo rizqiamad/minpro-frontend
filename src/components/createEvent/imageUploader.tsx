@@ -44,14 +44,21 @@ export const FieldThumbnail: React.FC<FieldThumbnailProps> = ({
       {!previewUrl ? (
         <div
           onClick={() => imgRef.current?.click()}
-          className="flex w-full h-full justify-center items-center border border-gray-500 border-dashed rounded-md cursor-pointer"
+          className="relative w-full h-full cursor-pointer bg-center bg-cover"
         >
-          +
+          <Image src={'https://assets.loket.com/images/banner-event.jpg'} alt="Banner Event" fill />
+          <div className="absolute gap-2 flex flex-col items-center top-[50%] right-[50%] translate-x-[50%] -translate-y-[50%]">
+            <span className="text-6xl text-white">
+              +
+            </span>
+            <p className="font-semibold text-4xl text-white"> gambar/poster/banner</p>
+            <p className="font-semibold text-white text-center">Direkomendasikan 724 x 340px dengan tidak lebih dari 2 mb</p>
+          </div>
         </div>
       ) : (
         <div
           onClick={() => imgRef.current?.click()}
-          className="overflow-hidden w-full h-full border relative border-gray-500 border-dashed rounded-md cursor-pointer"
+          className="overflow-hidden w-full h-full relative cursor-pointer"
         >
           <Image
             src={previewUrl}

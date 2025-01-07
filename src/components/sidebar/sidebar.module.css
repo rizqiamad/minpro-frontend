@@ -1,12 +1,12 @@
 /* USER-ITEM */
 .sidebar{
   @apply sticky top-0 hidden flex-col 
-  min-h-screen overflow-hidden
-  border-r p-4 
+  h-screen overflow-hidden
+  border-r py-4 
   transition-all duration-150
-  lg:flex md:flex
+  md:flex
 
-  bg-blue-900 text-stone-300
+  bg-blueNavy text-white
 }
 
 .menus{
@@ -18,10 +18,18 @@
   mb-4
 }
 
-.sideContainer a{
+.sideContainer a {
+  @apply my-1
+}
+
+.sideContainer a div{
   @apply flex items-center
-  py-2 transition-all
-  hover:pl-1
+  py-2 transition-all pl-2
+  hover:pl-4
+}
+
+.sideContainer a.active{
+  @apply bg-lightBlue
 }
 
 .icons{
@@ -30,7 +38,7 @@
 
 .sidebarBtn{
   @apply flex items-center
-  cursor-pointer
+  cursor-pointer px-2
 }
 
 /* NON-TAILWIND CLASS */

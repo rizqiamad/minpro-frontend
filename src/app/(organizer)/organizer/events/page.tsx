@@ -7,7 +7,6 @@ import OrganizerEvents from "@/components/organizer/organizerEvents";
 function EventsPage() {
   return (
     <section className={sideContent.eventSection}>
-      <h1 className={sideContent.mainTitle}>Event Saya</h1>
       <div className={sideContent.eventContainer}>
         <OrganizerEvents />
       </div>

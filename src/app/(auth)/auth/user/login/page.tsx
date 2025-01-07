@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import Image from "next/image";
 import authProtect from "@/hoc/userAuthProtect";
+import { toastErrAxios } from "@/helpers/toast";
 
 const RegisterSchema = Yup.object().shape({
   data: Yup.string().required("username or email is required"),
@@ -36,10 +37,9 @@ function LoginUser() {
       router.push("/");
       console.log(data);
       toast.success(data.message);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.log(err);
-      toast.error(err.response.data.message);
+      toastErrAxios(err)
     } finally {
       setIsLoading(false);
     }
@@ -56,14 +56,16 @@ function LoginUser() {
           height={300}
           className="mx-auto"
         />
-        <h1 className="font-bold text-center">
+        <h1 className="font-bold text-center text-xl mb-4">
           Tidak lagi ketinggalan event dan film favoritmu
         </h1>
-        <p className="text-sm text-center">
+        <p className="text-center">
           Gabung dan rasakan kemudahan bertransaksi dan mengelola event di
           Loket.
         </p>
       </div>
+
+      <Image className="absolute top-4" src={'https://assets.loket.com/web/assets/img/logo-loket-blue.svg'} alt="logo-loket-blue" width={125} height={75} />
       {/* gambar end */}
       <div className="min-h-[calc(100vh-4rem)] content-center">
         <div className="w-96 py-6 rounded-2xl shadow-2xl px-5 mx-auto">

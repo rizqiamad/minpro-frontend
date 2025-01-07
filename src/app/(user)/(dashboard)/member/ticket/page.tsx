@@ -7,8 +7,9 @@ import { IEvent } from "@/types/event";
 import { getEventsUser } from "@/libs/events";
 import ReviewCard from "@/components/member/reviewCard";
 import EventCard from "@/components/member/eventCard";
+import userGuard from "@/hoc/userProtect";
 
-export default function TicketUserPage() {
+function TicketUserPage() {
   type Tab = 'active' | 'unactive'
   const [activeTab, setActiveTab] = useState<Tab>('active');
   const [eventsActive, setEventsActive] = useState<IEvent[]>([]);
@@ -37,9 +38,8 @@ export default function TicketUserPage() {
 
   return (
     <section className={sideContent.eventSection}>
-      <h1 className={sideContent.mainTitle}>Event Saya</h1>
       <div className={sideContent.eventContainer}>
-        <div className={sideContent.tabContainer}>
+        <div className={`w-full flex border-b border-zinc-200 justify-between`}>
           <button
             className={`${sideContent.eventTab} ${activeTab === 'active'
               ? "font-bold border-b-4 border-lightBlue"
@@ -106,3 +106,5 @@ export default function TicketUserPage() {
     </section>
   );
 }
+
+export default userGuard(TicketUserPage)

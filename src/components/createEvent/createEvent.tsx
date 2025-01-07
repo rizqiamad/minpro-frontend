@@ -62,7 +62,7 @@ export default function CreateEvent() {
   }
 
   return (
-    <div className='rounded-2xl sm:mx-10 tablet:mx-52 shadow-2xl md:my-20'>
+    <div className='sm:mx-10 tablet:mx-36 lg:mx-52 xl:mx-60 shadow-2xl md:my-20'>
       <Formik
         initialValues={initialValue}
         validationSchema={eventSchema}
@@ -81,7 +81,7 @@ export default function CreateEvent() {
               </div>
               <ErrorMessage name='image'>{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
               <div className='text-xs ml-2 text-blue-400'>Jangan lebih dari 2mb</div>
-              <div className='px-5 flex flex-col gap-6 py-4'>
+              <div className='px-5 flex flex-col gap-6 pb-4'>
                 <div className='flex flex-col'>
                   <Field
                     type='text'
@@ -89,46 +89,50 @@ export default function CreateEvent() {
                     id='name'
                     onChange={handleChange}
                     value={values.name}
-                    placeholder='Event Name*'
-                    className='outline-none text-2xl px-1 focus:placeholder:text-transparent bg-white'
+                    placeholder='Event Name'
+                    className='outline-none text-2xl px-2 py-1 shadow-md border focus:placeholder:text-transparent bg-white'
                   />
                   <ErrorMessage name="name" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
                 </div>
-                <div className='flex flex-col'>
-                  <Field
-                    as="select"
-                    name='category'
-                    id='category'
-                    onChange={handleChange}
-                    value={values.category}
-                    className='outline-none border-b pb-2 font-[500]'
-                  >
-                    <option value={''} disabled className='text-black/50'>
-                      ~Select Category*~
-                    </option>
-                    {categories.map((category) => (
-                      <option key={category} value={category} className={values.category === category ? 'text-blue-500' : 'text-black'}>
-                        {category}
+                <div className='flex justify-around gap-2'>
+                  <div className='flex flex-col w-[50%]'>
+                    <Field
+                      as="select"
+                      name='category'
+                      id='category'
+                      onChange={handleChange}
+                      value={values.category}
+                      className='outline-none border-b h-full px-2 cursor-pointer appearance-none'
+                    >
+                      <option value={''} disabled className='text-black/50'>
+                        Select Category
                       </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage name="category" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
+                      {categories.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage name="category" >{msg => <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{msg}</div>}</ErrorMessage>
+                  </div>
+                  <div className='w-[50%] flex flex-col'>
+                    <SetLocation {...props} />
+                    {(errors.name_place || errors.address || errors.city) && (touched.name_place || touched.address || touched.city) ? (
+                      <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{errors.name_place || errors.address || errors.city}</div>
+                    ) : null}
+                  </div>
                 </div>
-                <div className='flex gap-2 px-2'>
-                  <div className='flex-1 flex flex-col gap-2'>
+                <div className='flex gap-2 justify-around'>
+                  <div className='flex flex-col w-[50%]'>
                     <SelectDate {...props} />
                     {(errors.start_date || errors.end_date) && (touched.start_date || touched.end_date) ? (
                       <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{errors.start_date || errors.end_date}</div>
                     ) : null}
+                  </div>
+                  <div className='flex flex-col w-[50%]'>
                     <SelectTime {...props} />
                     {(errors.start_time || errors.end_time) && (touched.start_time || touched.end_time) ? (
                       <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{errors.start_time || errors.end_time}</div>
-                    ) : null}
-                  </div>
-                  <div className='flex-1'>
-                    <SetLocation {...props} />
-                    {(errors.name_place || errors.address || errors.city) && (touched.name_place || touched.address || touched.city) ? (
-                      <div className='text-red-500 text-xs mt-1 ml-1'><sup>*</sup>{errors.name_place || errors.address || errors.city}</div>
                     ) : null}
                   </div>
                 </div>
@@ -144,7 +148,7 @@ export default function CreateEvent() {
                     id='coupon_seat'
                     onChange={handleChange}
                     value={values.coupon_seat}
-                    className='py-1 px-2 outline-none border rounded-md w-fit'
+                    className='py-1 px-2 outline-none border appearance-none shadow-md w-fit'
                     min={0}
                   />
                   {errors.coupon_seat ? (
@@ -161,7 +165,7 @@ export default function CreateEvent() {
                   <h1 className='my-2 text-black/50 font-[500]'>Terms & Condition</h1>
                   <RichTextEditor setFieldValue={props.setFieldValue} values={values} name='terms_condition' />
                 </div>
-                <button disabled={isLoading} type='submit' className={`${isLoading ? 'disabled:opacity-[0.5] disabled:bg-lightBlue text-white' : 'hover:bg-lightBlue hover:text-white'} py-2 mx-2 rounded-lg transition ease-linear font-semibold border-2 border-lightBlue`}>
+                <button disabled={isLoading} type='submit' className={`${isLoading ? 'disabled:opacity-[0.5] disabled:bg-lightBlue text-white' : 'hover:bg-lightBlue hover:text-white hover:shadow-sm'} py-2 mx-2 shadow-md shadow-lightBlue transition ease-linear font-semibold border-2 border-lightBlue`}>
                   {isLoading ? 'Loading ...' : 'Buat Event'}
                 </button>
               </div>

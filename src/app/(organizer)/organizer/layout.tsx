@@ -4,10 +4,12 @@ import { ReactNode } from "react";
 
 export default function OrganizerLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="items-start justify-between lg:flex md:flex">
+    <div className="md:flex">
       <Sidebar />
-      <MobileNav />
-      <main className="w-full h-full relative">{children}</main>
+      <div className="flex flex-col md:w-full">
+        <MobileNav />
+        <main className="w-full relative">{children}</main>
+      </div>
     </div>
   )
 }

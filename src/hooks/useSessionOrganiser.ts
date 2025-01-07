@@ -17,7 +17,7 @@ const useSessionOrganizer = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setOrganizer(data.organizer);
+      setOrganizer(data.result);
       setIsAuth(true);
     } catch (err) {
       console.error("Failed to fetch organizer session:", err);

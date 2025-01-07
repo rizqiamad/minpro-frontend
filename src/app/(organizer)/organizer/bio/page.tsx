@@ -7,11 +7,7 @@ import organizerGuard from "@/hoc/organizerProtect";
 function Bio() {
   return (
     <section className={sideContent.bioSection}>
-      <h1 className={sideContent.mainTitle}>Profil Kamu</h1>
-
       <div className={sideContent.bioContainer}>
-        <h1 className="text-xl font-semibold border-b-2 p-5 ">Event Saya</h1>
-
         <div className={sideContent.innerBioContainer}>
           <div className={sideContent.bioBanner}>
             <GoPlusCircle className="text-[3rem] text-red-600" />

@@ -1,10 +1,8 @@
 .dashboardNavbar{
     @apply relative 
-    flex justify-between 
-    py-5 px-2
-    border-b-2 border-zinc-200
-
-    md:hidden 
+    flex justify-between items-center
+    py-5 px-4
+    border-b-2 border-zinc-200 
 }
 
 .titleNavbar{
@@ -15,9 +13,11 @@
     @apply 
     absolute top-[80%] right-2 z-10
     flex flex-col w-[250px] 
-    p-3
+    p-3 
     rounded-xl
-    bg-blue-200 
+    bg-white
+    shadow-lg
+    border
 }
 
 .navMenu a{

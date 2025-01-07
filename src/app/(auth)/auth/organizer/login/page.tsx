@@ -51,15 +51,17 @@ export default function LoginOrganizer() {
           height={300}
           className="mx-auto"
         />
-        <h1 className="font-bold text-center">
+        <h1 className="font-bold text-center text-xl mb-4">
           Tidak lagi ketinggalan event dan film favoritmu
         </h1>
-        <p className="text-sm text-center">
+        <p className="text-center">
           Gabung dan rasakan kemudahan bertransaksi dan mengelola event di
           Loket.
         </p>
       </div>
       {/* gambar end */}
+
+      <Image className="absolute top-4" src={'https://assets.loket.com/web/assets/img/logo-loket-blue.svg'} alt="logo-loket-blue" width={125} height={75} />
 
       <div className="min-h-[calc(100vh-4rem)] content-center">
         <div className="w-96 py-6 rounded-2xl shadow-2xl px-5 mx-auto">
