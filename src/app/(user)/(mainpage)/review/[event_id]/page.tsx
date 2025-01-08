@@ -34,7 +34,7 @@ export default async function ReviewPage({ params }: { params: { event_id: strin
           </div>
         </div>
         <div className="my-6 px-4">
-          <h1 className="font-semibold text-4xl">Comment Section</h1>
+          <h1 className="font-semibold text-4xl my-2">Comment Section</h1>
           {dataReviews.result.length > 0 ? dataReviews.result.map((item, idx) => {
             return (
               <div key={idx} className="flex flex-col my-2 border-b py-4 gap-2">
@@ -54,7 +54,7 @@ export default async function ReviewPage({ params }: { params: { event_id: strin
               </div>
             )
           }) : (
-            <div>BELUM ADA REVIEW</div>
+            <div className="my-2 text-sm font-semibold text-black/50">BELUM ADA REVIEW</div>
           )}
         </div>
         <div className="shadow-xl rounded-md my-4 p-4">

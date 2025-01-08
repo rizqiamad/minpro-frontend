@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "@/helpers/axios";
+import axios, { isAxiosError } from "@/helpers/axios";
 import { IUser } from "@/types/user";
 import { useEffect, useState } from "react";
 
@@ -26,6 +26,13 @@ const useSession = () => {
       }
     } catch (err) {
       console.error("Session check failed:", err);
+      if (
+        isAxiosError(err) &&
+        err.response?.data.message.includes("jwt expired")
+      ) {
+        localStorage.removeItem("token");
+        location.reload();
+      }
       setIsAuth(false);
       setUser(null);
     }

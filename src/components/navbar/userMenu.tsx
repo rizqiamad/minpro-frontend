@@ -46,7 +46,7 @@ export default function UserMenu() {
           </div>
         )}
         <Link href={"/member/bio"} className="flex items-center hover:bg-black/10 p-3">
-          <FaHome className={side.icons}/>
+          <FaHome className={side.icons} />
           <p className="ml-2">Profile</p>
         </Link>
         <Link href={"#"} className="hover:bg-red-600/10 p-3 text-red-500" onClick={onLogout}>

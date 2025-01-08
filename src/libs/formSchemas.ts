@@ -1,5 +1,26 @@
 import * as Yup from "yup";
 
+export const avatarSchema = Yup.object().shape({
+  image: Yup.mixed()
+    .test(
+      "filesize",
+      "the image is too large",
+      (value) =>
+        !value || (value instanceof File && value.size <= 2 * 1024 * 1024)
+    )
+    .test(
+      "fileExtension",
+      "The extension is not proper",
+      (value) =>
+        !value ||
+        (value instanceof File &&
+          ["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(
+            value.type
+          ))
+    )
+    .required("Image is required"),
+});
+
 export const eventSchema = Yup.object().shape({
   name: Yup.string().required("Event name is required"),
   image: Yup.mixed()

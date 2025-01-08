@@ -11,6 +11,8 @@ interface IProps {
 export default function StarRating({ setFieldValue, values }: IProps) {
   const [rate, setRate] = useState<number>(0)
   const handleClick = (e: number) => {
+    console.log(e);
+    
     setRate(e)
     setFieldValue('rating', rate)
   }
@@ -27,7 +29,7 @@ export default function StarRating({ setFieldValue, values }: IProps) {
               onClick={() => handleClick(pointRate)}
               className="hidden"
             />
-            <FaStar className={`text-3xl cursor-pointer ${pointRate <= values ? 'text-yellow-300' : 'text-slate-400'}`} />
+            <FaStar className={`text-3xl cursor-pointer ${pointRate <= rate ? 'text-yellow-300' : 'text-slate-400'}`} />
           </label>
         )
       })}

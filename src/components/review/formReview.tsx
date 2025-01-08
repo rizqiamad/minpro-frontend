@@ -48,7 +48,6 @@ export default function FormReview({ event_id }: { event_id: string }) {
         {({ setFieldValue, values }: FormikProps<FormReview>) => {
           const commentChange = (e: string) => {
             setFieldValue('comment', e)
-            // console.log(e);
           }
           return (
             <Form className="flex flex-col gap-4">

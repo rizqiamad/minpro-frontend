@@ -34,7 +34,7 @@ export default function MobileNav() {
       <div className="flex items-center gap-2">
         <div className="sm:flex flex-col text-end hidden">
           <p className="font-bold">{user?.full_name}</p>
-          <p>{user?.email}</p>
+          <p className="text-xs font-semibold text-black/50">{user?.email}</p>
         </div>
         <button
           onClick={menuHandler}
