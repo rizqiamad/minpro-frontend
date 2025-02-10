@@ -21,7 +21,7 @@ interface IProps {
 export default function CreateTicket({ eventId, end_date, type }: IProps) {
   const initialValue: FormValueTicketEvent = {
     name: '',
-    seats: '',
+    seats: '0',
     price: 0,
     description: '',
     start_date: '',
