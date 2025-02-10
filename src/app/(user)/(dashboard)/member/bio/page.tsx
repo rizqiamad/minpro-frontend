@@ -2,24 +2,9 @@
 
 import EditAvatar from "@/components/member/editAvatar";
 import sideContent from "@/components/sidebar/content/content.module.css";
-import { formatRupiahTanpaDesimal } from "@/helpers/formatCurrency";
 import userGuard from "@/hoc/userProtect";
-import { getCoupon, getPoints } from "@/libs/transactions";
-import { useEffect, useState } from "react";
 
 function MemberBio() {
-  const [coupon, setCoupon] = useState<boolean>(false)
-  const [points, setPoints] = useState<number>(0)
-
-  useEffect(() => {
-    const getData = async () => {
-      const getDataCoupon = await getCoupon()
-      const getDataPoints = await getPoints()
-      setCoupon(getDataCoupon)
-      setPoints(getDataPoints)
-    }
-    getData()
-  }, [])
   return (
     <section className={sideContent.bioSection}>
       <div className={sideContent.memberBioContainer}>
@@ -28,12 +13,6 @@ function MemberBio() {
             <div className={sideContent.memberBioForm}>
               <EditAvatar />
               <form>
-                <div className={sideContent.memberFormContent}>
-                  <p className="text-xl font-semibold text-black">You Have <span>{formatRupiahTanpaDesimal(points)}</span> Points</p>
-                  <span className="text-xs font-light ml-2 text-blue-500">*You can use this points to get discount for your transaction</span>
-                  <p className="text-xl font-semibold text-black">{coupon ? 'You have one Coupon' : 'You do not have any coupon'}</p>
-                  <span className="text-xs font-light ml-2 text-blue-500">*You can use this coupon to get 10% discount for your transaction</span>
-                </div>
                 <div className={sideContent.memberFormContent}>
                   <h2 className="font-semibold mb-3">E-mail</h2>
                   <input

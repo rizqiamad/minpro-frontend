@@ -12,6 +12,7 @@ import Image from "next/image";
 import UseOpen from "@/hooks/useOpen";
 import UseClickOutside from "@/hooks/useClickOutside";
 import { usePathname } from "next/navigation";
+import DetailedPromo from "./detailedPromo";
 
 export default function MobileNav() {
   const { open, hidden, menuHandler } = UseOpen();
@@ -53,12 +54,11 @@ export default function MobileNav() {
         className={`rounded-md absolute w-64 shadow-lg border font-semibold z-10 bg-white text-black right-10 top-[4.3rem] flex flex-col transition duration-300 ${open ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
           } ${hidden ? "" : "hidden"}`}
       >
-        <div className="border-b p-3">
+        <div className="p-3 sm:hidden">
           <p className="font-bold sm:hidden">{user?.full_name}</p>
           <p className="sm:hidden">{user?.email}</p>
-          <p className="text-sm text-gray-500">Share your refcode : {user?.ref_code}</p>
-          <p className="text-sm text-gray-500">to get 10000 points for discount</p>
         </div>
+        < DetailedPromo />
         <Link href={"/events"} className="flex items-center hover:bg-black/10 p-3" >
           <RiHome4Fill className={side.icons} />
           <p className="ml-2">Jelajah Event</p>

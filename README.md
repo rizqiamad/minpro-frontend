@@ -25,6 +25,13 @@ Web Event Ticketing App is a mini project that's given by purwadhika as a task f
    npm install
    ```
 
+3. Use Free account for user
+
+   ```bash
+   username: andi
+   password: test123
+   ```
+
 3. Start the development server:
 
    ```bash
