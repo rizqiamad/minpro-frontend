@@ -28,7 +28,7 @@ Web Event Ticketing App is a mini project that's given by purwadhika as a task f
 3. Use Free account for user
 
    ```bash
-   username: andi
+   username: Maman Nurjaman
    password: test123
    ```
 
