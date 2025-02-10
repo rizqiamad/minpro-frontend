@@ -31,8 +31,13 @@ Web Event Ticketing App is a mini project that's given by purwadhika as a task f
    username: Maman Nurjaman
    password: test123
    ```
+   or organizer
+   ```bash
+   username: Meriah
+   password: test123
+   ```
 
-3. Start the development server:
+4. Start the development server:
 
    ```bash
    npm run dev
